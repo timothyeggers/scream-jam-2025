@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8hyiglkep8fh"]
+
+[ext_resource type="Texture2D" uid="uid://blkp2yccyd6p5" path="res://Assets/Lantern/lantern.png" id="1_1qtu6"]
+[ext_resource type="Texture2D" uid="uid://pkx7o40abu8m" path="res://Assets/Player/light_torch.png" id="2_1qtu6"]
+[ext_resource type="Script" uid="uid://xtamd5yc4gkb" path="res://Assets/Lantern/Lantern.gd" id="3_cyest"]
+
+[node name="Lantern" type="Sprite2D"]
+z_as_relative = false
+texture = ExtResource("1_1qtu6")
+
+[node name="Light" type="PointLight2D" parent="."]
+color = Color(1, 1, 0.58431375, 1)
+energy = 1.62
+shadow_item_cull_mask = 4
+texture = ExtResource("2_1qtu6")
+offset = Vector2(77, 3)
+script = ExtResource("3_cyest")
+
+[node name="LightShadow" type="PointLight2D" parent="."]
+range_item_cull_mask = 2
+shadow_enabled = true
+texture = ExtResource("2_1qtu6")
+offset = Vector2(77, 3)
+script = ExtResource("3_cyest")

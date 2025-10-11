@@ -1,0 +1,150 @@
+[gd_scene load_steps=20 format=3 uid="uid://lqpa18l6a1vp"]
+
+[ext_resource type="Script" uid="uid://oiqtgnh2hmoy" path="res://Assets/Player/Player.gd" id="1_cjc2e"]
+[ext_resource type="Texture2D" uid="uid://d0tfwuhwtbb31" path="res://Assets/Player/hand.png" id="2_qofj0"]
+[ext_resource type="PackedScene" uid="uid://b8hyiglkep8fh" path="res://Assets/Lantern/Lantern.tscn" id="3_3brq0"]
+[ext_resource type="Texture2D" uid="uid://boeeii5v84xfv" path="res://Assets/Player/ambient_light.png" id="4_u5to8"]
+[ext_resource type="Texture2D" uid="uid://phqoirrc86iu" path="res://Assets/Player/sheet.png" id="5_x4ggo"]
+[ext_resource type="Texture2D" uid="uid://drqjjnl0uxay" path="res://Assets/UI/progress-bar-circle.png" id="6_o1dpk"]
+[ext_resource type="Texture2D" uid="uid://c7idm1xu1sdrs" path="res://Assets/UI/progress-bar-frame.png" id="7_vewtk"]
+[ext_resource type="Script" uid="uid://cxypbmwfey6c3" path="res://Assets/UI/StaminaBar.gd" id="8_a3eu5"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cjc2e"]
+polygon = PackedVector2Array(8, -3, 8, 1, -2, 1, -2, -3)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hmte7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkxwm"]
+atlas = ExtResource("5_x4ggo")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqhvw"]
+atlas = ExtResource("5_x4ggo")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13v6g"]
+atlas = ExtResource("5_x4ggo")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4o24r"]
+atlas = ExtResource("5_x4ggo")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcpxn"]
+atlas = ExtResource("5_x4ggo")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnyhk"]
+atlas = ExtResource("5_x4ggo")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aq1ug"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkxwm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqhvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13v6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4o24r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcpxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnyhk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iylpf"]
+radius = 5.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rw40b"]
+light_mode = 1
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_animator", "_stamina_bar", "_rb_interactor", "_player_hand", "_look_at_pivot")]
+y_sort_enabled = true
+collision_mask = 11
+motion_mode = 1
+script = ExtResource("1_cjc2e")
+_animator = NodePath("Character")
+_stamina_bar = NodePath("StaminaBar")
+_rb_interactor = NodePath("RigidBodyInteractor")
+_player_hand = NodePath("Hand")
+_look_at_pivot = NodePath("Pivot")
+metadata/_edit_group_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+z_index = -5
+z_as_relative = false
+position = Vector2(3, -1)
+rotation = 3.1415927
+scale = Vector2(1, -1)
+occluder = SubResource("OccluderPolygon2D_cjc2e")
+occluder_light_mask = 2
+
+[node name="Hand" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(2, -15)
+texture = ExtResource("2_qofj0")
+
+[node name="Lantern" parent="Hand" instance=ExtResource("3_3brq0")]
+
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2(0, -32)
+
+[node name="EyeSight" type="PointLight2D" parent="Pivot"]
+energy = 0.2
+texture = ExtResource("4_u5to8")
+texture_scale = 1.5
+
+[node name="RigidBodyInteractor" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 12
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBodyInteractor"]
+shape = SubResource("CircleShape2D_hmte7")
+
+[node name="Character" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -22)
+sprite_frames = SubResource("SpriteFrames_aq1ug")
+frame = 4
+frame_progress = 0.060938086
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_iylpf")
+
+[node name="StaminaBar" type="TextureProgressBar" parent="."]
+z_index = 999
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_rw40b")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -61.0
+offset_right = 135.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+value = 100.0
+fill_mode = 5
+texture_under = ExtResource("6_o1dpk")
+texture_over = ExtResource("7_vewtk")
+texture_progress = ExtResource("6_o1dpk")
+tint_under = Color(0.21176471, 0.21176471, 0.21176471, 0.79607844)
+tint_over = Color(0.58888304, 0.58888304, 0.58888304, 0.45490196)
+tint_progress = Color(0, 0.7494336, 0, 1)
+script = ExtResource("8_a3eu5")

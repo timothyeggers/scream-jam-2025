@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cawycqh86srqn"]
+
+[ext_resource type="Texture2D" uid="uid://carvbp5cu2unf" path="res://Assets/torch.png" id="1_aefb5"]
+[ext_resource type="Texture2D" uid="uid://pkx7o40abu8m" path="res://Assets/Player/light_torch.png" id="2_nevix"]
+
+[node name="Lamp" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 25)
+texture = ExtResource("1_aefb5")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -2)
+rotation = 1.5707964
+scale = Vector2(0.5, 0.75)
+range_item_cull_mask = 3
+texture = ExtResource("2_nevix")
+offset = Vector2(77, 0)
+
+[node name="PointLightShadow" type="PointLight2D" parent="."]
+position = Vector2(2.2737368e-13, 36)
+rotation = 1.5707964
+scale = Vector2(0.5, 0.75)
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = ExtResource("2_nevix")
