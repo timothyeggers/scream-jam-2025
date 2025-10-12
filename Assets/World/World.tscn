@@ -1,25 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://cqwr1f22r0806"]
+[gd_scene load_steps=11 format=3 uid="uid://cqwr1f22r0806"]
 
+[ext_resource type="Texture2D" uid="uid://beeioy02jj8fr" path="res://bare_Tex1.BMP" id="1_2o6ge"]
 [ext_resource type="Script" uid="uid://ck5q4y1530gim" path="res://Assets/Player/PlayerCamera.gd" id="2_2o6ge"]
 [ext_resource type="PackedScene" uid="uid://bo3ricgmlxr4x" path="res://Assets/Door/Door.tscn" id="4_hmte7"]
 [ext_resource type="PackedScene" uid="uid://lqpa18l6a1vp" path="res://Assets/Player/Player.tscn" id="5_rw40b"]
 [ext_resource type="PackedScene" uid="uid://cv7dlornpjt08" path="res://Assets/GlowStick/GlowStick.tscn" id="6_fdrvb"]
+[ext_resource type="Texture2D" uid="uid://carvbp5cu2unf" path="res://Assets/torch.png" id="7_2o6ge"]
+[ext_resource type="PackedScene" uid="uid://4pqcuqcx1t0r" path="res://Assets/Lamp/LampLight.tscn" id="7_rw40b"]
 [ext_resource type="PackedScene" uid="uid://8fu162i6jn6l" path="res://Assets/Entity/Entity.tscn" id="11_mh0j8"]
-[ext_resource type="PackedScene" uid="uid://cawycqh86srqn" path="res://Assets/Lamp/Lamp.tscn" id="14_sxnil"]
-
-[sub_resource type="Gradient" id="Gradient_3p22m"]
-offsets = PackedFloat32Array(0.49333334, 1)
-colors = PackedColorArray(0.071101405, 0.021431979, 0, 1, 0.44232723, 0.22926313, 0, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_rw40b"]
-noise_type = 0
-frequency = 0.0001
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h7mlw"]
-width = 5000
-height = 5000
-noise = SubResource("FastNoiseLite_rw40b")
-color_ramp = SubResource("Gradient_3p22m")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rw40b"]
 polygon = PackedVector2Array(428, 172, 435, 172, 435, 58, 428, 58)
@@ -32,16 +20,19 @@ height = 114
 y_sort_enabled = true
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-color = Color(0, 0, 0, 0.9254902)
+color = Color(0.003921569, 0, 0, 0.8862745)
 blend_mode = 2
 range_item_cull_mask = 0
 
 [node name="Ground" type="Sprite2D" parent="."]
 light_mask = 3
 z_index = -99
-position = Vector2(-888, -482)
-texture = SubResource("NoiseTexture2D_h7mlw")
-centered = false
+texture_repeat = 2
+position = Vector2(-5, 1.0000002)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_2o6ge")
+region_enabled = true
+region_rect = Rect2(0, 0, 100000, 100000)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(379, 217)
@@ -58,17 +49,14 @@ time_alive = 1000.0
 [node name="Door" parent="." instance=ExtResource("4_hmte7")]
 position = Vector2(431, 173)
 
-[node name="Lamp" parent="." instance=ExtResource("14_sxnil")]
-position = Vector2(207, 358)
-
-[node name="Lamp2" parent="." instance=ExtResource("14_sxnil")]
-position = Vector2(387, 115)
-
 [node name="Entity" parent="." instance=ExtResource("11_mh0j8")]
 position = Vector2(122, 250)
 
+[node name="Entity2" parent="." instance=ExtResource("11_mh0j8")]
+position = Vector2(751, 418)
+
 [node name="Player" parent="." node_paths=PackedStringArray("_player_camera") instance=ExtResource("5_rw40b")]
-position = Vector2(226, 419)
+position = Vector2(329, 393)
 _player_camera = NodePath("../Camera2D")
 
 [node name="TempWall" type="LightOccluder2D" parent="."]
@@ -76,7 +64,7 @@ occluder = SubResource("OccluderPolygon2D_rw40b")
 
 [node name="Sprite2D" type="Sprite2D" parent="TempWall"]
 position = Vector2(431, 115.5)
-scale = Vector2(1, 1.008772)
+scale = Vector2(1, 1.00877)
 texture = SubResource("NoiseTexture2D_2o6ge")
 
 [node name="TempWall2" type="LightOccluder2D" parent="."]
@@ -85,5 +73,12 @@ occluder = SubResource("OccluderPolygon2D_rw40b")
 
 [node name="Sprite2D" type="Sprite2D" parent="TempWall2"]
 position = Vector2(431, 115.5)
-scale = Vector2(1, 1.008772)
+scale = Vector2(1, 1.00877)
 texture = SubResource("NoiseTexture2D_2o6ge")
+
+[node name="LampLight" parent="." instance=ExtResource("7_rw40b")]
+position = Vector2(90, 395)
+
+[node name="Sprite2D" type="Sprite2D" parent="LampLight"]
+position = Vector2(0, -33)
+texture = ExtResource("7_2o6ge")

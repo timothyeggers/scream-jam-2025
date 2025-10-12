@@ -13,7 +13,7 @@
 polygon = PackedVector2Array(8, -3, 8, 1, -2, 1, -2, -3)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h5qsp"]
-radius = 109.041275
+radius = 109.041
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7gb8a"]
 light_mode = 1
@@ -106,29 +106,29 @@ script = ExtResource("3_pki85")
 default_state = NodePath("EntityWanderState")
 metadata/_custom_type_script = "uid://bcqdtjau3wt7r"
 
-[node name="EntityWanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("detector", "body", "sprite")]
+[node name="EntityWanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("detector", "entity", "sprite")]
 script = ExtResource("4_6gvbd")
 detector = NodePath("../../Detector")
-body = NodePath("../..")
+entity = NodePath("../..")
 sprite = NodePath("../../Character")
 metadata/_custom_type_script = "uid://b3f7doumy1fkv"
 
-[node name="EntityChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("body", "sprite")]
+[node name="EntityChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("entity", "sprite")]
 script = ExtResource("5_tha7b")
 move_speed = 45.0
-body = NodePath("../..")
+entity = NodePath("../..")
 sprite = NodePath("../../Character")
 metadata/_custom_type_script = "uid://b2g7yhw1tviqd"
 
-[node name="EntityStunnedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("stun_icon", "body")]
+[node name="EntityStunnedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("stun_icon", "entity")]
 script = ExtResource("6_2of05")
 stun_icon = NodePath("../../Stunned")
-body = NodePath("../..")
+entity = NodePath("../..")
 metadata/_custom_type_script = "uid://clhwnne81atjj"
 
-[node name="EntityFleeState" type="Node" parent="StateMachine" node_paths=PackedStringArray("body", "sprite")]
+[node name="EntityFleeState" type="Node" parent="StateMachine" node_paths=PackedStringArray("entity", "sprite")]
 script = ExtResource("7_1ta34")
-body = NodePath("../..")
+entity = NodePath("../..")
 sprite = NodePath("../../Character")
 metadata/_custom_type_script = "uid://bf5wooc37wmki"
 
@@ -137,7 +137,7 @@ y_sort_enabled = true
 position = Vector2(1, -22)
 sprite_frames = SubResource("SpriteFrames_05pht")
 frame = 4
-frame_progress = 0.060938086
+frame_progress = 0.0609381
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_it4rn")

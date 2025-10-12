@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://4pqcuqcx1t0r"]
+
+[ext_resource type="Texture2D" uid="uid://pkx7o40abu8m" path="res://Assets/Player/light_torch.png" id="1_4hjso"]
+[ext_resource type="Texture2D" uid="uid://bfbd6ojjkc4to" path="res://Assets/Lamp/lamp_light.tres" id="2_26bge"]
+[ext_resource type="Script" uid="uid://cfvb1ic1yy6mo" path="res://Assets/LightArea2D/LightArea2D.gd" id="3_qa3it"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wnaqr"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oo1l0"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nevix"]
+radius = 68.57143
+
+[node name="LampLight" type="Node2D"]
+
+[node name="Glow" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 0.24313726)
+material = SubResource("CanvasItemMaterial_wnaqr")
+position = Vector2(0, -32)
+rotation = 1.5707964
+scale = Vector2(0.5, 0.6)
+texture = ExtResource("1_4hjso")
+
+[node name="Light" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 0.24313726)
+material = SubResource("CanvasItemMaterial_oo1l0")
+position = Vector2(0, -4.7683716e-07)
+rotation = 1.5707964
+scale = Vector2(1.142, 2)
+texture = ExtResource("2_26bge")
+
+[node name="PointShadow" type="PointLight2D" parent="."]
+scale = Vector2(1, 0.65)
+color = Color(0.7576681, 0.018946333, 7.70092e-07, 1)
+energy = 2.0
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = ExtResource("2_26bge")
+texture_scale = 2.0
+
+[node name="LightArea2D" type="Area2D" parent="."]
+position = Vector2(0.00016403198, 7.6293945e-06)
+rotation = 1.5708
+scale = Vector2(0.5, 0.75)
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("3_qa3it")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LightArea2D"]
+scale = Vector2(0.7, 1)
+shape = SubResource("CircleShape2D_nevix")

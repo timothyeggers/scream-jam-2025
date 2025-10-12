@@ -14,9 +14,9 @@ func _process(delta: float) -> void:
 		emit_signal("transitioned", self, "EntityWanderState")
 
 func physics_process(delta):
-	var move_dir = body.global_position.direction_to(Game.get_player().global_position)
-	body.velocity = -move_dir * move_speed
-	body.move_and_slide()
+	var move_dir = entity.global_position.direction_to(Game.get_player().global_position)
+	entity.velocity = -move_dir * move_speed
+	entity.move_and_slide()
 	
 	# flip character
 	if move_dir.x > 0:

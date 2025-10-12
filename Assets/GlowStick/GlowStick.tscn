@@ -1,16 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://cv7dlornpjt08"]
+[gd_scene load_steps=10 format=3 uid="uid://cv7dlornpjt08"]
 
 [ext_resource type="Texture2D" uid="uid://c2axsk1tom0en" path="res://Assets/GlowStick/glow_stick.png" id="1_0eum6"]
 [ext_resource type="Script" uid="uid://twglro38njg8" path="res://Assets/GlowStick/GlowStick.gd" id="2_5purn"]
+[ext_resource type="Script" uid="uid://cfvb1ic1yy6mo" path="res://Assets/LightArea2D/LightArea2D.gd" id="2_pfjkg"]
+[ext_resource type="Texture2D" uid="uid://bfbd6ojjkc4to" path="res://Assets/Lamp/lamp_light.tres" id="3_5purn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0eum6"]
 size = Vector2(4, 11)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_1suxt"]
+radius = 46.097702
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pfjkg"]
+blend_mode = 1
+light_mode = 1
+
 [sub_resource type="Gradient" id="Gradient_mh0j8"]
-offsets = PackedFloat32Array(0, 0.7266667)
+offsets = PackedFloat32Array(0, 0.726667)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_hmte7"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5purn"]
 gradient = SubResource("Gradient_mh0j8")
 width = 128
 height = 128
@@ -24,24 +33,41 @@ collision_layer = 4
 collision_mask = 4
 mass = 0.02
 gravity_scale = 0.0
-linear_damp = 0.25
+linear_damp = 1.0
 script = ExtResource("2_5purn")
-light = NodePath("PointLight2D")
+light = NodePath("")
+time_alive = 60.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_0eum6")
 
+[node name="LightArea2D" type="Area2D" parent="."]
+position = Vector2(0.00016403198, 7.6293945e-06)
+rotation = 1.5708
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("2_pfjkg")
+is_harmful = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LightArea2D"]
+shape = SubResource("CircleShape2D_1suxt")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_0eum6")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-color = Color(0, 0.4855144, 0.00534492, 1)
-texture = SubResource("GradientTexture2D_hmte7")
+[node name="Light" type="Sprite2D" parent="."]
+modulate = Color(0.19794765, 0.63341206, 5.7756904e-07, 0.24313726)
+material = SubResource("CanvasItemMaterial_pfjkg")
+position = Vector2(0, -4.7683716e-07)
+rotation = 1.5707964
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_5purn")
 
-[node name="PointLightShadow" type="PointLight2D" parent="."]
-color = Color(0, 0.4855144, 0.00534492, 1)
+[node name="PointShadow" type="PointLight2D" parent="."]
+scale = Vector2(0.75, 0.75)
+color = Color(0, 0.485514, 0.00534492, 1)
 range_item_cull_mask = 2
 shadow_enabled = true
 shadow_item_cull_mask = 3
-texture = SubResource("GradientTexture2D_hmte7")
+texture = SubResource("GradientTexture2D_5purn")

@@ -12,7 +12,7 @@ func _ready():
 	
 	for child in get_children():
 		if child is State:
-			states[child.name.to_lower()] = child
+			states[child.name] = child
 			child.transitioned.connect(_on_child_transition)
 			child.force_transitioned.connect(transition)
 
@@ -28,7 +28,7 @@ func _on_child_transition(state, new_state):
 	if state != current_state:
 		return
 	
-	var new = states.get(new_state.to_lower())
+	var new = states.get(new_state)
 	if !new:
 		return
 	
@@ -39,7 +39,7 @@ func _on_child_transition(state, new_state):
 	current_state = new
 
 func transition(new_state):
-	var new = states.get(new_state.to_lower())
+	var new = states.get(new_state)
 	if !new:
 		return
 	

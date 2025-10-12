@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d01qd57e4vhk4"]
+
+[ext_resource type="Script" uid="uid://cfvb1ic1yy6mo" path="res://Assets/LightArea2D/LightArea2D.gd" id="1_wkb41"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nevix"]
+radius = 60.133175
+
+[node name="LightArea2D" type="Area2D"]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_wkb41")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nevix")

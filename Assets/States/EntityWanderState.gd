@@ -8,7 +8,7 @@ var _start_pos: Vector2
 var _target_pos: Vector2
 
 func _ready():
-	_start_pos = body.position
+	_start_pos = entity.position
 	detector.body_entered.connect(_on_player_entered)
 
 func _on_player_entered(body):
@@ -25,13 +25,13 @@ func get_random_position():
 	return Vector2(random_x, random_y)
 
 func enter():
-	_start_pos = body.position
+	_start_pos = entity.position
 	set_target_position(get_random_position())
 
 func physics_process(delta):
-	var move_dir = body.global_position.direction_to(_target_pos)
-	body.velocity = move_dir * move_speed
-	body.move_and_slide()
+	var move_dir = entity.global_position.direction_to(_target_pos)
+	entity.velocity = move_dir * move_speed
+	entity.move_and_slide()
 	
 	# flip character
 	if move_dir.x > 0:
@@ -39,5 +39,5 @@ func physics_process(delta):
 	elif move_dir.x < 0:
 		sprite.scale.x = abs(sprite.scale.x) * -1
 	
-	if body.position.distance_to(_target_pos) < 1:
+	if entity.position.distance_to(_target_pos) < 1:
 		set_target_position(get_random_position())

@@ -29,3 +29,6 @@ func set_player_mental_state(state: PlayerMentalState):
 
 func get_player() -> Player:
 	return get_tree().get_first_node_in_group("Player")
+
+func get_world() -> Node2D:
+	return get_tree().get_first_node_in_group("World")

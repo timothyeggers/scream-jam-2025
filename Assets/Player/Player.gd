@@ -9,8 +9,7 @@ const VEL_TO_RB_FORCE_RATIO: float = 0.3
 @export var _stamina_bar: AutohideProgressBar
 @export var _player_camera: PlayerCamera
 @export var _rb_interactor: Area2D
-@export var _player_hand: Sprite2D
-@export var _look_at_pivot: Node2D
+@export var _player_hand: Node2D
 @export var _walk_speed : float = 50
 @export var _run_speed : float = 70
 @export var _total_stamina : float = 5
@@ -38,7 +37,6 @@ func _process(delta: float) -> void:
 	#region Update camera position
 	var target_pos = position - get_global_mouse_position()
 	_player_camera.position = position
-	_look_at_pivot.look_at(get_global_mouse_position())
 	_player_hand.look_at(get_global_mouse_position())
 	if _is_running:
 		_player_camera.zoom = _camera_zoom * 0.9
@@ -62,11 +60,11 @@ func _process(delta: float) -> void:
 		_player_hand.scale.y = -1
 		_animator.flip_h = true
 	#endregion
-	
-	if Input.is_action_just_pressed("action"):
-		var hitbox = HitBox.create(self)
-		hitbox.position = _player_hand.position
-		hitbox.look_at(get_global_mouse_position())
+	#
+	#if Input.is_action_just_pressed("action"):
+		#var hitbox = HitBox.create(self)
+		#hitbox.position = _player_hand.position
+		#hitbox.look_at(get_global_mouse_position())
 
 func _update_ui():
 	_stamina_bar.set_value_bar((_stamina_left / _total_stamina) * 100)
