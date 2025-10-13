@@ -1,11 +1,15 @@
 [gd_scene load_steps=20 format=4 uid="uid://cqwr1f22r0806"]
 
 [ext_resource type="Texture2D" uid="uid://beeioy02jj8fr" path="res://bare_Tex1.BMP" id="1_2o6ge"]
+<<<<<<< HEAD
 [ext_resource type="Texture2D" uid="uid://b58kc0vq3yrwj" path="res://Assets/tileset_wood_corrected.png" id="1_hmte7"]
 [ext_resource type="TileSet" uid="uid://b31nkkc6kpopy" path="res://Assets/TileSet.tres" id="1_mh0j8"]
 [ext_resource type="Script" uid="uid://ck5q4y1530gim" path="res://Assets/Player/PlayerCamera.gd" id="2_2o6ge"]
 [ext_resource type="Script" uid="uid://bsn7l24lrenpa" path="res://Assets/World/OverworldLight.gd" id="2_mh0j8"]
 [ext_resource type="Script" uid="uid://c5did3bug2sch" path="res://Assets/Log/Log.gd" id="3_op1do"]
+=======
+[ext_resource type="Script" uid="uid://brcfmaed82in6" path="res://Assets/Player/PlayerCamera.gd" id="2_2o6ge"]
+>>>>>>> a1cf3b4 (Walking Sounds System V1)
 [ext_resource type="PackedScene" uid="uid://bo3ricgmlxr4x" path="res://Assets/Door/Door.tscn" id="4_hmte7"]
 [ext_resource type="PackedScene" uid="uid://lqpa18l6a1vp" path="res://Assets/Player/Player.tscn" id="5_rw40b"]
 [ext_resource type="PackedScene" uid="uid://cv7dlornpjt08" path="res://Assets/GlowStick/GlowStick.tscn" id="6_fdrvb"]
@@ -139,6 +143,16 @@ position = Vector2(431, 115.5)
 scale = Vector2(1, 1.00877)
 texture = SubResource("NoiseTexture2D_2o6ge")
 
+<<<<<<< HEAD
+=======
+[node name="LampLight" parent="." instance=ExtResource("7_rw40b")]
+position = Vector2(90, 395)
+
+[node name="Sprite2D" type="Sprite2D" parent="LampLight"]
+position = Vector2(0, -33)
+texture = ExtResource("7_2o6ge")
+
+>>>>>>> a1cf3b4 (Walking Sounds System V1)
 [node name="FmodBankLoader" type="FmodBankLoader" parent="."]
 bank_paths = ["res://FmodBanks/Desktop/Master.strings.bank", "res://FmodBanks/Desktop/Master.bank", "res://FmodBanks/Desktop/SFX.bank"]
 
