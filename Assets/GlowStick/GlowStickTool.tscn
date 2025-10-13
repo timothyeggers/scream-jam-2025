@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://no5uah74bibm"]
 
-[ext_resource type="Script" uid="uid://bv2s6xjt666fh" path="res://Assets/HandTool/RBHandTool.gd" id="1_0as5p"]
+[ext_resource type="Script" uid="uid://bv2s6xjt666fh" path="res://Assets/GlowStick/GlowStickTool.gd" id="1_0as5p"]
 [ext_resource type="PackedScene" uid="uid://cv7dlornpjt08" path="res://Assets/GlowStick/GlowStick.tscn" id="2_ad737"]
 
 [node name="GlowStickTool" type="Node2D" node_paths=PackedStringArray("glow_stick", "spawn_origin")]

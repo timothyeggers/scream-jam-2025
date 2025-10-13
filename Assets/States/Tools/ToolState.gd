@@ -9,7 +9,6 @@ func exit():
 	if tool: tool.disable()
 
 func process(delta):
-	if Input.is_action_just_pressed("action") && Inventory.glow_sticks > 0:
+	if Input.is_action_just_pressed("action"):
 		if tool: 
 			tool.activate()
-			Inventory.glow_sticks -= 1

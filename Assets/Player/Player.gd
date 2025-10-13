@@ -60,11 +60,6 @@ func _process(delta: float) -> void:
 		_player_hand.scale.y = -1
 		_animator.flip_h = true
 	#endregion
-	#
-	#if Input.is_action_just_pressed("action"):
-		#var hitbox = HitBox.create(self)
-		#hitbox.position = _player_hand.position
-		#hitbox.look_at(get_global_mouse_position())
 
 func _update_ui():
 	_stamina_bar.set_value_bar((_stamina_left / _total_stamina) * 100)

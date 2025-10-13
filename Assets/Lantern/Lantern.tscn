@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b8hyiglkep8fh"]
 
 [ext_resource type="Texture2D" uid="uid://blkp2yccyd6p5" path="res://Assets/Lantern/lantern.png" id="1_1qtu6"]
-[ext_resource type="Script" uid="uid://bgmcmlltcgs5" path="res://Assets/States/LanternToolState.gd" id="1_mdpkq"]
+[ext_resource type="Script" uid="uid://bgmcmlltcgs5" path="res://Assets/Lantern/LanternTool.gd" id="1_mdpkq"]
 [ext_resource type="Texture2D" uid="uid://pkx7o40abu8m" path="res://Assets/Player/light_torch.png" id="2_1qtu6"]
 [ext_resource type="Script" uid="uid://xtamd5yc4gkb" path="res://Assets/Lantern/Lantern.gd" id="3_cyest"]
 [ext_resource type="Script" uid="uid://cfvb1ic1yy6mo" path="res://Assets/LightArea2D/LightArea2D.gd" id="3_l6m8e"]

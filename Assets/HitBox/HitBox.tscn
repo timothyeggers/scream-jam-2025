@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cn6wyab21jyml"]
 
-[ext_resource type="Script" path="res://Assets/HitBox/HitBox.gd" id="1_6bb6k"]
-[ext_resource type="Texture2D" uid="uid://vqfc0mqu83h" path="res://Assets/slash.png" id="2_277uk"]
+[ext_resource type="Script" uid="uid://cotvn1bhc6fj0" path="res://Assets/HitBox/HitBox.gd" id="1_6bb6k"]
+[ext_resource type="Texture2D" uid="uid://vqfc0mqu83h" path="res://Assets/Melee/slash.png" id="2_277uk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_coyqj"]
 size = Vector2(37, 93)

@@ -1,16 +1,19 @@
-[gd_scene load_steps=23 format=3 uid="uid://lqpa18l6a1vp"]
+[gd_scene load_steps=26 format=3 uid="uid://lqpa18l6a1vp"]
 
 [ext_resource type="Script" uid="uid://oiqtgnh2hmoy" path="res://Assets/Player/Player.gd" id="1_cjc2e"]
 [ext_resource type="Texture2D" uid="uid://d0tfwuhwtbb31" path="res://Assets/Player/hand.png" id="2_qofj0"]
 [ext_resource type="Script" uid="uid://vdmspytcdxq0" path="res://Assets/StateMachine/ToolStateMachine.gd" id="2_xl0l8"]
 [ext_resource type="PackedScene" uid="uid://b8hyiglkep8fh" path="res://Assets/Lantern/Lantern.tscn" id="3_3brq0"]
-[ext_resource type="Script" uid="uid://ccb2a0n4atyrm" path="res://Assets/States/ToolState.gd" id="4_1vo2c"]
+[ext_resource type="Script" uid="uid://ccb2a0n4atyrm" path="res://Assets/States/Tools/ToolState.gd" id="4_1vo2c"]
 [ext_resource type="Texture2D" uid="uid://boeeii5v84xfv" path="res://Assets/Player/ambient_light.png" id="4_u5to8"]
 [ext_resource type="PackedScene" uid="uid://no5uah74bibm" path="res://Assets/GlowStick/GlowStickTool.tscn" id="4_x4ggo"]
+[ext_resource type="PackedScene" uid="uid://3e1poy8fdjbg" path="res://Assets/Melee/MeleeTool.tscn" id="5_vewtk"]
 [ext_resource type="Texture2D" uid="uid://phqoirrc86iu" path="res://Assets/Player/sheet.png" id="5_x4ggo"]
 [ext_resource type="Texture2D" uid="uid://drqjjnl0uxay" path="res://Assets/UI/progress-bar-circle.png" id="6_o1dpk"]
 [ext_resource type="Texture2D" uid="uid://c7idm1xu1sdrs" path="res://Assets/UI/progress-bar-frame.png" id="7_vewtk"]
+[ext_resource type="Script" uid="uid://dn1o3dao3fen7" path="res://Assets/States/Tools/GlowStickToolState.gd" id="7_x4ggo"]
 [ext_resource type="Script" uid="uid://cxypbmwfey6c3" path="res://Assets/UI/StaminaBar.gd" id="8_a3eu5"]
+[ext_resource type="Script" uid="uid://bbwiy63mko2or" path="res://Assets/States/Tools/MeleeToolState.gd" id="8_o1dpk"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cjc2e"]
 polygon = PackedVector2Array(8, -3, 8, 1, -2, 1, -2, -3)
@@ -106,6 +109,9 @@ position = Vector2(2, 0)
 [node name="GlowStickTool" parent="HandPivot" instance=ExtResource("4_x4ggo")]
 visible = false
 
+[node name="MeleeTool" parent="HandPivot" instance=ExtResource("5_vewtk")]
+position = Vector2(0, -5)
+
 [node name="HandToolMachine" type="Node2D" parent="." node_paths=PackedStringArray("default_state")]
 position = Vector2(2, -15)
 script = ExtResource("2_xl0l8")
@@ -119,9 +125,14 @@ script = ExtResource("4_1vo2c")
 tool = NodePath("../../HandPivot/Lantern")
 
 [node name="GlowStick" type="Node" parent="HandToolMachine" node_paths=PackedStringArray("tool")]
-script = ExtResource("4_1vo2c")
+script = ExtResource("7_x4ggo")
 tool = NodePath("../../HandPivot/GlowStickTool")
-metadata/_custom_type_script = "uid://ccb2a0n4atyrm"
+metadata/_custom_type_script = "uid://dn1o3dao3fen7"
+
+[node name="MeleeToolState" type="Node" parent="HandToolMachine" node_paths=PackedStringArray("tool")]
+script = ExtResource("8_o1dpk")
+tool = NodePath("../../HandPivot/MeleeTool")
+metadata/_custom_type_script = "uid://bbwiy63mko2or"
 
 [node name="AmbientLight" type="PointLight2D" parent="."]
 visible = false
