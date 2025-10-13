@@ -90,5 +90,6 @@ position = Vector2(90, 395)
 [node name="Sprite2D" type="Sprite2D" parent="LampLight"]
 position = Vector2(0, -33)
 texture = ExtResource("7_2o6ge")
+
 [node name="FmodBankLoader" type="FmodBankLoader" parent="."]
 bank_paths = ["res://FmodBanks/Desktop/Master.strings.bank", "res://FmodBanks/Desktop/Master.bank", "res://FmodBanks/Desktop/SFX.bank"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://lqpa18l6a1vp"]
+[gd_scene load_steps=27 format=3 uid="uid://lqpa18l6a1vp"]
 
 [ext_resource type="Script" uid="uid://oiqtgnh2hmoy" path="res://Assets/Player/Player.gd" id="1_cjc2e"]
+[ext_resource type="Script" uid="uid://ygkr81jmtsfw" path="res://Assets/Player/HandToolManager.gd" id="2_a3eu5"]
 [ext_resource type="Texture2D" uid="uid://d0tfwuhwtbb31" path="res://Assets/Player/hand.png" id="2_qofj0"]
 [ext_resource type="Script" uid="uid://vdmspytcdxq0" path="res://Assets/StateMachine/ToolStateMachine.gd" id="2_xl0l8"]
 [ext_resource type="PackedScene" uid="uid://b8hyiglkep8fh" path="res://Assets/Lantern/Lantern.tscn" id="3_3brq0"]
@@ -97,17 +98,16 @@ occluder_light_mask = 2
 
 [node name="HandPivot" type="Node2D" parent="."]
 position = Vector2(2, -15)
+script = ExtResource("2_a3eu5")
 
 [node name="HandSprite" type="Sprite2D" parent="HandPivot"]
 z_index = 2
 texture = ExtResource("2_qofj0")
 
 [node name="Lantern" parent="HandPivot" instance=ExtResource("3_3brq0")]
-visible = false
 position = Vector2(2, 0)
 
 [node name="GlowStickTool" parent="HandPivot" instance=ExtResource("4_x4ggo")]
-visible = false
 
 [node name="MeleeTool" parent="HandPivot" instance=ExtResource("5_vewtk")]
 position = Vector2(0, -5)
