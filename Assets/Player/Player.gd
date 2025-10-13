@@ -29,6 +29,10 @@ const VEL_TO_RB_FORCE_RATIO: float = 0.3
 var _is_running: bool = false
 var _damage_cd: float = 0
 
+# Variables for footsteps sounds
+var _footstepTimer = 0
+var _resetfootstepTimer = 0.5
+
 func _ready() -> void:
 	Game.set_player_mental_state(Game.PlayerMentalState.IN_DANGER)
 	
@@ -98,6 +102,14 @@ func _physics_process(delta: float) -> void:
 	#endregion
 	_stamina_left = clamp(_stamina_left, 0, _total_stamina)
 	velocity = dir * speed
+	if dir:
+		if _footstepTimer <= 0:
+			$FmodEventEmitter2D.play()
+			if _is_running:
+				_footstepTimer = _resetfootstepTimer/2
+			else:
+				_footstepTimer = _resetfootstepTimer
+		_footstepTimer -= delta
 	move_and_slide()
 	
 	#for body in _rb_interactor.get_overlapping_bodies():

@@ -5,6 +5,9 @@
 [ext_resource type="Script" uid="uid://ck5q4y1530gim" path="res://Assets/Player/PlayerCamera.gd" id="2_2o6ge"]
 [ext_resource type="Script" uid="uid://bsn7l24lrenpa" path="res://Assets/World/OverworldLight.gd" id="2_mh0j8"]
 [ext_resource type="Script" uid="uid://c5did3bug2sch" path="res://Assets/Log/Log.gd" id="3_op1do"]
+=======
+[ext_resource type="Script" uid="uid://brcfmaed82in6" path="res://Assets/Player/PlayerCamera.gd" id="2_2o6ge"]
+>>>>>>> a1cf3b4 (Walking Sounds System V1)
 [ext_resource type="PackedScene" uid="uid://bo3ricgmlxr4x" path="res://Assets/Door/Door.tscn" id="4_hmte7"]
 [ext_resource type="PackedScene" uid="uid://lqpa18l6a1vp" path="res://Assets/Player/Player.tscn" id="5_rw40b"]
 [ext_resource type="PackedScene" uid="uid://cv7dlornpjt08" path="res://Assets/GlowStick/GlowStick.tscn" id="6_fdrvb"]
