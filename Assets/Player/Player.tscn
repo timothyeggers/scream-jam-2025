@@ -81,7 +81,7 @@ animations = [{
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rw40b"]
 light_mode = 1
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_animator", "_stamina_bar", "_rb_interactor", "_player_hand", "_attack_sprite") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_animator", "_stamina_bar", "_rb_interactor", "_player_hand", "_attack_sprite", "_blood_emitter") groups=["Player"]]
 collision_mask = 139
 motion_mode = 1
 script = ExtResource("1_cjc2e")
@@ -90,6 +90,7 @@ _stamina_bar = NodePath("StaminaBar")
 _rb_interactor = NodePath("RigidBodyInteractor")
 _player_hand = NodePath("HandPivot")
 _attack_sprite = NodePath("Attacked")
+_blood_emitter = NodePath("BloodParticles")
 
 [node name="Attacked" type="Sprite2D" parent="."]
 visible = false
@@ -97,6 +98,23 @@ z_index = 9
 material = SubResource("CanvasItemMaterial_dthkx")
 position = Vector2(0, -21)
 texture = ExtResource("2_dthkx")
+
+[node name="BloodParticles" type="CPUParticles2D" parent="."]
+position = Vector2(0, -7)
+emitting = false
+amount = 16
+lifetime = 0.2
+one_shot = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+damping_max = 2.062
+scale_amount_max = 5.0
+color = Color(1, 0.08235294, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)
@@ -153,8 +171,7 @@ tool = NodePath("../../HandPivot/MeleeTool")
 metadata/_custom_type_script = "uid://bbwiy63mko2or"
 
 [node name="AmbientLight" type="PointLight2D" parent="."]
-visible = false
-position = Vector2(0, -32)
+position = Vector2(-2, -18)
 energy = 0.2
 texture = ExtResource("4_u5to8")
 texture_scale = 1.5

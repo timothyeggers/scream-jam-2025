@@ -19,6 +19,7 @@ const VEL_TO_RB_FORCE_RATIO: float = 0.3
 @export var _rb_interactor: Area2D
 @export var _player_hand: Node2D
 @export var _attack_sprite: Sprite2D
+@export var _blood_emitter: CPUParticles2D
 
 @onready var _stamina_left = _total_stamina
 # The starting offset of the hand, relative to the player.
@@ -119,6 +120,7 @@ func take_damage(amount: int):
 	_damage_cd = _damage_cooldown
 	_health -= amount
 	_attack_sprite.show()
+	_blood_emitter.emitting = true
 	var tween = create_tween()
 	_attack_sprite.modulate.a = 1
 	tween.tween_property(_attack_sprite, "modulate:a", 0, 1).set_ease(Tween.EASE_OUT)
