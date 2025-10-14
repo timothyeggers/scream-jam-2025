@@ -4,10 +4,14 @@ class_name EntityChaseState extends EntityState
 @export var attack_distance: float = 25
 
 func enter():
+	print("test1")
+	entity._start_playing_sounds()
 	entity.light_area_entered.connect(_on_light_area_entered)
 	entity.light_area_exited.connect(_on_light_area_exited)
 
 func exit():
+	print("test2")
+	entity._stop_playing_sounds()
 	entity.light_area_entered.disconnect(_on_light_area_entered)
 	entity.light_area_exited.disconnect(_on_light_area_exited)
 
