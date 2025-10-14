@@ -1,13 +1,34 @@
-[gd_scene load_steps=11 format=3 uid="uid://cqwr1f22r0806"]
+[gd_scene load_steps=19 format=4 uid="uid://cqwr1f22r0806"]
 
 [ext_resource type="Texture2D" uid="uid://beeioy02jj8fr" path="res://bare_Tex1.BMP" id="1_2o6ge"]
+[ext_resource type="Texture2D" uid="uid://b58kc0vq3yrwj" path="res://Assets/tileset_wood_corrected.png" id="1_hmte7"]
+[ext_resource type="TileSet" uid="uid://b31nkkc6kpopy" path="res://Assets/TileSet.tres" id="1_mh0j8"]
 [ext_resource type="Script" uid="uid://ck5q4y1530gim" path="res://Assets/Player/PlayerCamera.gd" id="2_2o6ge"]
+[ext_resource type="Script" uid="uid://bsn7l24lrenpa" path="res://Assets/World/OverworldLight.gd" id="2_mh0j8"]
+[ext_resource type="Script" uid="uid://c5did3bug2sch" path="res://Assets/Log/Log.gd" id="3_op1do"]
 [ext_resource type="PackedScene" uid="uid://bo3ricgmlxr4x" path="res://Assets/Door/Door.tscn" id="4_hmte7"]
 [ext_resource type="PackedScene" uid="uid://lqpa18l6a1vp" path="res://Assets/Player/Player.tscn" id="5_rw40b"]
 [ext_resource type="PackedScene" uid="uid://cv7dlornpjt08" path="res://Assets/GlowStick/GlowStick.tscn" id="6_fdrvb"]
-[ext_resource type="Texture2D" uid="uid://carvbp5cu2unf" path="res://Assets/torch.png" id="7_2o6ge"]
 [ext_resource type="PackedScene" uid="uid://4pqcuqcx1t0r" path="res://Assets/Lamp/LampLight.tscn" id="7_rw40b"]
+[ext_resource type="PackedScene" uid="uid://chfd4qkwyoi7p" path="res://Assets/PowerGenerator/PowerGenerator.tscn" id="8_2o6ge"]
+[ext_resource type="PackedScene" uid="uid://cotgkmcidfvsv" path="res://Assets/ItemPickup/GlowStickPickup.tscn" id="10_op1do"]
 [ext_resource type="PackedScene" uid="uid://8fu162i6jn6l" path="res://Assets/Entity/Entity.tscn" id="11_mh0j8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sxnil"]
+texture = ExtResource("1_hmte7")
+texture_region_size = Vector2i(48, 48)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+2:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_mh0j8"]
+tile_size = Vector2i(48, 48)
+sources/0 = SubResource("TileSetAtlasSource_sxnil")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h7mlw"]
+light_mode = 1
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rw40b"]
 polygon = PackedVector2Array(428, 172, 435, 172, 435, 58, 428, 58)
@@ -19,10 +40,23 @@ height = 114
 [node name="World" type="Node2D" groups=["World"]]
 y_sort_enabled = true
 
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAQAA0AAAACAAAAAAAQAA4AAAAAAAEAAAATAA0AAAACAAAAAFATAA4AAAAAAAEAAAATAA8AAAACAAAAADAQAA8AAAACAAAAAGARAA0AAAABAAAAAAASAA0AAAABAAAAAAA=")
+tile_set = SubResource("TileSet_mh0j8")
+metadata/_edit_lock_ = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAATABAAAgAAAAEAAAAUABAAAgABAAEAAAAUABEAAgABAAIAAAARABAAAgACAAAAAAARABEAAgACAAEAAAASABAAAgADAAAAAAARABIAAAACAAAAAAARABMAAAACAAEAAAASABIAAAADAAAAAAASABMAAAACAAIAAAATABIAAAAAAAEAAAATABMAAAACAAIAAAAUABIAAAABAAEAAAAUABMAAAABAAIAAAASABEAAgACAAIAAAATABEAAgACAAIAAAA=")
+tile_set = ExtResource("1_mh0j8")
+metadata/_edit_lock_ = true
+
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
 color = Color(0.003921569, 0, 0, 0.8862745)
 blend_mode = 2
 range_item_cull_mask = 0
+script = ExtResource("2_mh0j8")
+metadata/_edit_lock_ = true
 
 [node name="Ground" type="Sprite2D" parent="."]
 light_mask = 3
@@ -33,6 +67,7 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_2o6ge")
 region_enabled = true
 region_rect = Rect2(0, 0, 100000, 100000)
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(379, 217)
@@ -43,6 +78,25 @@ script = ExtResource("2_2o6ge")
 
 [node name="FmodListener2D" type="FmodListener2D" parent="Camera2D"]
 position = Vector2(-379, -217)
+
+[node name="Log" type="RichTextLabel" parent="Camera2D" groups=["Item Log"]]
+material = SubResource("CanvasItemMaterial_h7mlw")
+custom_minimum_size = Vector2(200, 100)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -377.0
+offset_top = -214.0
+offset_right = -177.0
+offset_bottom = -114.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 12
+text = "
+"
+script = ExtResource("3_op1do")
 
 [node name="GlowStick" parent="." instance=ExtResource("6_fdrvb")]
 position = Vector2(393, 262)
@@ -59,7 +113,7 @@ position = Vector2(122, 250)
 position = Vector2(751, 418)
 
 [node name="Player" parent="." node_paths=PackedStringArray("_player_camera") instance=ExtResource("5_rw40b")]
-position = Vector2(329, 393)
+position = Vector2(702, 601)
 _player_camera = NodePath("../Camera2D")
 
 [node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="Player"]
@@ -84,12 +138,17 @@ position = Vector2(431, 115.5)
 scale = Vector2(1, 1.00877)
 texture = SubResource("NoiseTexture2D_2o6ge")
 
-[node name="LampLight" parent="." instance=ExtResource("7_rw40b")]
-position = Vector2(90, 395)
-
-[node name="Sprite2D" type="Sprite2D" parent="LampLight"]
-position = Vector2(0, -33)
-texture = ExtResource("7_2o6ge")
-
 [node name="FmodBankLoader" type="FmodBankLoader" parent="."]
 bank_paths = ["res://FmodBanks/Desktop/Master.strings.bank", "res://FmodBanks/Desktop/Master.bank", "res://FmodBanks/Desktop/SFX.bank"]
+
+[node name="LampLight" parent="." groups=["Red Generator"] instance=ExtResource("7_rw40b")]
+position = Vector2(273, 339)
+
+[node name="PowerGenerator" parent="." instance=ExtResource("8_2o6ge")]
+position = Vector2(371, 283)
+
+[node name="GlowStickPickup" parent="." instance=ExtResource("10_op1do")]
+position = Vector2(421, 477)
+
+[node name="GlowStickPickup2" parent="." instance=ExtResource("10_op1do")]
+position = Vector2(465, 479)

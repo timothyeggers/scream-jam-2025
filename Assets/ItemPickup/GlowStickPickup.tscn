@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://cotgkmcidfvsv"]
+
+[ext_resource type="Script" uid="uid://c6syvfv6r6o74" path="res://Assets/ItemPickup/ItemPickup.gd" id="1_rkwto"]
+[ext_resource type="PackedScene" uid="uid://cv7dlornpjt08" path="res://Assets/GlowStick/GlowStick.tscn" id="2_fbfgc"]
+[ext_resource type="Texture2D" uid="uid://c2axsk1tom0en" path="res://Assets/GlowStick/glow_stick.png" id="3_gyit7"]
+[ext_resource type="Texture2D" uid="uid://cmc8vvaha6rtb" path="res://Assets/star.png" id="4_8rw2l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jqwih"]
+radius = 25.079872
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ng7v0"]
+light_mode = 1
+
+[node name="GlowStickPickup" type="Node2D" node_paths=PackedStringArray("area", "tooltip", "sprite")]
+y_sort_enabled = true
+script = ExtResource("1_rkwto")
+item = ExtResource("2_fbfgc")
+thumbnail = ExtResource("3_gyit7")
+pickup_description = "Obatined 2 glowsticks."
+area = NodePath("YSortAnchor/Area2D")
+tooltip = NodePath("YSortAnchor/Label")
+sprite = NodePath("YSortAnchor/Sprite2D")
+
+[node name="YSortAnchor" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Area2D" type="Area2D" parent="YSortAnchor"]
+position = Vector2(0, -25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="YSortAnchor/Area2D"]
+shape = SubResource("CircleShape2D_jqwih")
+
+[node name="Sprite2D" type="Sprite2D" parent="YSortAnchor"]
+y_sort_enabled = true
+position = Vector2(0, -25)
+texture = ExtResource("4_8rw2l")
+
+[node name="Label" type="Label" parent="YSortAnchor"]
+z_index = 99
+material = SubResource("CanvasItemMaterial_ng7v0")
+offset_left = -65.0
+offset_top = -61.0
+offset_right = 66.0
+offset_bottom = -38.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 10
+text = "Press E"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://chfd4qkwyoi7p"]
+
+[ext_resource type="Texture2D" uid="uid://c0mr3w8j56xf3" path="res://Assets/generator_off.png" id="1_j06us"]
+[ext_resource type="Script" uid="uid://duyye761ousvm" path="res://Assets/PowerGenerator/PowerGenerator.gd" id="1_pylls"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j06us"]
+size = Vector2(54, 20)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j06us"]
+polygon = PackedVector2Array(27, -20, 27, 0, -27, 0, -27, -20)
+
+[node name="PowerGenerator" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_pylls")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -22)
+texture = ExtResource("1_j06us")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, -10)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_j06us")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_j06us")

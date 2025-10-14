@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://4pqcuqcx1t0r"]
+[gd_scene load_steps=8 format=3 uid="uid://4pqcuqcx1t0r"]
 
 [ext_resource type="Texture2D" uid="uid://pkx7o40abu8m" path="res://Assets/Player/light_torch.png" id="1_4hjso"]
+[ext_resource type="Script" uid="uid://f08vygm4fo8y" path="res://Assets/Lamp/ToggleActivation.gd" id="1_26bge"]
 [ext_resource type="Texture2D" uid="uid://bfbd6ojjkc4to" path="res://Assets/Lamp/lamp_light.tres" id="2_26bge"]
 [ext_resource type="Script" uid="uid://cfvb1ic1yy6mo" path="res://Assets/LightArea2D/LightArea2D.gd" id="3_qa3it"]
 
@@ -16,6 +17,7 @@ light_mode = 1
 radius = 68.57143
 
 [node name="LampLight" type="Node2D"]
+script = ExtResource("1_26bge")
 
 [node name="Glow" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 0.24313726)

@@ -16,6 +16,9 @@
 [ext_resource type="Script" uid="uid://cxypbmwfey6c3" path="res://Assets/UI/StaminaBar.gd" id="8_a3eu5"]
 [ext_resource type="Script" uid="uid://bbwiy63mko2or" path="res://Assets/States/Tools/MeleeToolState.gd" id="8_o1dpk"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3eu5"]
+size = Vector2(14, 7)
+
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cjc2e"]
 polygon = PackedVector2Array(8, -3, 8, 1, -2, 1, -2, -3)
 
@@ -71,9 +74,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_iylpf"]
-radius = 5.0
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rw40b"]
 light_mode = 1
 
@@ -86,6 +86,10 @@ _animator = NodePath("Character")
 _stamina_bar = NodePath("StaminaBar")
 _rb_interactor = NodePath("RigidBodyInteractor")
 _player_hand = NodePath("HandPivot")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_a3eu5")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 z_index = -5
@@ -105,11 +109,14 @@ z_index = 2
 texture = ExtResource("2_qofj0")
 
 [node name="Lantern" parent="HandPivot" instance=ExtResource("3_3brq0")]
+visible = false
 position = Vector2(2, 0)
 
 [node name="GlowStickTool" parent="HandPivot" instance=ExtResource("4_x4ggo")]
+visible = false
 
 [node name="MeleeTool" parent="HandPivot" instance=ExtResource("5_vewtk")]
+visible = false
 position = Vector2(0, -5)
 
 [node name="HandToolMachine" type="Node2D" parent="." node_paths=PackedStringArray("default_state")]
@@ -154,9 +161,6 @@ position = Vector2(1, -22)
 sprite_frames = SubResource("SpriteFrames_aq1ug")
 frame = 4
 frame_progress = 0.0609381
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_iylpf")
 
 [node name="StaminaBar" type="TextureProgressBar" parent="."]
 z_index = 999

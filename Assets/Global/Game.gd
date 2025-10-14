@@ -1,5 +1,9 @@
 extends Node
 
+signal player_died
+
+var log: Log : get = get_log
+
 ## The player state represents the mentality of the player.
 enum PlayerMentalState {
 	## The player mentally is doing great!
@@ -11,6 +15,12 @@ enum PlayerMentalState {
 }
 
 var _mental_state = PlayerMentalState.DEFAULT
+
+func get_log() -> Log:
+	var log = get_tree().get_first_node_in_group("Item Log")
+	if log is Log:
+		return log
+	return null
 
 ## How quickly does the player stamina drain?
 func get_stamina_consumption_rate() -> float:
