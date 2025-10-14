@@ -11,6 +11,8 @@ func set_target_position():
 	timer.start(0)
 
 func enter():
+	print("test1")
+	entity._start_playing_sounds()
 	entity.light_area_entered.connect(_on_light_area_entered)
 	entity.light_area_exited.connect(_on_light_area_exited)
 	navigation.velocity_computed.connect(Callable(_on_velocity_computed))
@@ -19,6 +21,8 @@ func enter():
 	timer.start()
 
 func exit():
+	print("test2")
+	entity._stop_playing_sounds()
 	entity.light_area_entered.disconnect(_on_light_area_entered)
 	entity.light_area_exited.disconnect(_on_light_area_exited)
 	navigation.velocity_computed.disconnect(Callable(_on_velocity_computed))

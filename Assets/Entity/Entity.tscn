@@ -1,12 +1,12 @@
 [gd_scene load_steps=21 format=3 uid="uid://8fu162i6jn6l"]
 
-[ext_resource type="Script" uid="uid://dkcayi1t6onj7" path="res://Assets/Entity/Entity.gd" id="1_h5qsp"]
+[ext_resource type="Script" uid="uid://cjar74j74aqbx" path="res://Assets/Entity/Entity.gd" id="1_h5qsp"]
 [ext_resource type="Texture2D" uid="uid://cmc8vvaha6rtb" path="res://Assets/star.png" id="2_67amp"]
-[ext_resource type="Script" uid="uid://bcqdtjau3wt7r" path="res://Assets/StateMachine/StateMachine.gd" id="3_pki85"]
-[ext_resource type="Script" uid="uid://b3f7doumy1fkv" path="res://Assets/States/Entity/EntityWanderState.gd" id="4_6gvbd"]
-[ext_resource type="Script" uid="uid://b2g7yhw1tviqd" path="res://Assets/States/Entity/EntityChaseState.gd" id="5_tha7b"]
-[ext_resource type="Script" uid="uid://clhwnne81atjj" path="res://Assets/States/Entity/EntityStunnedState.gd" id="6_2of05"]
-[ext_resource type="Script" uid="uid://bf5wooc37wmki" path="res://Assets/States/Entity/EntityFleeState.gd" id="7_1ta34"]
+[ext_resource type="Script" uid="uid://dkgb3ulroifgk" path="res://Assets/StateMachine/StateMachine.gd" id="3_pki85"]
+[ext_resource type="Script" uid="uid://cfft0hyetre16" path="res://Assets/States/Entity/EntityWanderState.gd" id="4_6gvbd"]
+[ext_resource type="Script" uid="uid://cevk1nb40xg2i" path="res://Assets/States/Entity/EntityChaseState.gd" id="5_tha7b"]
+[ext_resource type="Script" uid="uid://bnn8wgqvrq712" path="res://Assets/States/Entity/EntityStunnedState.gd" id="6_2of05"]
+[ext_resource type="Script" uid="uid://g4068lqngxw3" path="res://Assets/States/Entity/EntityFleeState.gd" id="7_1ta34"]
 [ext_resource type="Texture2D" uid="uid://phqoirrc86iu" path="res://Assets/Player/sheet.png" id="8_4t5va"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h5qsp"]
@@ -118,7 +118,6 @@ texture = ExtResource("2_67amp")
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("default_state")]
 script = ExtResource("3_pki85")
 default_state = NodePath("EntityWanderState")
-metadata/_custom_type_script = "uid://bcqdtjau3wt7r"
 
 [node name="EntityWanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("detector", "timer", "entity", "navigation", "sprite")]
 script = ExtResource("4_6gvbd")
@@ -127,7 +126,6 @@ timer = NodePath("../../Timer")
 entity = NodePath("../..")
 navigation = NodePath("../../NavigationAgent2D")
 sprite = NodePath("../../Character")
-metadata/_custom_type_script = "uid://b3f7doumy1fkv"
 
 [node name="EntityChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "_rb_interactor", "entity", "navigation", "sprite")]
 script = ExtResource("5_tha7b")
@@ -137,13 +135,11 @@ _rb_interactor = NodePath("../../RigidBodyInteractor")
 entity = NodePath("../..")
 navigation = NodePath("../../NavigationAgent2D")
 sprite = NodePath("../../Character")
-metadata/_custom_type_script = "uid://b2g7yhw1tviqd"
 
 [node name="EntityStunnedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("stun_icon", "entity")]
 script = ExtResource("6_2of05")
 stun_icon = NodePath("../../Stunned")
 entity = NodePath("../..")
-metadata/_custom_type_script = "uid://clhwnne81atjj"
 
 [node name="EntityFleeState" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "entity", "navigation", "sprite")]
 script = ExtResource("7_1ta34")
@@ -151,7 +147,6 @@ timer = NodePath("../../Timer")
 entity = NodePath("../..")
 navigation = NodePath("../../NavigationAgent2D")
 sprite = NodePath("../../Character")
-metadata/_custom_type_script = "uid://bf5wooc37wmki"
 
 [node name="Character" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
@@ -163,10 +158,11 @@ frame_progress = 0.0609381
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.25
 
-[node name="RigidBodyInteractor" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 12
-monitorable = false
+[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Zombie"
+event_guid = "{9db4bdd6-2a05-498b-b13b-2b6594be5a0d}"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBodyInteractor"]
-shape = SubResource("CircleShape2D_67amp")
+[node name="Timer_Groans" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer_Groans" to="." method="_on_timer_groans_timeout"]
