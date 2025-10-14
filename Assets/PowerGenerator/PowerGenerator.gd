@@ -28,14 +28,11 @@ func _on_body_entered(body):
 	sprite.material = OUTLINE_MATERIAL
 	tooltip.show()
 	_is_nearby = true
-	if _is_active:
-		fuel_gauge.show()
 
 func _on_body_exited(body):
 	sprite.material = null
 	tooltip.hide()
 	_is_nearby = false
-	fuel_gauge.hide()
 
 func _process(delta: float) -> void:
 	fuel_gauge.value = (_fuel_left / time_active_on_fuel) * 100
