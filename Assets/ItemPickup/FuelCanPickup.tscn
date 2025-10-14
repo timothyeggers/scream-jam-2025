@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg8diwbthudyd"]
+
+[ext_resource type="Script" uid="uid://c6syvfv6r6o74" path="res://Assets/ItemPickup/ItemPickup.gd" id="1_x8vxj"]
+[ext_resource type="Texture2D" uid="uid://bmpjbtke1dt13" path="res://Assets/FuelCan/gas_tank.png" id="4_x8vxj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jqwih"]
+radius = 25.079872
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ng7v0"]
+light_mode = 1
+
+[node name="FuelCanPickup" type="Node2D" node_paths=PackedStringArray("area", "tooltip", "sprite")]
+script = ExtResource("1_x8vxj")
+item = 1
+pickup_description = "Obtained 1 fuel."
+area = NodePath("Area2D")
+tooltip = NodePath("Label")
+sprite = NodePath("Sprite2D")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -12)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_jqwih")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("4_x8vxj")
+offset = Vector2(0, -16)
+
+[node name="Label" type="Label" parent="."]
+z_index = 99
+material = SubResource("CanvasItemMaterial_ng7v0")
+offset_left = -65.0
+offset_top = -43.0
+offset_right = 66.0
+offset_bottom = -20.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 10
+text = "Pickup?"
+horizontal_alignment = 1
+vertical_alignment = 1

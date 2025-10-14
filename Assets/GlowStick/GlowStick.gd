@@ -21,5 +21,6 @@ static func create(attach_to: Node) -> GlowStick:
 func _process(delta: float) -> void:
 	_time_left += delta
 	if _time_left >= time_alive:
-		light.enabled = false
+		if light:
+			light.enabled = false
 		queue_free()

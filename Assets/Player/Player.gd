@@ -5,14 +5,20 @@ const MAX_HAND_DISTANCE: float = 12
 ## When the player hits a RB, that isn't a door, how much should the velocity transfer to an impulse to that RB?
 const VEL_TO_RB_FORCE_RATIO: float = 0.3
 
+@export var _walk_speed : float = 50
+@export var _run_speed : float = 70
+@export var _total_stamina : float = 5
+## when you reach _health 0 you die immediately, so u really only have 3 hits until dead
+@export var _health: float = 4
+@export var _damage_cooldown: float = 1
+
+@export_category("Internal")
 @export var _animator: AnimatedSprite2D
 @export var _stamina_bar: AutohideProgressBar
 @export var _player_camera: PlayerCamera
 @export var _rb_interactor: Area2D
 @export var _player_hand: Node2D
-@export var _walk_speed : float = 50
-@export var _run_speed : float = 70
-@export var _total_stamina : float = 5
+@export var _attack_sprite: Sprite2D
 
 @onready var _stamina_left = _total_stamina
 # The starting offset of the hand, relative to the player.
@@ -20,6 +26,7 @@ const VEL_TO_RB_FORCE_RATIO: float = 0.3
 
 @onready var _camera_zoom = _player_camera.zoom
 var _is_running: bool = false
+var _damage_cd: float = 0
 
 func _ready() -> void:
 	Game.set_player_mental_state(Game.PlayerMentalState.IN_DANGER)
@@ -34,10 +41,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_update_ui()
 	
+	if _damage_cd > 0:
+		_damage_cd -= delta
+	
 	#region Update camera position
 	var target_pos = position - get_global_mouse_position()
 	_player_camera.position = position
-	_player_hand.look_at(get_global_mouse_position())
 	if _is_running:
 		_player_camera.zoom = _camera_zoom * 0.9
 	else:
@@ -45,15 +54,17 @@ func _process(delta: float) -> void:
 	#endregion
 	
 	#region Update hand position
-	var hand_dir = -target_pos.normalized()
-	var hand_dist = -target_pos / 20
-	hand_dist = clamp(hand_dist.length(), -MAX_HAND_DISTANCE, MAX_HAND_DISTANCE)
-	
-	_player_hand.position = (hand_dir * hand_dist) + _hand_offset
+	var target_hand_pos = _animator.get_global_transform().get_origin() - get_global_mouse_position()
+	var hand_dir = -target_hand_pos.normalized()
+	var hand_dist = -target_hand_pos / 20
+	if hand_dist.length() > 0.3:
+		_player_hand.look_at(get_global_mouse_position())
+		hand_dist = clamp(hand_dist.length(), -MAX_HAND_DISTANCE, MAX_HAND_DISTANCE)
+		_player_hand.position = (hand_dir * hand_dist) + _hand_offset
 	#endregion
 	
 	#region Reflect direction in player sprite
-	if hand_dir.x > 0:
+	if target_pos.x < 0:
 		_player_hand.scale.y = 1
 		_animator.flip_h = false
 	else:
@@ -102,4 +113,15 @@ func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index)
 		if body is RigidBody2D:
 			if !body.is_in_group("Door"):
 				body.apply_impulse(velocity.length() * VEL_TO_RB_FORCE_RATIO * (col_normal * body.mass), col_pos)
-			
+
+func take_damage(amount: int):
+	if _damage_cd > 0: return
+	_damage_cd = _damage_cooldown
+	_health -= amount
+	_attack_sprite.show()
+	var tween = create_tween()
+	_attack_sprite.modulate.a = 1
+	tween.tween_property(_attack_sprite, "modulate:a", 0, 1).set_ease(Tween.EASE_OUT)
+	if _health <= 0:
+		print("Player dead")
+		Game.player_died.emit()

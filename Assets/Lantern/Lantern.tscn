@@ -10,7 +10,7 @@
 z_as_relative = false
 script = ExtResource("1_mdpkq")
 light = NodePath("Light")
-shadow = NodePath("LightShadow")
+shadow = NodePath("Light/LightShadow")
 light_area = NodePath("LightArea2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -29,13 +29,13 @@ polygon = PackedVector2Array(-99, -114, -75, -96, -68, -36, -78, 28, -99, 48, -2
 
 [node name="Light" type="PointLight2D" parent="."]
 color = Color(1, 1, 0.584314, 1)
-energy = 1.62
+energy = 0.75
 shadow_item_cull_mask = 4
 texture = ExtResource("2_1qtu6")
 offset = Vector2(77, 3)
 script = ExtResource("3_cyest")
 
-[node name="LightShadow" type="PointLight2D" parent="."]
+[node name="LightShadow" type="PointLight2D" parent="Light"]
 range_item_cull_mask = 2
 shadow_enabled = true
 texture = ExtResource("2_1qtu6")

@@ -16,8 +16,9 @@ light_mode = 1
 [sub_resource type="CircleShape2D" id="CircleShape2D_nevix"]
 radius = 68.57143
 
-[node name="LampLight" type="Node2D"]
+[node name="LampLight" type="Node2D" node_paths=PackedStringArray("light_area")]
 script = ExtResource("1_26bge")
+light_area = NodePath("LightArea2D")
 
 [node name="Glow" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 0.24313726)

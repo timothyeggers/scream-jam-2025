@@ -1,6 +1,7 @@
 class_name EntityChaseState extends EntityState
 
 @export var move_speed: float = 60
+@export var attack_distance: float = 25
 
 func enter():
 	entity.light_area_entered.connect(_on_light_area_entered)
@@ -17,6 +18,10 @@ func _on_light_area_entered(light_area_2d):
 
 func _on_light_area_exited(light_area_2d):
 	pass
+
+func process(delta):
+	if entity.global_position.distance_to(Game.get_player().global_position) <= attack_distance:
+		Game.get_player().take_damage(1)
 
 func physics_process(delta):
 	var move_dir = entity.global_position.direction_to(Game.get_player().global_position)

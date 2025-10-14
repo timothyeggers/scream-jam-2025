@@ -35,6 +35,7 @@ position = Vector2(0, -25)
 texture = ExtResource("2_bp8vk")
 
 [node name="Label" type="Label" parent="YSortAnchor"]
+visible = false
 z_index = 99
 material = SubResource("CanvasItemMaterial_ng7v0")
 offset_left = -65.0
@@ -44,6 +45,6 @@ offset_bottom = -38.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 10
-text = "Press E"
+text = "Pickup?"
 horizontal_alignment = 1
 vertical_alignment = 1

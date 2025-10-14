@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://lqpa18l6a1vp"]
+[gd_scene load_steps=29 format=3 uid="uid://lqpa18l6a1vp"]
 
 [ext_resource type="Script" uid="uid://oiqtgnh2hmoy" path="res://Assets/Player/Player.gd" id="1_cjc2e"]
 [ext_resource type="Script" uid="uid://ygkr81jmtsfw" path="res://Assets/Player/HandToolManager.gd" id="2_a3eu5"]
+[ext_resource type="Texture2D" uid="uid://cgp6opwjfrvot" path="res://Assets/claw_mark.png" id="2_dthkx"]
 [ext_resource type="Texture2D" uid="uid://d0tfwuhwtbb31" path="res://Assets/Player/hand.png" id="2_qofj0"]
 [ext_resource type="Script" uid="uid://vdmspytcdxq0" path="res://Assets/StateMachine/ToolStateMachine.gd" id="2_xl0l8"]
 [ext_resource type="PackedScene" uid="uid://b8hyiglkep8fh" path="res://Assets/Lantern/Lantern.tscn" id="3_3brq0"]
@@ -15,6 +16,9 @@
 [ext_resource type="Script" uid="uid://dn1o3dao3fen7" path="res://Assets/States/Tools/GlowStickToolState.gd" id="7_x4ggo"]
 [ext_resource type="Script" uid="uid://cxypbmwfey6c3" path="res://Assets/UI/StaminaBar.gd" id="8_a3eu5"]
 [ext_resource type="Script" uid="uid://bbwiy63mko2or" path="res://Assets/States/Tools/MeleeToolState.gd" id="8_o1dpk"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dthkx"]
+light_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3eu5"]
 size = Vector2(14, 7)
@@ -77,15 +81,22 @@ animations = [{
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rw40b"]
 light_mode = 1
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_animator", "_stamina_bar", "_rb_interactor", "_player_hand")]
-y_sort_enabled = true
-collision_mask = 11
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_animator", "_stamina_bar", "_rb_interactor", "_player_hand", "_attack_sprite") groups=["Player"]]
+collision_mask = 139
 motion_mode = 1
 script = ExtResource("1_cjc2e")
 _animator = NodePath("Character")
 _stamina_bar = NodePath("StaminaBar")
 _rb_interactor = NodePath("RigidBodyInteractor")
 _player_hand = NodePath("HandPivot")
+_attack_sprite = NodePath("Attacked")
+
+[node name="Attacked" type="Sprite2D" parent="."]
+visible = false
+z_index = 9
+material = SubResource("CanvasItemMaterial_dthkx")
+position = Vector2(0, -21)
+texture = ExtResource("2_dthkx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)
@@ -157,10 +168,11 @@ monitorable = false
 shape = SubResource("CircleShape2D_hmte7")
 
 [node name="Character" type="AnimatedSprite2D" parent="."]
-position = Vector2(1, -22)
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_aq1ug")
 frame = 4
 frame_progress = 0.0609381
+offset = Vector2(0, -22)
 
 [node name="StaminaBar" type="TextureProgressBar" parent="."]
 z_index = 999

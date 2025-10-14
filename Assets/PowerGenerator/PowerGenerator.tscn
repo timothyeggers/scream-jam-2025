@@ -1,7 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://chfd4qkwyoi7p"]
+[gd_scene load_steps=10 format=3 uid="uid://chfd4qkwyoi7p"]
 
 [ext_resource type="Texture2D" uid="uid://c0mr3w8j56xf3" path="res://Assets/generator_off.png" id="1_j06us"]
 [ext_resource type="Script" uid="uid://duyye761ousvm" path="res://Assets/PowerGenerator/PowerGenerator.gd" id="1_pylls"]
+[ext_resource type="Texture2D" uid="uid://drqjjnl0uxay" path="res://Assets/UI/progress-bar-circle.png" id="3_61ody"]
+[ext_resource type="Texture2D" uid="uid://c7idm1xu1sdrs" path="res://Assets/UI/progress-bar-frame.png" id="4_jxdt2"]
+[ext_resource type="Script" uid="uid://cxypbmwfey6c3" path="res://Assets/UI/StaminaBar.gd" id="5_l3i4r"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pylls"]
+light_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j06us"]
 size = Vector2(54, 20)
@@ -9,17 +15,45 @@ size = Vector2(54, 20)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_j06us"]
 polygon = PackedVector2Array(27, -20, 27, 0, -27, 0, -27, -20)
 
-[node name="PowerGenerator" type="Node2D"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lm52m"]
+light_mode = 1
+
+[node name="PowerGenerator" type="Node2D" node_paths=PackedStringArray("area", "tooltip", "sprite", "fuel_gauge")]
 y_sort_enabled = true
 script = ExtResource("1_pylls")
+area = NodePath("Area2D")
+tooltip = NodePath("Label")
+sprite = NodePath("Sprite2D")
+fuel_gauge = NodePath("FuelGauge")
+
+[node name="Label" type="Label" parent="."]
+z_index = 99
+material = SubResource("CanvasItemMaterial_pylls")
+offset_left = -65.0
+offset_top = -42.0
+offset_right = 66.0
+offset_bottom = -19.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 10
+text = "Refuel?"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -22)
 texture = ExtResource("1_j06us")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_j06us")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, -10)
+collision_layer = 128
+collision_mask = 3
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
@@ -27,3 +61,28 @@ shape = SubResource("RectangleShape2D_j06us")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_j06us")
+
+[node name="FuelGauge" type="TextureProgressBar" parent="."]
+modulate = Color(1, 1, 1, 0.6666667)
+material = SubResource("CanvasItemMaterial_lm52m")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = -18.000004
+offset_right = 140.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+value = 100.0
+fill_mode = 5
+texture_under = ExtResource("3_61ody")
+texture_over = ExtResource("4_jxdt2")
+texture_progress = ExtResource("3_61ody")
+tint_under = Color(0.211765, 0.211765, 0.211765, 0.796078)
+tint_over = Color(0.588883, 0.588883, 0.588883, 0.454902)
+tint_progress = Color(0.86170006, 0.52309483, 0.2510723, 1)
+script = ExtResource("5_l3i4r")
