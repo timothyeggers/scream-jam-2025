@@ -7,4 +7,4 @@ extends RigidBody2D
 
 func _physics_process(delta: float) -> void:
 	rotation_degrees = clamp(rotation_degrees, _start_degrees - max_degrees_offset, _start_degrees + max_degrees_offset)
-	position = _start_pos
+	#position = _start_pos

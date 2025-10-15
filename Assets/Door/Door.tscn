@@ -26,6 +26,7 @@ linear_damp = 1.0
 script = ExtResource("1_un2ul")
 
 [node name="Sprite2D" type="Sprite2D" parent="Door"]
+z_index = 1
 position = Vector2(0, 24)
 scale = Vector2(0.165, 1)
 texture = ExtResource("1_nty3d")

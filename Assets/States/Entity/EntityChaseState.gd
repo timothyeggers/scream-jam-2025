@@ -2,14 +2,26 @@ class_name EntityChaseState extends EntityState
 
 @export var move_speed: float = 60
 @export var attack_distance: float = 25
+@export var timer: Timer
+@export var chase_wait_time: float = 2
+
+func set_target_position():
+	navigation.target_position = Game.get_player().global_position
+	timer.start(0)
 
 func enter():
 	entity.light_area_entered.connect(_on_light_area_entered)
 	entity.light_area_exited.connect(_on_light_area_exited)
+	navigation.velocity_computed.connect(Callable(_on_velocity_computed))
+	timer.wait_time = chase_wait_time
+	timer.timeout.connect(set_target_position)
+	timer.start()
 
 func exit():
 	entity.light_area_entered.disconnect(_on_light_area_entered)
 	entity.light_area_exited.disconnect(_on_light_area_exited)
+	navigation.velocity_computed.disconnect(Callable(_on_velocity_computed))
+	timer.timeout.disconnect(set_target_position)
 
 func _on_light_area_entered(light_area_2d):
 	if light_area_2d is LightArea2D:
@@ -25,7 +37,7 @@ func process(delta):
 
 func physics_process(delta):
 	if navigation.is_navigation_finished():
-		navigation.target_position = Game.get_player().global_position
+		set_target_position()
 	
 	var next_path_position: Vector2 = navigation.get_next_path_position()
 	var new_velocity: Vector2 = entity.global_position.direction_to(next_path_position) * move_speed

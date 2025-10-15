@@ -1,26 +1,41 @@
 class_name EntityFleeState extends EntityState
 
+const FLEE_DISTANCE = 300
+
 @export var move_speed: float = 75
 @export var flee_time: float = 4
+@export var timer: Timer
 
-var _flee_dt = 0
+var _start_pos: Vector2
+
+func end_flee():
+	emit_signal("transitioned", self, "EntityWanderState")
 
 func enter():
-	_flee_dt = 0
+	_start_pos = entity.position
+	navigation.velocity_computed.connect(Callable(_on_velocity_computed))
+	timer.wait_time = flee_time
+	timer.timeout.connect(end_flee)
+	timer.start()
+	navigation.target_position = -Game.get_player().global_position.direction_to(entity.global_position) * FLEE_DISTANCE
 
-func _process(delta: float) -> void:
-	_flee_dt += delta
-	if _flee_dt >= flee_time:
-		emit_signal("transitioned", self, "EntityWanderState")
+func exit():
+	navigation.velocity_computed.disconnect(Callable(_on_velocity_computed))
+	timer.timeout.disconnect(end_flee)
 
 func physics_process(delta):
-	var move_dir = entity.global_position.direction_to(Game.get_player().global_position)
-	entity.velocity = -move_dir * move_speed
-	entity.move_and_slide()
+	var next_path_position: Vector2 = navigation.get_next_path_position()
+	var new_velocity: Vector2 = entity.global_position.direction_to(next_path_position) * move_speed
+	if navigation.avoidance_enabled:
+		navigation.set_velocity(new_velocity)
+	else:
+		_on_velocity_computed(new_velocity)
 	
-	# flip character
-	if move_dir.x > 0:
+	if new_velocity.x > 0:
 		sprite.scale.x = abs(sprite.scale.x)
-	elif move_dir.x < 0:
+	elif new_velocity.x < 0:
 		sprite.scale.x = abs(sprite.scale.x) * -1
-		
+
+func _on_velocity_computed(safe_velocity: Vector2):
+	entity.velocity = safe_velocity
+	entity.move_and_slide()
