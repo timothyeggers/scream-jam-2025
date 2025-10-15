@@ -1,14 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://bo3ricgmlxr4x"]
 
-[ext_resource type="Texture2D" uid="uid://carvbp5cu2unf" path="res://Assets/torch.png" id="1_c801n"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mh0j8"]
+[ext_resource type="Texture2D" uid="uid://biyn5omh8ina1" path="res://Assets/48x48.png" id="1_nty3d"]
+[ext_resource type="Script" uid="uid://7jisb2mrjnpm" path="res://Assets/Door/Door.gd" id="1_un2ul"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mh0j8"]
-size = Vector2(7, 63)
+size = Vector2(8, 48)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_c801n"]
-polygon = PackedVector2Array(-3, -1, 4, -1, 4, 63, -3, 63)
+polygon = PackedVector2Array(0, -4, 8, -4, 8, 44, 0, 44)
 
 [node name="Door" type="Node2D"]
 metadata/_edit_group_ = true
@@ -19,23 +18,22 @@ node_b = NodePath("../Door")
 
 [node name="Anchor" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor"]
-shape = SubResource("CircleShape2D_mh0j8")
-
 [node name="Door" type="RigidBody2D" parent="." groups=["Door"]]
-collision_layer = 8
+collision_layer = 136
 collision_mask = 12
 gravity_scale = 0.0
 linear_damp = 1.0
-metadata/_edit_group_ = true
+script = ExtResource("1_un2ul")
 
 [node name="Sprite2D" type="Sprite2D" parent="Door"]
-position = Vector2(0, 31)
-texture = ExtResource("1_c801n")
+position = Vector2(0, 24)
+scale = Vector2(0.165, 1)
+texture = ExtResource("1_nty3d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
-position = Vector2(0.5, 31.5)
+position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_mh0j8")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Door"]
+position = Vector2(-4, 4)
 occluder = SubResource("OccluderPolygon2D_c801n")

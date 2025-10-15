@@ -101,7 +101,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	for body in _rb_interactor.get_overlapping_bodies():
-		if !body.is_in_group("Door"): continue
+		if !body.is_in_group("Door") && body is not RigidBody2D: continue
 		body.apply_central_force(velocity * 1.5 - (-velocity.normalized() * body.mass))
 		if _is_running:
 			body.apply_central_impulse(velocity * 0.5 - (-velocity.normalized() * body.mass))

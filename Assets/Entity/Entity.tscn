@@ -9,6 +9,9 @@
 [ext_resource type="Script" uid="uid://bf5wooc37wmki" path="res://Assets/States/Entity/EntityFleeState.gd" id="7_1ta34"]
 [ext_resource type="Texture2D" uid="uid://phqoirrc86iu" path="res://Assets/Player/sheet.png" id="8_4t5va"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5qsp"]
+size = Vector2(12, 10)
+
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_coyqj"]
 polygon = PackedVector2Array(8, -3, 8, 1, -2, 1, -2, -3)
 
@@ -68,8 +71,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_it4rn"]
-
 [node name="Entity" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 2
@@ -77,6 +78,14 @@ collision_mask = 135
 motion_mode = 1
 script = ExtResource("1_h5qsp")
 metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_h5qsp")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+debug_path_custom_color = Color(1, 0, 1, 1)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 z_index = -5
@@ -106,17 +115,19 @@ script = ExtResource("3_pki85")
 default_state = NodePath("EntityWanderState")
 metadata/_custom_type_script = "uid://bcqdtjau3wt7r"
 
-[node name="EntityWanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("detector", "entity", "sprite")]
+[node name="EntityWanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("detector", "entity", "navigation", "sprite")]
 script = ExtResource("4_6gvbd")
 detector = NodePath("../../Detector")
 entity = NodePath("../..")
+navigation = NodePath("../../NavigationAgent2D")
 sprite = NodePath("../../Character")
 metadata/_custom_type_script = "uid://b3f7doumy1fkv"
 
-[node name="EntityChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("entity", "sprite")]
+[node name="EntityChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("entity", "navigation", "sprite")]
 script = ExtResource("5_tha7b")
 move_speed = 45.0
 entity = NodePath("../..")
+navigation = NodePath("../../NavigationAgent2D")
 sprite = NodePath("../../Character")
 metadata/_custom_type_script = "uid://b2g7yhw1tviqd"
 
@@ -138,6 +149,3 @@ position = Vector2(1, -22)
 sprite_frames = SubResource("SpriteFrames_05pht")
 frame = 4
 frame_progress = 0.0609381
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_it4rn")

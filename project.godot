@@ -113,6 +113,8 @@ interact={
 2d_physics/layer_4="RBs Blocking CBs"
 2d_physics/layer_5="Light"
 2d_physics/layer_8="Wall"
+2d_navigation/layer_8="Wall"
+avoidance/layer_1="Agents"
 
 [physics]
 

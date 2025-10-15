@@ -1,6 +1,7 @@
 class_name EntityState extends State
 
 @export var entity: Entity
+@export var navigation: NavigationAgent2D
 
 @export_category("Animation")
 @export var sprite: AnimatedSprite2D

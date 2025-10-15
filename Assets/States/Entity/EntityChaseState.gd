@@ -24,12 +24,21 @@ func process(delta):
 		Game.get_player().take_damage(1)
 
 func physics_process(delta):
-	var move_dir = entity.global_position.direction_to(Game.get_player().global_position)
-	entity.velocity = move_dir * move_speed
-	entity.move_and_slide()
+	if navigation.is_navigation_finished():
+		navigation.target_position = Game.get_player().global_position
 	
-	# flip character
-	if move_dir.x > 0:
+	var next_path_position: Vector2 = navigation.get_next_path_position()
+	var new_velocity: Vector2 = entity.global_position.direction_to(next_path_position) * move_speed
+	if navigation.avoidance_enabled:
+		navigation.set_velocity(new_velocity)
+	else:
+		_on_velocity_computed(new_velocity)
+	
+	if new_velocity.x > 0:
 		sprite.scale.x = abs(sprite.scale.x)
-	elif move_dir.x < 0:
+	elif new_velocity.x < 0:
 		sprite.scale.x = abs(sprite.scale.x) * -1
+
+func _on_velocity_computed(safe_velocity: Vector2):
+	entity.velocity = safe_velocity
+	entity.move_and_slide()
