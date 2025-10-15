@@ -158,10 +158,6 @@ frame_progress = 0.0609381
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.25
 
-[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
-event_name = "event:/Zombie"
-event_guid = "{9db4bdd6-2a05-498b-b13b-2b6594be5a0d}"
-
 [node name="Timer_Groans" type="Timer" parent="."]
 one_shot = true
 

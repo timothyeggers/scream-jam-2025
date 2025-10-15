@@ -12,6 +12,8 @@ var _in_light = false
 var _zombieSoundTimer = 0
 var _resetzombieSoundTimer = 0.5
 
+@onready var zombieEmitter3D = get_node("../../SpatialAudio3D/ZombieSounds_FmodEventEmitter3D")
+var scaleEmitter = 0.015
 
 func _ready():
 	print("Entity Ready")
@@ -23,6 +25,9 @@ func _ready():
 
 func _process(delta: float) -> void:
 	#print("Process Entity")
+	#zombieEmitter3D.global_transform = Transform3D(zombieEmitter3D.global_transform.basis, Vector3(global_position.x*scaleEmitter, 0.0, global_position.y*scaleEmitter))
+	zombieEmitter3D.global_transform.origin = Vector3(global_position.x*scaleEmitter, 0.0, global_position.y*scaleEmitter)
+	
 	if _in_light: return
 	_time_left_to_disappear -= delta
 	_time_left_to_disappear = max(0, _time_left_to_disappear)
@@ -30,6 +35,7 @@ func _process(delta: float) -> void:
 	if _time_left_to_disappear == 0:
 		modulate.a = 0
 		visible = false
+	print("Entity Emitter Global Pos : ", zombieEmitter3D.global_position)
 
 func _on_light_area_entered(light_area_2d):
 	print("_on_light_area_entered")
@@ -43,8 +49,9 @@ func _on_light_area_exited(light_area_2d):
 	_in_light = false
 	
 func _start_playing_sounds():
-	$FmodEventEmitter2D.play()
-	_zombieSoundTimer = randf_range(0.9, 2)
+	print("start playing zombie sounds")
+	zombieEmitter3D.play()
+	_zombieSoundTimer = randf_range(1.5, 3)
 	$Timer_Groans.start(_zombieSoundTimer)
 
 func _on_timer_groans_timeout() -> void:
@@ -52,6 +59,6 @@ func _on_timer_groans_timeout() -> void:
 	_start_playing_sounds()
 	
 func _stop_playing_sounds():
-	$FmodEventEmitter2D.stop()
+	zombieEmitter3D.stop()
 	$Timer_Groans.stop()
 	

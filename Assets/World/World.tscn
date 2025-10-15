@@ -28,19 +28,48 @@ agent_radius = 5.0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h7mlw"]
 light_mode = 1
 
-[node name="World" type="Node2D" groups=["World"]]
-y_sort_enabled = true
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rw40b"]
+polygon = PackedVector2Array(428, 172, 435, 172, 435, 58, 428, 58)
 
-[node name="GPUParticles2D" parent="." instance=ExtResource("14_ssbc4")]
-visible = false
-position = Vector2(0, 16)
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2o6ge"]
+width = 7
+height = 114
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-position = Vector2(-8, 8)
-navigation_polygon = SubResource("NavigationPolygon_7gb8a")
+[node name="Game" type="Node" groups=["World"]]
+
+[node name="SpatialAudio3D" type="Node3D" parent="."]
+
+[node name="FmodListener3D" type="FmodListener3D" parent="SpatialAudio3D"]
+
+[node name="Footsteps_FmodEmitter3D" type="FmodEventEmitter3D" parent="SpatialAudio3D"]
+event_name = "event:/Footsteps_Grass"
+event_guid = "{02037b91-5cea-4d7e-a642-9c05f704eb89}"
+
+[node name="ZombieSounds_FmodEventEmitter3D" type="FmodEventEmitter3D" parent="SpatialAudio3D"]
+event_name = "event:/Zombie"
+event_guid = "{c903e3c9-064e-4cb3-a023-d331bd8a9566}"
+
+[node name="World_2D" type="Node2D" parent="."]
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="World_2D"]
+tile_map_data = PackedByteArray("AAAQAA0AAAACAAAAAAAQAA4AAAAAAAEAAAATAA0AAAACAAAAAFATAA4AAAAAAAEAAAATAA8AAAACAAAAADAQAA8AAAACAAAAAGARAA0AAAABAAAAAAASAA0AAAABAAAAAAA=")
+tile_set = SubResource("TileSet_mh0j8")
 metadata/_edit_lock_ = true
 
-[node name="Ground" type="Sprite2D" parent="NavigationRegion2D"]
+[node name="TileMapLayer" type="TileMapLayer" parent="World_2D"]
+tile_map_data = PackedByteArray("AAATABAAAgAAAAEAAAAUABAAAgABAAEAAAAUABEAAgABAAIAAAARABAAAgACAAAAAAARABEAAgACAAEAAAASABAAAgADAAAAAAARABIAAAACAAAAAAARABMAAAACAAEAAAASABIAAAADAAAAAAASABMAAAACAAIAAAATABIAAAAAAAEAAAATABMAAAACAAIAAAAUABIAAAABAAEAAAAUABMAAAABAAIAAAASABEAAgACAAIAAAATABEAAgACAAIAAAA=")
+tile_set = ExtResource("1_mh0j8")
+metadata/_edit_lock_ = true
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="World_2D"]
+visible = false
+color = Color(0.003921569, 0, 0, 0.8862745)
+blend_mode = 2
+range_item_cull_mask = 0
+script = ExtResource("2_mh0j8")
+metadata/_edit_lock_ = true
+
+[node name="Ground" type="Sprite2D" parent="World_2D"]
 light_mask = 3
 z_index = -99
 texture_repeat = 2
@@ -51,44 +80,14 @@ region_enabled = true
 region_rect = Rect2(0, 0, 100000, 100000)
 metadata/_edit_lock_ = true
 
-[node name="LevelLayer" type="TileMapLayer" parent="NavigationRegion2D"]
-tile_map_data = PackedByteArray("AAASAAUAAAAAAAIAAAASAAYAAAABAAEAAAARAAYAAAABAAEAAAARAAQAAAABAAEAAAASAAQAAAACAAEAAAAQAAUAAAABAAEAAAAQAAYAAAABAAEAAAAQAAQAAAABAAEAAAAPAAUAAAABAAEAAAAPAAYAAAABAAEAAAAPAAQAAAABAAEAAAAOAAUAAAAAAAEAAAAOAAYAAAADAAAAAAAOAAQAAAAAAAEAAAASAAcAAAABAAEAAAASAAgAAAACAAAAAAARAAcAAAABAAEAAAARAAgAAAABAAIAAAAQAAcAAAABAAEAAAAQAAgAAAABAAIAAAAPAAcAAAABAAEAAAAPAAgAAAABAAIAAAAOAAcAAAADAAEAAAAOAAgAAAAAAAIAAAAWAAkAAAACAAEAAAAWAAoAAAACAAIAAAAVAAkAAAABAAEAAAAVAAoAAAABAAIAAAAWAAgAAAACAAEAAAAUAAkAAAABAAEAAAAUAAoAAAABAAIAAAATAAkAAAABAAEAAAATAAoAAAABAAIAAAASAAkAAAAAAAEAAAASAAoAAAAAAAIAAAAWAAcAAAACAAEAAAAVAAcAAAABAAEAAAAVAAYAAAABAAEAAAAWAAYAAAACAAEAAAAUAAcAAAABAAEAAAAUAAYAAAABAAEAAAATAAcAAAABAAEAAAATAAYAAAABAAEAAAASAAMAAAACAAEAAAARAAMAAAABAAEAAAARAAIAAAABAAAAAAASAAIAAAACAAAAAAAQAAMAAAABAAEAAAAQAAIAAAABAAAAAAAPAAMAAAABAAEAAAAPAAIAAAABAAAAAAAOAAMAAAAAAAEAAAAOAAIAAAAAAAAAAAATAAUAAAABAAIAAAAUAAUAAAABAAAAAAAVAAUAAAABAAAAAAAWAAUAAAACAAAAAAA=")
-tile_set = ExtResource("1_hmte7")
-navigation_visibility_mode = 1
-metadata/_edit_lock_ = true
-
-[node name="GroundLayer" type="TileMapLayer" parent="NavigationRegion2D"]
-z_index = -1
-tile_set = ExtResource("1_hmte7")
-metadata/_edit_lock_ = true
-
-[node name="PowerGenerator" parent="NavigationRegion2D" instance=ExtResource("8_2o6ge")]
-position = Vector2(371, 283)
-
-[node name="DirectionalLight" type="DirectionalLight2D" parent="."]
-visible = false
-color = Color(0.003921569, 0, 0, 0.8862745)
-blend_mode = 2
-range_item_cull_mask = 0
-script = ExtResource("2_mh0j8")
-metadata/_edit_lock_ = true
-
-[node name="Level" type="Node2D" parent="."]
-
-[node name="Door" parent="." instance=ExtResource("4_hmte7")]
-position = Vector2(584, 160)
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="World_2D"]
 position = Vector2(379, 217)
 zoom = Vector2(1.5, 1.5)
 editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("2_2o6ge")
 
-[node name="FmodListener2D" type="FmodListener2D" parent="Camera2D"]
-position = Vector2(-379, -217)
-
-[node name="Log" type="RichTextLabel" parent="Camera2D" groups=["Item Log"]]
+[node name="Log" type="RichTextLabel" parent="World_2D/Camera2D" groups=["Item Log"]]
 material = SubResource("CanvasItemMaterial_h7mlw")
 custom_minimum_size = Vector2(200, 100)
 anchors_preset = 15
@@ -106,37 +105,59 @@ theme_override_font_sizes/normal_font_size = 12
 text = "
 "
 script = ExtResource("3_op1do")
+metadata/_edit_use_anchors_ = true
 
-[node name="GlowStick" parent="." instance=ExtResource("6_fdrvb")]
+[node name="GlowStick" parent="World_2D" instance=ExtResource("6_fdrvb")]
 position = Vector2(393, 262)
 collision_mask = 12
 time_alive = 1000.0
 
-[node name="Entity" parent="." instance=ExtResource("11_mh0j8")]
-position = Vector2(56, 232)
+[node name="Door" parent="World_2D" instance=ExtResource("4_hmte7")]
+position = Vector2(431, 173)
 
-[node name="Player" parent="." node_paths=PackedStringArray("_player_camera") instance=ExtResource("5_rw40b")]
-position = Vector2(640, 352)
+[node name="Entity" parent="World_2D" instance=ExtResource("11_mh0j8")]
+position = Vector2(122, 250)
+
+[node name="Entity2" parent="World_2D" instance=ExtResource("11_mh0j8")]
+position = Vector2(751, 418)
+
+[node name="Player" parent="World_2D" node_paths=PackedStringArray("_player_camera") instance=ExtResource("5_rw40b")]
+position = Vector2(373, 344)
 _player_camera = NodePath("../Camera2D")
 
-[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="Player"]
-event_name = "event:/Footsteps"
-event_guid = "{3ae7973e-4cf2-4bad-91ea-e6675447da4d}"
-position = Vector2(-226, -419)
+[node name="TempWall" type="LightOccluder2D" parent="World_2D"]
+occluder = SubResource("OccluderPolygon2D_rw40b")
 
-[node name="FmodBankLoader" type="FmodBankLoader" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="World_2D/TempWall"]
+position = Vector2(431, 115.5)
+scale = Vector2(1, 1.00877)
+texture = SubResource("NoiseTexture2D_2o6ge")
+
+[node name="TempWall2" type="LightOccluder2D" parent="World_2D"]
+position = Vector2(0, 178)
+occluder = SubResource("OccluderPolygon2D_rw40b")
+
+[node name="Sprite2D" type="Sprite2D" parent="World_2D/TempWall2"]
+position = Vector2(431, 115.5)
+scale = Vector2(1, 1.00877)
+texture = SubResource("NoiseTexture2D_2o6ge")
+
+[node name="FmodBankLoader" type="FmodBankLoader" parent="World_2D"]
 bank_paths = ["res://FmodBanks/Desktop/Master.strings.bank", "res://FmodBanks/Desktop/Master.bank", "res://FmodBanks/Desktop/SFX.bank"]
 
-[node name="LampLight" parent="." groups=["Red Generator"] instance=ExtResource("7_rw40b")]
+[node name="LampLight" parent="World_2D" groups=["Red Generator"] instance=ExtResource("7_rw40b")]
 position = Vector2(273, 339)
 
-[node name="GlowStickPickup" parent="." instance=ExtResource("10_op1do")]
+[node name="PowerGenerator" parent="World_2D" instance=ExtResource("8_2o6ge")]
+position = Vector2(371, 283)
+
+[node name="GlowStickPickup" parent="World_2D" instance=ExtResource("10_op1do")]
 position = Vector2(421, 477)
 
-[node name="GlowStickPickup2" parent="." instance=ExtResource("10_op1do")]
+[node name="GlowStickPickup2" parent="World_2D" instance=ExtResource("10_op1do")]
 position = Vector2(465, 479)
 
-[node name="FuelCanPickup" parent="." instance=ExtResource("14_sxnil")]
+[node name="FuelCanPickup" parent="World_2D" instance=ExtResource("14_sxnil")]
 position = Vector2(388, 395)
 
 [node name="Node2D" type="Node2D" parent="."]

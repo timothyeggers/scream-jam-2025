@@ -31,11 +31,15 @@ var _damage_cd: float = 0
 
 # Variables for footsteps sounds
 var _footstepTimer = 0
-var _resetfootstepTimer = 0.5
+var _resetfootstepTimer = 0.6
+
+@onready var listener3d = get_node("../../SpatialAudio3D/FmodListener3D")
+@onready var footstepsEmitter3d = get_node("../../SpatialAudio3D/Footsteps_FmodEmitter3D")
+var scaleListener = 0.015
 
 func _ready() -> void:
 	Game.set_player_mental_state(Game.PlayerMentalState.IN_DANGER)
-	
+	FmodServer.add_listener(0,listener3d)
 	_player_camera.position = position
 	_hand_offset = _player_hand.position
 	
@@ -45,6 +49,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_update_ui()
+	
+	#listener3d.global_transform = Transform3D(listener3d.global_transform.basis, Vector3(global_position.x*scaleListener, 0.0, global_position.y*scaleListener))
+	listener3d.global_transform.origin = Vector3(global_position.x*scaleListener, 0.0, global_position.y*scaleListener)
 	
 	if _damage_cd > 0:
 		_damage_cd -= delta
@@ -77,6 +84,8 @@ func _process(delta: float) -> void:
 		_animator.flip_h = true
 	#endregion
 
+	print("Player Listener Global Pos : ", listener3d.global_position)
+
 func _update_ui():
 	_stamina_bar.set_value_bar((_stamina_left / _total_stamina) * 100)
 
@@ -104,10 +113,11 @@ func _physics_process(delta: float) -> void:
 	velocity = dir * speed
 	if dir:
 		if _footstepTimer <= 0:
-			$FmodEventEmitter2D.play()
+			footstepsEmitter3d.play()
 			if _is_running:
 				_footstepTimer = _resetfootstepTimer/2
 			else:
+				#print("FOOTSTEP Player Listener Global Pos : ", $FmodListener3D.global_position)
 				_footstepTimer = _resetfootstepTimer
 		_footstepTimer -= delta
 	move_and_slide()
