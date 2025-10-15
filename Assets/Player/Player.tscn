@@ -81,13 +81,13 @@ animations = [{
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rw40b"]
 light_mode = 1
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_animator", "_stamina_bar", "_rb_interactor", "_player_hand", "_attack_sprite", "_blood_emitter") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_animator", "_stamina_bar", "_interactor", "_player_hand", "_attack_sprite", "_blood_emitter") groups=["Player"]]
 collision_mask = 139
 motion_mode = 1
 script = ExtResource("1_cjc2e")
 _animator = NodePath("Character")
 _stamina_bar = NodePath("StaminaBar")
-_rb_interactor = NodePath("RigidBodyInteractor")
+_interactor = NodePath("Interactor")
 _player_hand = NodePath("HandPivot")
 _attack_sprite = NodePath("Attacked")
 _blood_emitter = NodePath("BloodParticles")
@@ -176,12 +176,13 @@ energy = 0.2
 texture = ExtResource("4_u5to8")
 texture_scale = 1.5
 
-[node name="RigidBodyInteractor" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 12
+[node name="Interactor" type="Area2D" parent="."]
+scale = Vector2(1.5600009, 1)
+collision_layer = 4
+collision_mask = 132
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBodyInteractor"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactor"]
 shape = SubResource("CircleShape2D_hmte7")
 
 [node name="Character" type="AnimatedSprite2D" parent="."]

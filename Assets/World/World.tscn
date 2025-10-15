@@ -1,7 +1,7 @@
-[gd_scene load_steps=21 format=4 uid="uid://cqwr1f22r0806"]
+[gd_scene load_steps=17 format=4 uid="uid://cqwr1f22r0806"]
 
 [ext_resource type="Texture2D" uid="uid://beeioy02jj8fr" path="res://bare_Tex1.BMP" id="1_2o6ge"]
-[ext_resource type="Texture2D" uid="uid://b58kc0vq3yrwj" path="res://Assets/tileset_wood_corrected.png" id="1_hmte7"]
+[ext_resource type="TileSet" uid="uid://b31nkkc6kpopy" path="res://Assets/TileSet.tres" id="1_hmte7"]
 [ext_resource type="Script" uid="uid://ck5q4y1530gim" path="res://Assets/Player/PlayerCamera.gd" id="2_2o6ge"]
 [ext_resource type="Script" uid="uid://bsn7l24lrenpa" path="res://Assets/World/OverworldLight.gd" id="2_mh0j8"]
 [ext_resource type="Script" uid="uid://c5did3bug2sch" path="res://Assets/Log/Log.gd" id="3_op1do"]
@@ -12,49 +12,14 @@
 [ext_resource type="PackedScene" uid="uid://chfd4qkwyoi7p" path="res://Assets/PowerGenerator/PowerGenerator.tscn" id="8_2o6ge"]
 [ext_resource type="PackedScene" uid="uid://cotgkmcidfvsv" path="res://Assets/ItemPickup/GlowStickPickup.tscn" id="10_op1do"]
 [ext_resource type="PackedScene" uid="uid://8fu162i6jn6l" path="res://Assets/Entity/Entity.tscn" id="11_mh0j8"]
+[ext_resource type="PackedScene" uid="uid://dkwt7i4r6rtr3" path="res://GrassParticleShader.tscn" id="14_ssbc4"]
 [ext_resource type="PackedScene" uid="uid://bg8diwbthudyd" path="res://Assets/ItemPickup/FuelCanPickup.tscn" id="14_sxnil"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_7gb8a"]
-vertices = PackedVector2Array(634, 442, 807.96094, 579.9531, 10, 576.03906, 435.7578, 442, 806.03125, 10, 634, 374, 476.15625, 10, 476.15625, 202, 435.7578, 394, 10, 10, 334, 293, 435.85156, 230, 435.7578, 298, 408, 293, 408, 253, 435.7578, 58, 435.82813, 58, 435.7578, 106, 435.82813, 106, 435.7578, 154, 435.82813, 154, 435.7578, 202, 435.82813, 298, 435.7578, 346, 435.82813, 346, 435.82813, 394, 435.82813, 10, 476.15625, 374, 476.15625, 230, 334, 253)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0, 5), PackedInt32Array(6, 4, 5, 7), PackedInt32Array(8, 3, 2, 9, 10), PackedInt32Array(11, 12, 13, 14), PackedInt32Array(15, 16, 17), PackedInt32Array(17, 18, 19), PackedInt32Array(19, 20, 21), PackedInt32Array(12, 22, 23), PackedInt32Array(23, 24, 8), PackedInt32Array(8, 25, 3), PackedInt32Array(9, 26, 15), PackedInt32Array(5, 27, 28), PackedInt32Array(7, 5, 28), PackedInt32Array(21, 7, 28, 11), PackedInt32Array(9, 15, 17), PackedInt32Array(13, 12, 23, 10), PackedInt32Array(9, 17, 19), PackedInt32Array(9, 19, 21), PackedInt32Array(9, 21, 11, 14, 29), PackedInt32Array(10, 23, 8), PackedInt32Array(9, 29, 10)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 816, 0, 818, 590, 0, 586)])
+vertices = PackedVector2Array(4971, -4955.008, 4978.992, 4987, 1095.9063, 533, 1095.9063, 235, -4995, 5002.992, 872.09375, 533, -5002.992, -4978.9766, 903.90625, 91, 680.09375, 91, 680.09375, 319.1797, 403, 288, 403, 258, 903.90625, 235, 339, 258, 339, 288, 680.09375, 437, 711.90625, 319.1797, 711.90625, 149, 872.09375, 149, 872.09375, 293, 1064.0938, 293, 1064.0938, 475, 903.90625, 379, 903.90625, 475, 711.90625, 379, 711.90625, 352.8203, 680.09375, 352.8203, 872.09375, 437)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 1, 4, 5), PackedInt32Array(6, 0, 3, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(3, 12, 7), PackedInt32Array(6, 7, 8), PackedInt32Array(6, 8, 11, 13), PackedInt32Array(4, 6, 13, 14), PackedInt32Array(5, 4, 14, 15), PackedInt32Array(16, 17, 18, 19), PackedInt32Array(19, 20, 21, 22), PackedInt32Array(21, 23, 22), PackedInt32Array(19, 22, 24, 25), PackedInt32Array(16, 19, 25), PackedInt32Array(9, 16, 25, 26), PackedInt32Array(15, 27, 5), PackedInt32Array(15, 14, 10, 26), PackedInt32Array(26, 10, 9)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-5008, -4984, 4976, -4960, 4984, 4992, -5000, 5008)])
 agent_radius = 5.0
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hmte7"]
-polygon = PackedVector2Array(-10.000267, 24, 10.101791, 24, 10.101791, -24, -10.101791, -24)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sxnil"]
-polygon = PackedVector2Array(-10.000267, 24, 24, 24, 24, -24, -10.101791, -24)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7gb8a"]
-polygon = PackedVector2Array(-24, 24, 24, 24, 24, -24, -24, -24)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sxnil"]
-texture = ExtResource("1_hmte7")
-texture_region_size = Vector2i(48, 48)
-0:0/0 = 0
-0:0/0/z_index = 1
-0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_hmte7")
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10.158798, -24, 10.158798, -24, 10.158798, 24, -10.228134, 24)
-1:0/0 = 0
-2:0/0 = 0
-0:1/0 = 0
-0:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_sxnil")
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-10.158798, -24, 24, -24, 24, 24, -10.228134, 24)
-2:1/0 = 0
-0:2/0 = 0
-0:2/0/z_index = -1
-1:1/0 = 0
-1:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7gb8a")
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
-1:2/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_mh0j8"]
-tile_size = Vector2i(48, 48)
-occlusion_layer_0/light_mask = 1
-physics_layer_0/collision_layer = 128
-physics_layer_0/collision_mask = 7
-sources/0 = SubResource("TileSetAtlasSource_sxnil")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h7mlw"]
 light_mode = 1
@@ -62,13 +27,35 @@ light_mode = 1
 [node name="World" type="Node2D" groups=["World"]]
 y_sort_enabled = true
 
+[node name="GPUParticles2D" parent="." instance=ExtResource("14_ssbc4")]
+visible = false
+position = Vector2(0, 16)
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-8, 8)
 navigation_polygon = SubResource("NavigationPolygon_7gb8a")
+metadata/_edit_lock_ = true
+
+[node name="Ground" type="Sprite2D" parent="NavigationRegion2D"]
+light_mask = 3
+z_index = -99
+texture_repeat = 2
+position = Vector2(-5, 1.0000002)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_2o6ge")
+region_enabled = true
+region_rect = Rect2(0, 0, 100000, 100000)
+metadata/_edit_lock_ = true
 
 [node name="LevelLayer" type="TileMapLayer" parent="NavigationRegion2D"]
-tile_map_data = PackedByteArray("AAAQAA0AAAACAAAAAAAQAA4AAAAAAAEAAAATAA0AAAACAAAAAFATAA4AAAAAAAEAAAATAA8AAAACAAAAADAQAA8AAAACAAAAAGARAA0AAAABAAAAAAASAA0AAAABAAAAAAAJAAgAAAAAAAEAAAAJAAcAAAAAAAAAAAAJAAYAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAAAAAAAAAAAAAAKAAgAAAABAAEAAAALAAgAAAABAAEAAAAMAAgAAAABAAEAAAAJAAMAAAAAAAAAAAA=")
-tile_set = SubResource("TileSet_mh0j8")
+tile_map_data = PackedByteArray("AAASAAUAAAAAAAIAAAASAAYAAAABAAEAAAARAAYAAAABAAEAAAARAAQAAAABAAEAAAASAAQAAAACAAEAAAAQAAUAAAABAAEAAAAQAAYAAAABAAEAAAAQAAQAAAABAAEAAAAPAAUAAAABAAEAAAAPAAYAAAABAAEAAAAPAAQAAAABAAEAAAAOAAUAAAAAAAEAAAAOAAYAAAADAAAAAAAOAAQAAAAAAAEAAAASAAcAAAABAAEAAAASAAgAAAACAAAAAAARAAcAAAABAAEAAAARAAgAAAABAAIAAAAQAAcAAAABAAEAAAAQAAgAAAABAAIAAAAPAAcAAAABAAEAAAAPAAgAAAABAAIAAAAOAAcAAAADAAEAAAAOAAgAAAAAAAIAAAAWAAkAAAACAAEAAAAWAAoAAAACAAIAAAAVAAkAAAABAAEAAAAVAAoAAAABAAIAAAAWAAgAAAACAAEAAAAUAAkAAAABAAEAAAAUAAoAAAABAAIAAAATAAkAAAABAAEAAAATAAoAAAABAAIAAAASAAkAAAAAAAEAAAASAAoAAAAAAAIAAAAWAAcAAAACAAEAAAAVAAcAAAABAAEAAAAVAAYAAAABAAEAAAAWAAYAAAACAAEAAAAUAAcAAAABAAEAAAAUAAYAAAABAAEAAAATAAcAAAABAAEAAAATAAYAAAABAAEAAAASAAMAAAACAAEAAAARAAMAAAABAAEAAAARAAIAAAABAAAAAAASAAIAAAACAAAAAAAQAAMAAAABAAEAAAAQAAIAAAABAAAAAAAPAAMAAAABAAEAAAAPAAIAAAABAAAAAAAOAAMAAAAAAAEAAAAOAAIAAAAAAAAAAAATAAUAAAABAAIAAAAUAAUAAAABAAAAAAAVAAUAAAABAAAAAAAWAAUAAAACAAAAAAA=")
+tile_set = ExtResource("1_hmte7")
 navigation_visibility_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="GroundLayer" type="TileMapLayer" parent="NavigationRegion2D"]
+z_index = -1
+tile_set = ExtResource("1_hmte7")
 metadata/_edit_lock_ = true
 
 [node name="PowerGenerator" parent="NavigationRegion2D" instance=ExtResource("8_2o6ge")]
@@ -86,17 +73,6 @@ metadata/_edit_lock_ = true
 
 [node name="Door" parent="." instance=ExtResource("4_hmte7")]
 position = Vector2(584, 160)
-
-[node name="Ground" type="Sprite2D" parent="."]
-light_mask = 3
-z_index = -99
-texture_repeat = 2
-position = Vector2(-5, 1.0000002)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_2o6ge")
-region_enabled = true
-region_rect = Rect2(0, 0, 100000, 100000)
-metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(379, 217)
@@ -133,10 +109,10 @@ collision_mask = 12
 time_alive = 1000.0
 
 [node name="Entity" parent="." instance=ExtResource("11_mh0j8")]
-position = Vector2(208, 288)
+position = Vector2(56, 232)
 
 [node name="Player" parent="." node_paths=PackedStringArray("_player_camera") instance=ExtResource("5_rw40b")]
-position = Vector2(288, 208)
+position = Vector2(640, 352)
 _player_camera = NodePath("../Camera2D")
 
 [node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="Player"]

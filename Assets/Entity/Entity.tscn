@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://8fu162i6jn6l"]
+[gd_scene load_steps=21 format=3 uid="uid://8fu162i6jn6l"]
 
 [ext_resource type="Script" uid="uid://dkcayi1t6onj7" path="res://Assets/Entity/Entity.gd" id="1_h5qsp"]
 [ext_resource type="Texture2D" uid="uid://cmc8vvaha6rtb" path="res://Assets/star.png" id="2_67amp"]
@@ -71,6 +71,8 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_67amp"]
+
 [node name="Entity" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 2
@@ -127,10 +129,11 @@ navigation = NodePath("../../NavigationAgent2D")
 sprite = NodePath("../../Character")
 metadata/_custom_type_script = "uid://b3f7doumy1fkv"
 
-[node name="EntityChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "entity", "navigation", "sprite")]
+[node name="EntityChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "_rb_interactor", "entity", "navigation", "sprite")]
 script = ExtResource("5_tha7b")
 move_speed = 45.0
 timer = NodePath("../../Timer")
+_rb_interactor = NodePath("../../RigidBodyInteractor")
 entity = NodePath("../..")
 navigation = NodePath("../../NavigationAgent2D")
 sprite = NodePath("../../Character")
@@ -159,3 +162,11 @@ frame_progress = 0.0609381
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.25
+
+[node name="RigidBodyInteractor" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 12
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBodyInteractor"]
+shape = SubResource("CircleShape2D_67amp")

@@ -16,7 +16,7 @@ const VEL_TO_RB_FORCE_RATIO: float = 0.3
 @export var _animator: AnimatedSprite2D
 @export var _stamina_bar: AutohideProgressBar
 @export var _player_camera: PlayerCamera
-@export var _rb_interactor: Area2D
+@export var _interactor: Area2D
 @export var _player_hand: Node2D
 @export var _attack_sprite: Sprite2D
 @export var _blood_emitter: CPUParticles2D
@@ -36,7 +36,7 @@ func _ready() -> void:
 	_hand_offset = _player_hand.position
 	
 	add_to_group("Player")
-	_rb_interactor.body_shape_entered.connect(_on_body_shape_entered)
+	_interactor.body_shape_entered.connect(_on_body_shape_entered)
 
 
 func _process(delta: float) -> void:
@@ -100,20 +100,21 @@ func _physics_process(delta: float) -> void:
 	velocity = dir * speed
 	move_and_slide()
 	
-	for body in _rb_interactor.get_overlapping_bodies():
-		if !body.is_in_group("Door") && body is not RigidBody2D: continue
-		body.apply_central_force(velocity * 1.5 - (-velocity.normalized() * body.mass))
-		if _is_running:
-			body.apply_central_impulse(velocity * 0.5 - (-velocity.normalized() * body.mass))
+	#for body in _rb_interactor.get_overlapping_bodies():
+		#if !body.is_in_group("Door") && body is not RigidBody2D: continue
+		#body.apply_central_force(velocity * 1.5 - (-velocity.normalized() * body.mass))
+		#if _is_running:
+			#body.apply_central_impulse(velocity * 0.5 - (-velocity.normalized() * body.mass))
 
 func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body:
 		var col = body.shape_owner_get_owner(body.shape_find_owner(body_shape_index))
 		var col_normal = position.direction_to(body.position)
 		var col_pos = position - body.position
-		if body is RigidBody2D:
-			if !body.is_in_group("Door"):
-				body.apply_impulse(velocity.length() * VEL_TO_RB_FORCE_RATIO * (col_normal * body.mass), col_pos)
+		if body.is_in_group("Door"):
+			if body is Door:
+				var dir_to = -1 if global_position.x < body.global_position.x else 1
+				#body.toggle(dir_to)
 
 func take_damage(amount: int):
 	if _damage_cd > 0: return

@@ -17,7 +17,7 @@ func enter():
 	timer.wait_time = flee_time
 	timer.timeout.connect(end_flee)
 	timer.start()
-	navigation.target_position = -Game.get_player().global_position.direction_to(entity.global_position) * FLEE_DISTANCE
+	navigation.target_position = entity.position + (Game.get_player().position.direction_to(entity.position) * FLEE_DISTANCE)
 
 func exit():
 	navigation.velocity_computed.disconnect(Callable(_on_velocity_computed))

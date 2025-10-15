@@ -1,7 +1,15 @@
-[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://6dgdcwystnrw"]
+[gd_resource type="ParticleProcessMaterial" load_steps=2 format=3 uid="uid://6dgdcwystnrw"]
+
+[sub_resource type="GDScript" id="GDScript_cg0sf"]
+script/source = "extends ParticleProcessMaterial
+
+func start():
+	pass
+"
 
 [resource]
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 128.0
 gravity = Vector3(0, 0, 0)
+script = SubResource("GDScript_cg0sf")

@@ -3,7 +3,8 @@ class_name EntityChaseState extends EntityState
 @export var move_speed: float = 60
 @export var attack_distance: float = 25
 @export var timer: Timer
-@export var chase_wait_time: float = 2
+@export var chase_wait_time: float = 0.25
+@export var _rb_interactor: Area2D
 
 func set_target_position():
 	navigation.target_position = Game.get_player().global_position
@@ -50,6 +51,10 @@ func physics_process(delta):
 		sprite.scale.x = abs(sprite.scale.x)
 	elif new_velocity.x < 0:
 		sprite.scale.x = abs(sprite.scale.x) * -1
+	
+	for body in _rb_interactor.get_overlapping_bodies():
+		if !body.is_in_group("Door") && body is not RigidBody2D: continue
+		body.apply_central_force(new_velocity * 1.5 - (-new_velocity.normalized() * body.mass))
 
 func _on_velocity_computed(safe_velocity: Vector2):
 	entity.velocity = safe_velocity
