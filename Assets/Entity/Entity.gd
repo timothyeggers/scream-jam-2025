@@ -24,8 +24,6 @@ func _ready():
 	visible = false
 
 func _process(delta: float) -> void:
-	#print("Process Entity")
-	#zombieEmitter3D.global_transform = Transform3D(zombieEmitter3D.global_transform.basis, Vector3(global_position.x*scaleEmitter, 0.0, global_position.y*scaleEmitter))
 	zombieEmitter3D.global_transform.origin = Vector3(global_position.x*scaleEmitter, 0.0, global_position.y*scaleEmitter)
 	
 	if _in_light: return
@@ -35,27 +33,22 @@ func _process(delta: float) -> void:
 	if _time_left_to_disappear == 0:
 		modulate.a = 0
 		visible = false
-	print("Entity Emitter Global Pos : ", zombieEmitter3D.global_position)
 
 func _on_light_area_entered(light_area_2d):
-	print("_on_light_area_entered")
 	modulate.a = 1
 	visible = true
 	_in_light = true
 
 func _on_light_area_exited(light_area_2d):
-	print("_on_light_area_exited")
 	_time_left_to_disappear = time_to_disappear_in_dark
 	_in_light = false
 	
 func _start_playing_sounds():
-	print("start playing zombie sounds")
 	zombieEmitter3D.play()
 	_zombieSoundTimer = randf_range(1.5, 3)
 	$Timer_Groans.start(_zombieSoundTimer)
 
 func _on_timer_groans_timeout() -> void:
-	print("_on_timer_groans_timeout")
 	_start_playing_sounds()
 	
 func _stop_playing_sounds():

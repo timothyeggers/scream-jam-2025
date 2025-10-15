@@ -49,6 +49,10 @@ event_guid = "{02037b91-5cea-4d7e-a642-9c05f704eb89}"
 event_name = "event:/Zombie"
 event_guid = "{c903e3c9-064e-4cb3-a023-d331bd8a9566}"
 
+[node name="Music_Emitter" type="FmodEventEmitter3D" parent="SpatialAudio3D"]
+event_name = "event:/Music"
+event_guid = "{698ee3a7-bda1-4b2c-bbc4-9bd9ce4e3fea}"
+
 [node name="World_2D" type="Node2D" parent="."]
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="World_2D"]
@@ -143,7 +147,7 @@ scale = Vector2(1, 1.00877)
 texture = SubResource("NoiseTexture2D_2o6ge")
 
 [node name="FmodBankLoader" type="FmodBankLoader" parent="World_2D"]
-bank_paths = ["res://FmodBanks/Desktop/Master.strings.bank", "res://FmodBanks/Desktop/Master.bank", "res://FmodBanks/Desktop/SFX.bank"]
+bank_paths = ["res://FmodBanks/Desktop/Master.strings.bank", "res://FmodBanks/Desktop/Master.bank", "res://FmodBanks/Desktop/SFX.bank", "res://FmodBanks/Desktop/Music.bank"]
 
 [node name="LampLight" parent="World_2D" groups=["Red Generator"] instance=ExtResource("7_rw40b")]
 position = Vector2(273, 339)
