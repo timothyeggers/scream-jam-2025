@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://lqpa18l6a1vp"]
+[gd_scene load_steps=36 format=3 uid="uid://lqpa18l6a1vp"]
 
 [ext_resource type="Script" uid="uid://oiqtgnh2hmoy" path="res://Assets/Player/Player.gd" id="1_cjc2e"]
 [ext_resource type="Script" uid="uid://ygkr81jmtsfw" path="res://Assets/Player/HandToolManager.gd" id="2_a3eu5"]
@@ -10,11 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://boeeii5v84xfv" path="res://Assets/Player/ambient_light.png" id="4_u5to8"]
 [ext_resource type="PackedScene" uid="uid://no5uah74bibm" path="res://Assets/GlowStick/GlowStickTool.tscn" id="4_x4ggo"]
 [ext_resource type="PackedScene" uid="uid://3e1poy8fdjbg" path="res://Assets/Melee/MeleeTool.tscn" id="5_vewtk"]
-[ext_resource type="Texture2D" uid="uid://phqoirrc86iu" path="res://Assets/Player/sheet.png" id="5_x4ggo"]
 [ext_resource type="Texture2D" uid="uid://drqjjnl0uxay" path="res://Assets/UI/progress-bar-circle.png" id="6_o1dpk"]
 [ext_resource type="Texture2D" uid="uid://c7idm1xu1sdrs" path="res://Assets/UI/progress-bar-frame.png" id="7_vewtk"]
 [ext_resource type="Script" uid="uid://dn1o3dao3fen7" path="res://Assets/States/Tools/GlowStickToolState.gd" id="7_x4ggo"]
 [ext_resource type="Script" uid="uid://cxypbmwfey6c3" path="res://Assets/UI/StaminaBar.gd" id="8_a3eu5"]
+[ext_resource type="Texture2D" uid="uid://82xoli50j55f" path="res://Assets/Player/sprites.png" id="8_dthkx"]
 [ext_resource type="Script" uid="uid://bbwiy63mko2or" path="res://Assets/States/Tools/MeleeToolState.gd" id="8_o1dpk"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dthkx"]
@@ -26,53 +26,126 @@ size = Vector2(14, 7)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cjc2e"]
 polygon = PackedVector2Array(8, -3, 8, 1, -2, 1, -2, -3)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kkxwm"]
-atlas = ExtResource("5_x4ggo")
-region = Rect2(0, 0, 48, 48)
+[sub_resource type="AtlasTexture" id="AtlasTexture_motui"]
+atlas = ExtResource("8_dthkx")
+region = Rect2(2, 52, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uqhvw"]
-atlas = ExtResource("5_x4ggo")
-region = Rect2(48, 0, 48, 48)
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjvuq"]
+atlas = ExtResource("8_dthkx")
+region = Rect2(2, 102, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_13v6g"]
-atlas = ExtResource("5_x4ggo")
-region = Rect2(96, 0, 48, 48)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybmbr"]
+atlas = ExtResource("8_dthkx")
+region = Rect2(2, 152, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4o24r"]
-atlas = ExtResource("5_x4ggo")
-region = Rect2(0, 48, 48, 48)
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5xin"]
+atlas = ExtResource("8_dthkx")
+region = Rect2(152, 52, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pcpxn"]
-atlas = ExtResource("5_x4ggo")
-region = Rect2(48, 48, 48, 48)
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgcxo"]
+atlas = ExtResource("8_dthkx")
+region = Rect2(152, 102, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dnyhk"]
-atlas = ExtResource("5_x4ggo")
-region = Rect2(96, 48, 48, 48)
+[sub_resource type="AtlasTexture" id="AtlasTexture_05i0m"]
+atlas = ExtResource("8_dthkx")
+region = Rect2(152, 2, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejhpm"]
+atlas = ExtResource("8_dthkx")
+region = Rect2(152, 152, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dthkx"]
+atlas = ExtResource("8_dthkx")
+region = Rect2(102, 2, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu04c"]
+atlas = ExtResource("8_dthkx")
+region = Rect2(102, 102, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mw5sd"]
+atlas = ExtResource("8_dthkx")
+region = Rect2(102, 152, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssqv5"]
+atlas = ExtResource("8_dthkx")
+region = Rect2(52, 52, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8kkr"]
+atlas = ExtResource("8_dthkx")
+region = Rect2(52, 102, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hs5d3"]
+atlas = ExtResource("8_dthkx")
+region = Rect2(52, 152, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aq1ug"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kkxwm")
+"texture": SubResource("AtlasTexture_motui")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uqhvw")
+"texture": SubResource("AtlasTexture_wjvuq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_13v6g")
+"texture": SubResource("AtlasTexture_motui")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4o24r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pcpxn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dnyhk")
+"texture": SubResource("AtlasTexture_ybmbr")
 }],
 "loop": true,
-"name": &"default",
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5xin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgcxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05i0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejhpm")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dthkx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu04c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dthkx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mw5sd")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssqv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8kkr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssqv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hs5d3")
+}],
+"loop": true,
+"name": &"walk_up",
 "speed": 5.0
 }]
 
@@ -151,8 +224,8 @@ position = Vector2(0, -5)
 [node name="Character" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_aq1ug")
-frame = 4
-frame_progress = 0.0609381
+animation = &"walk_up"
+frame_progress = 0.597222
 offset = Vector2(0, -22)
 
 [node name="HandToolMachine" type="Node2D" parent="." node_paths=PackedStringArray("default_state")]
