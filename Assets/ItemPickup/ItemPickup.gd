@@ -20,7 +20,7 @@ var _in_light = false
 var _is_nearby: bool = false
 
 func _ready():
-	tooltip.hide()
+	if tooltip: tooltip.hide()
 	LightArea2DManager.light_area_entered.connect(_on_light_area_entered)
 	LightArea2DManager.light_area_exited.connect(_on_light_area_exited)
 	body_entered.connect(_on_body_entered)
@@ -39,13 +39,15 @@ func _on_light_area_exited(node):
 	_time_left_to_disappear = time_to_disappear_in_dark
 
 func _on_body_entered(body):
+	if body is not Player: return
 	sprite.material = OUTLINE_MATERIAL
-	tooltip.show()
+	if tooltip: tooltip.show()
 	_is_nearby = true
 
 func _on_body_exited(body):
+	if body is not Player: return
 	sprite.material = null
-	tooltip.hide()
+	if tooltip: tooltip.hide()
 	_is_nearby = false
 
 func _process(delta: float) -> void:

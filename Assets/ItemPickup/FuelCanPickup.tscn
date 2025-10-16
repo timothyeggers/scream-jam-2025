@@ -26,6 +26,7 @@ texture = ExtResource("4_x8vxj")
 offset = Vector2(0, -16)
 
 [node name="Label" type="Label" parent="."]
+visible = false
 z_index = 99
 material = SubResource("CanvasItemMaterial_ng7v0")
 offset_left = -65.0
@@ -35,6 +36,5 @@ offset_bottom = -20.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 10
-text = "Pickup?"
 horizontal_alignment = 1
 vertical_alignment = 1

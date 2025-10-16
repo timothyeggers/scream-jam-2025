@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://beeioy02jj8fr"
-path="res://.godot/imported/bare_Tex1.BMP-9afea4454ced83f4227a03ff42ad8c40.ctex"
+uid="uid://dsjdd5chs6r4i"
+path="res://.godot/imported/sign_danger.png-b06b937852e5a86914df3822a0bf37f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://bare_Tex1.BMP"
-dest_files=["res://.godot/imported/bare_Tex1.BMP-9afea4454ced83f4227a03ff42ad8c40.ctex"]
+source_file="res://Assets/sign_danger.png"
+dest_files=["res://.godot/imported/sign_danger.png-b06b937852e5a86914df3822a0bf37f1.ctex"]
 
 [params]
 

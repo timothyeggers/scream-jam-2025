@@ -25,11 +25,13 @@ func _ready():
 	area.body_exited.connect(_on_body_exited)
 
 func _on_body_entered(body):
+	if body is not Player: return
 	sprite.material = OUTLINE_MATERIAL
 	tooltip.show()
 	_is_nearby = true
 
 func _on_body_exited(body):
+	if body is not Player: return
 	sprite.material = null
 	tooltip.hide()
 	_is_nearby = false
@@ -37,7 +39,7 @@ func _on_body_exited(body):
 func _process(delta: float) -> void:
 	fuel_gauge.value = (_fuel_left / time_active_on_fuel) * 100
 	_fuel_left -= delta
-	if _fuel_left <= 0:
+	if _is_active && _fuel_left <= 0:
 		deactivate()
 	
 	if !_is_nearby: return

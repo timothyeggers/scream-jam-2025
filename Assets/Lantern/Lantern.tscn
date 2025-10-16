@@ -17,12 +17,14 @@ light_area = NodePath("LightArea2D")
 y_sort_enabled = true
 texture = ExtResource("1_1qtu6")
 
-[node name="LightArea2D" type="Area2D" parent="."]
+[node name="LightArea2D" type="Area2D" parent="." node_paths=PackedStringArray("line_of_sight_origin")]
 position = Vector2(77, 1)
 collision_layer = 16
 collision_mask = 3
 script = ExtResource("3_l6m8e")
 is_harmful = false
+line_of_sight = true
+line_of_sight_origin = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="LightArea2D"]
 position = Vector2(165, 35)

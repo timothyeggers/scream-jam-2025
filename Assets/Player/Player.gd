@@ -28,6 +28,7 @@ const VEL_TO_RB_FORCE_RATIO: float = 0.3
 @onready var _camera_zoom = _player_camera.zoom
 var _is_running: bool = false
 var _damage_cd: float = 0
+var _facing_dir: Vector2 = Vector2.DOWN
 
 # Variables for footsteps sounds
 var _footstepTimer = 0
@@ -47,9 +48,15 @@ func _ready() -> void:
 	add_to_group("Player")
 	_interactor.body_shape_entered.connect(_on_body_shape_entered)
 
-var _facing_dir: Vector2 = Vector2.DOWN
+
+@onready var walk_speed = _walk_speed
 func _process(delta: float) -> void:
 	_update_ui()
+	
+	if Input.is_action_just_pressed("debug_start_chase"):
+		_walk_speed = walk_speed * 3
+	if Input.is_action_just_pressed("debug_stun"):
+		_walk_speed = walk_speed
 	
 	listener3d.global_transform.origin = Vector3(global_position.x*scaleListener, 0.0, global_position.y*scaleListener)
 	

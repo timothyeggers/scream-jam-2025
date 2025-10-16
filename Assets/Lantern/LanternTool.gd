@@ -4,6 +4,7 @@ class_name LanternTool extends HandTool
 @export var shadow: Light2D
 @export var light_area: LightArea2D
 
+
 func enable():
 	super()
 	light.enabled = true

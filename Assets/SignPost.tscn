@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyw2jhh21r45x"]
+
+[ext_resource type="Texture2D" uid="uid://dbka3i88n45t0" path="res://Assets/sign_escape.png" id="1_pqfro"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sxnil"]
+size = Vector2(48, 16)
+
+[node name="SignPost" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_pqfro")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_sxnil")

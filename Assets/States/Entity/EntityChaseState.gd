@@ -4,6 +4,7 @@ class_name EntityChaseState extends EntityState
 @export var attack_distance: float = 25
 @export var timer: Timer
 @export var chase_wait_time: float = 0.25
+@export var distance_to_stop: float = 800
 
 func set_target_position():
 	navigation.target_position = Game.get_player().global_position
@@ -29,8 +30,12 @@ func _on_entity_light_area_entered(light_area):
 			emit_signal("transitioned", self, "EntityStunnedState")
 
 func process(delta):
-	if entity.global_position.distance_to(Game.get_player().global_position) <= attack_distance:
+	var dist_to_player = entity.global_position.distance_to(Game.get_player().global_position)
+	if dist_to_player <= attack_distance:
 		Game.get_player().take_damage(1)
+	
+	if dist_to_player > distance_to_stop:
+		emit_signal("transitioned", self, "EntityWanderState")
 
 func physics_process(delta):
 	if navigation.is_navigation_finished():

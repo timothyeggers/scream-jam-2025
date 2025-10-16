@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2dwktnx3rcq5"]
+[gd_scene load_steps=5 format=3 uid="uid://br5uqq16mlvqc"]
 
-[ext_resource type="Script" uid="uid://cwuaaquiraywg" path="res://Assets/Door/LockedDoor.gd" id="1_ywtnq"]
-[ext_resource type="Texture2D" uid="uid://c4x22fta5vca7" path="res://Assets/Door/Door.png" id="2_tfk6t"]
+[ext_resource type="Script" uid="uid://cwuaaquiraywg" path="res://Assets/Door/LockedDoor.gd" id="1_piiuc"]
+[ext_resource type="Texture2D" uid="uid://c4x22fta5vca7" path="res://Assets/Door/Door.png" id="2_4jiui"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssbc4"]
 size = Vector2(16, 72)
@@ -9,11 +9,12 @@ size = Vector2(16, 72)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gb8a"]
 size = Vector2(32, 54)
 
-[node name="Door" type="StaticBody2D" node_paths=PackedStringArray("static_body", "sprite", "interaction_area")]
+[node name="LockedDoor" type="StaticBody2D" node_paths=PackedStringArray("static_body", "sprite", "interaction_area")]
 collision_layer = 128
 collision_mask = 0
-script = ExtResource("1_ywtnq")
+script = ExtResource("1_piiuc")
 static_body = NodePath(".")
+condition_met = false
 sprite = NodePath("Sprite2D")
 interaction_area = NodePath("Interaction")
 
@@ -22,8 +23,9 @@ position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_ssbc4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(2.5210483, 2.3391137, 0, 1)
 z_index = 1
-texture = ExtResource("2_tfk6t")
+texture = ExtResource("2_4jiui")
 
 [node name="Interaction" type="Area2D" parent="."]
 
