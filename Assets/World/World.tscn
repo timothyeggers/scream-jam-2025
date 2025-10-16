@@ -117,7 +117,7 @@ time_alive = 1000.0
 position = Vector2(431, 173)
 
 [node name="Entity" parent="World_2D" instance=ExtResource("11_mh0j8")]
-position = Vector2(320, 416)
+position = Vector2(-80, 504)
 
 [node name="Entity2" parent="World_2D" instance=ExtResource("11_mh0j8")]
 position = Vector2(751, 418)

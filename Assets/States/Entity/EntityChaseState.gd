@@ -10,10 +10,8 @@ func set_target_position():
 	timer.start(0)
 
 func enter():
-	print("test1")
 	entity._start_playing_sounds()
-	entity.light_area_entered.connect(_on_light_area_entered)
-	entity.light_area_exited.connect(_on_light_area_exited)
+	entity.light_area_entered.connect(_on_entity_light_area_entered)
 	navigation.velocity_computed.connect(Callable(_on_velocity_computed))
 	timer.wait_time = chase_wait_time
 	timer.timeout.connect(set_target_position)
@@ -21,18 +19,14 @@ func enter():
 
 func exit():
 	entity._stop_playing_sounds()
-	entity.light_area_entered.disconnect(_on_light_area_entered)
-	entity.light_area_exited.disconnect(_on_light_area_exited)
+	entity.light_area_entered.disconnect(_on_entity_light_area_entered)
 	navigation.velocity_computed.disconnect(Callable(_on_velocity_computed))
 	timer.timeout.disconnect(set_target_position)
 
-func _on_light_area_entered(light_area_2d):
-	if light_area_2d is LightArea2D:
-		if light_area_2d.is_harmful:
+func _on_entity_light_area_entered(light_area):
+	if light_area is LightArea2D:
+		if light_area.is_harmful:
 			emit_signal("transitioned", self, "EntityStunnedState")
-
-func _on_light_area_exited(light_area_2d):
-	pass
 
 func process(delta):
 	if entity.global_position.distance_to(Game.get_player().global_position) <= attack_distance:

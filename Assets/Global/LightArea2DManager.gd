@@ -1,6 +1,6 @@
 extends Node
 
-signal light_area_entered(node)
+signal light_area_entered(node, light_area)
 signal light_area_exited(node)
 
 const LIGHT_AREA2D_AFFECTED_GROUP = "Vanishing"
@@ -14,13 +14,13 @@ func _process(delta: float) -> void:
 	for light_area in light_areas:
 		for area in light_area.get_overlapping_areas():
 			if !area.is_in_group(LIGHT_AREA2D_AFFECTED_GROUP): continue
-			light_area_entered.emit(area)
+			light_area_entered.emit(area, light_area)
 			if !newly_in_area.has(area):
 				newly_in_area.append(area)
 	for light_area in light_areas:
 		for body in light_area.get_overlapping_bodies():
 			if !body.is_in_group(LIGHT_AREA2D_AFFECTED_GROUP): continue
-			light_area_entered.emit(body)
+			light_area_entered.emit(body, light_area)
 			if !newly_in_area.has(body):
 				newly_in_area.append(body)
 	

@@ -1,5 +1,8 @@
 class_name Entity extends CharacterBody2D
 
+signal light_area_entered(light_area)
+signal light_area_exited()
+
 @export var time_to_disappear_in_dark: float = 2
 
 var _time_left_to_disappear: float = 0
@@ -31,16 +34,18 @@ func _process(delta: float) -> void:
 		modulate.a = 0
 		visible = false
 
-func _on_light_area_entered(body):
+func _on_light_area_entered(body, light_area):
 	if body != self: return
 	modulate.a = 1
 	visible = true
 	_in_light = true
+	light_area_entered.emit(light_area)
 
 func _on_light_area_exited(body):
 	if body != self: return
 	_time_left_to_disappear = time_to_disappear_in_dark
 	_in_light = false
+	light_area_exited.emit()
 	
 func _start_playing_sounds():
 	zombieEmitter3D.play()

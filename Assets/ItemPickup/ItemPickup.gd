@@ -26,7 +26,7 @@ func _ready():
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 
-func _on_light_area_entered(node):
+func _on_light_area_entered(node, light_area):
 	if node != self: return
 	
 	_in_light = true
