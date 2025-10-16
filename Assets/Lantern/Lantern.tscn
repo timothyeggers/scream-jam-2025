@@ -14,6 +14,7 @@ shadow = NodePath("Light/LightShadow")
 light_area = NodePath("LightArea2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture = ExtResource("1_1qtu6")
 
 [node name="LightArea2D" type="Area2D" parent="."]
@@ -28,6 +29,7 @@ position = Vector2(165, 35)
 polygon = PackedVector2Array(-99, -114, -75, -96, -68, -36, -78, 28, -99, 48, -243, -34)
 
 [node name="Light" type="PointLight2D" parent="."]
+y_sort_enabled = true
 color = Color(1, 1, 0.584314, 1)
 energy = 0.75
 shadow_item_cull_mask = 4

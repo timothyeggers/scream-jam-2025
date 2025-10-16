@@ -19,7 +19,6 @@ polygon = PackedVector2Array(27, -20, 27, 0, -27, 0, -27, -20)
 light_mode = 1
 
 [node name="PowerGenerator" type="Node2D" node_paths=PackedStringArray("area", "tooltip", "sprite", "fuel_gauge")]
-y_sort_enabled = true
 script = ExtResource("1_pylls")
 area = NodePath("Area2D")
 tooltip = NodePath("Label")

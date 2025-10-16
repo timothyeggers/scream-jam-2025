@@ -1,12 +1,12 @@
-[gd_scene load_steps=21 format=3 uid="uid://8fu162i6jn6l"]
+[gd_scene load_steps=20 format=3 uid="uid://8fu162i6jn6l"]
 
-[ext_resource type="Script" uid="uid://cjar74j74aqbx" path="res://Assets/Entity/Entity.gd" id="1_h5qsp"]
+[ext_resource type="Script" uid="uid://dkcayi1t6onj7" path="res://Assets/Entity/Entity.gd" id="1_h5qsp"]
 [ext_resource type="Texture2D" uid="uid://cmc8vvaha6rtb" path="res://Assets/star.png" id="2_67amp"]
-[ext_resource type="Script" uid="uid://dkgb3ulroifgk" path="res://Assets/StateMachine/StateMachine.gd" id="3_pki85"]
-[ext_resource type="Script" uid="uid://cfft0hyetre16" path="res://Assets/States/Entity/EntityWanderState.gd" id="4_6gvbd"]
-[ext_resource type="Script" uid="uid://cevk1nb40xg2i" path="res://Assets/States/Entity/EntityChaseState.gd" id="5_tha7b"]
-[ext_resource type="Script" uid="uid://bnn8wgqvrq712" path="res://Assets/States/Entity/EntityStunnedState.gd" id="6_2of05"]
-[ext_resource type="Script" uid="uid://g4068lqngxw3" path="res://Assets/States/Entity/EntityFleeState.gd" id="7_1ta34"]
+[ext_resource type="Script" uid="uid://bcqdtjau3wt7r" path="res://Assets/StateMachine/StateMachine.gd" id="3_pki85"]
+[ext_resource type="Script" uid="uid://b3f7doumy1fkv" path="res://Assets/States/Entity/EntityWanderState.gd" id="4_6gvbd"]
+[ext_resource type="Script" uid="uid://b2g7yhw1tviqd" path="res://Assets/States/Entity/EntityChaseState.gd" id="5_tha7b"]
+[ext_resource type="Script" uid="uid://clhwnne81atjj" path="res://Assets/States/Entity/EntityStunnedState.gd" id="6_2of05"]
+[ext_resource type="Script" uid="uid://bf5wooc37wmki" path="res://Assets/States/Entity/EntityFleeState.gd" id="7_1ta34"]
 [ext_resource type="Texture2D" uid="uid://phqoirrc86iu" path="res://Assets/Player/sheet.png" id="8_4t5va"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h5qsp"]
@@ -71,10 +71,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_67amp"]
-
 [node name="Entity" type="CharacterBody2D"]
-y_sort_enabled = true
 collision_layer = 2
 collision_mask = 135
 motion_mode = 1
@@ -127,11 +124,10 @@ entity = NodePath("../..")
 navigation = NodePath("../../NavigationAgent2D")
 sprite = NodePath("../../Character")
 
-[node name="EntityChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "_rb_interactor", "entity", "navigation", "sprite")]
+[node name="EntityChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "entity", "navigation", "sprite")]
 script = ExtResource("5_tha7b")
 move_speed = 45.0
 timer = NodePath("../../Timer")
-_rb_interactor = NodePath("../../RigidBodyInteractor")
 entity = NodePath("../..")
 navigation = NodePath("../../NavigationAgent2D")
 sprite = NodePath("../../Character")
