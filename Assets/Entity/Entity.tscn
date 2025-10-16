@@ -126,7 +126,6 @@ sprite = NodePath("../../Character")
 
 [node name="EntityChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("timer", "entity", "navigation", "sprite")]
 script = ExtResource("5_tha7b")
-move_speed = 45.0
 timer = NodePath("../../Timer")
 entity = NodePath("../..")
 navigation = NodePath("../../NavigationAgent2D")

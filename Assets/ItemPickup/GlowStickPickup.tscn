@@ -16,7 +16,7 @@ light_mode = 1
 
 [node name="GlowStickPickup" type="Area2D" node_paths=PackedStringArray("tooltip", "sprite") groups=["Vanishing"]]
 script = ExtResource("1_rkwto")
-pickup_description = "Obatined 2 glowsticks."
+pickup_description = "Obtained two glowsticks!"
 tooltip = NodePath("Label")
 sprite = NodePath("Sprite2D")
 
@@ -27,6 +27,12 @@ shape = SubResource("CircleShape2D_jqwih")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -5)
+texture = ExtResource("3_gyit7")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D"]
+y_sort_enabled = true
+position = Vector2(3, 0)
+rotation = 0.28650606
 texture = ExtResource("3_gyit7")
 
 [node name="Label" type="Label" parent="."]

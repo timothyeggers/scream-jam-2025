@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 			if _is_active:
 				activate()
 		else:
-			Game.log.push_next("You have no fuel!")
+			Game.ui.log_message("You have no fuel!")
 
 
 func activate():

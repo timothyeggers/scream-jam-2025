@@ -1,10 +1,10 @@
 class_name EntityChaseState extends EntityState
 
-@export var move_speed: float = 60
+@export var move_speed: float = 55
 @export var attack_distance: float = 25
 @export var timer: Timer
 @export var chase_wait_time: float = 0.25
-@export var distance_to_stop: float = 800
+@export var distance_to_stop: float = 500
 
 func set_target_position():
 	navigation.target_position = Game.get_player().global_position

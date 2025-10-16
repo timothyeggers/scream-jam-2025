@@ -2,7 +2,7 @@ extends Node
 
 signal player_died
 
-var log: Log : get = get_log
+var ui: UI : get = get_ui
 
 ## The player state represents the mentality of the player.
 enum PlayerMentalState {
@@ -16,10 +16,10 @@ enum PlayerMentalState {
 
 var _mental_state = PlayerMentalState.DEFAULT
 
-func get_log() -> Log:
-	var log = get_tree().get_first_node_in_group("Item Log")
-	if log is Log:
-		return log
+func get_ui() -> UI:
+	var ui = get_tree().get_first_node_in_group("UI")
+	if ui is UI:
+		return ui
 	return null
 
 ## How quickly does the player stamina drain?

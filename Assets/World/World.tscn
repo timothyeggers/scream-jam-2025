@@ -1,22 +1,23 @@
-[gd_scene load_steps=26 format=4 uid="uid://cqwr1f22r0806"]
+[gd_scene load_steps=28 format=4 uid="uid://cqwr1f22r0806"]
 
 [ext_resource type="Texture2D" uid="uid://beeioy02jj8fr" path="res://ground.BMP" id="1_2o6ge"]
 [ext_resource type="TileSet" uid="uid://b31nkkc6kpopy" path="res://Assets/TileSet.tres" id="1_hmte7"]
 [ext_resource type="Script" uid="uid://ck5q4y1530gim" path="res://Assets/Player/PlayerCamera.gd" id="2_2o6ge"]
 [ext_resource type="PackedScene" uid="uid://d114gmh52qqbk" path="res://Assets/ItemPickup/KeyPickup.tscn" id="2_7gb8a"]
 [ext_resource type="Script" uid="uid://bsn7l24lrenpa" path="res://Assets/World/OverworldLight.gd" id="2_mh0j8"]
-[ext_resource type="Script" uid="uid://c5did3bug2sch" path="res://Assets/Log/Log.gd" id="3_op1do"]
 [ext_resource type="PackedScene" uid="uid://csluw12yetokq" path="res://Assets/EscapeSign.tscn" id="3_ssbc4"]
 [ext_resource type="PackedScene" uid="uid://lqpa18l6a1vp" path="res://Assets/Player/Player.tscn" id="5_rw40b"]
 [ext_resource type="Texture2D" uid="uid://ora4ly1pf4ph" path="res://Assets/tree.png" id="5_ssbc4"]
-[ext_resource type="PackedScene" uid="uid://cv7dlornpjt08" path="res://Assets/GlowStick/GlowStick.tscn" id="6_fdrvb"]
 [ext_resource type="PackedScene" uid="uid://4pqcuqcx1t0r" path="res://Assets/Lamp/LampLight.tscn" id="7_rw40b"]
 [ext_resource type="PackedScene" uid="uid://c2dwktnx3rcq5" path="res://Assets/Door/Door.tscn" id="7_ssbc4"]
 [ext_resource type="PackedScene" uid="uid://chfd4qkwyoi7p" path="res://Assets/PowerGenerator/PowerGenerator.tscn" id="8_2o6ge"]
 [ext_resource type="PackedScene" uid="uid://cotgkmcidfvsv" path="res://Assets/ItemPickup/GlowStickPickup.tscn" id="10_op1do"]
 [ext_resource type="PackedScene" uid="uid://br5uqq16mlvqc" path="res://Assets/Door/LockedDoor.tscn" id="10_x5c5b"]
 [ext_resource type="PackedScene" uid="uid://8fu162i6jn6l" path="res://Assets/Entity/Entity.tscn" id="11_mh0j8"]
+[ext_resource type="Script" uid="uid://c5did3bug2sch" path="res://Assets/UI/UI.gd" id="14_coyqj"]
 [ext_resource type="PackedScene" uid="uid://bg8diwbthudyd" path="res://Assets/ItemPickup/FuelCanPickup.tscn" id="14_sxnil"]
+[ext_resource type="Texture2D" uid="uid://c2axsk1tom0en" path="res://Assets/GlowStick/glow_stick.png" id="15_coyqj"]
+[ext_resource type="Texture2D" uid="uid://bmpjbtke1dt13" path="res://Assets/FuelCan/gas_tank.png" id="16_e22uk"]
 [ext_resource type="PackedScene" uid="uid://bnnkddymt1034" path="res://Assets/DangerSign.tscn" id="18_qk2bo"]
 [ext_resource type="Texture2D" uid="uid://dsjdd5chs6r4i" path="res://Assets/sign_danger.png" id="19_coyqj"]
 
@@ -43,6 +44,9 @@ physics_layer_0/collision_mask = 0
 sources/1 = SubResource("TileSetAtlasSource_ssbc4")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h7mlw"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_coyqj"]
 light_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxnil"]
@@ -162,6 +166,7 @@ tile_set = ExtResource("1_hmte7")
 metadata/_edit_lock_ = true
 
 [node name="Background" type="TileMapLayer" parent="World_2D/LevelMesh"]
+z_index = -1
 position = Vector2(24, 0)
 tile_map_data = PackedByteArray("AAAKAAUAAAAEAAIAAAAKAAYAAAAEAAIAAAALAAUAAAAEAAIAAAALAAYAAAAEAAIAAAAJAAYAAAADAAIAAAAKAAQAAAAEAAIAAAALAAQAAAAFAAIAAAAJAAQAAAADAAIAAAAJAAUAAAADAAIAAAAMAAUAAAAFAAIAAAAMAAYAAAAFAAIAAAAKAAcAAAAEAAIAAAALAAcAAAAEAAIAAAAJAAcAAAADAAIAAAAMAAcAAAAFAAIAAAA=")
 tile_set = ExtResource("1_hmte7")
@@ -194,10 +199,22 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("2_2o6ge")
 
-[node name="Log" type="RichTextLabel" parent="World_2D/Camera2D" groups=["Item Log"]]
+[node name="UI" type="Control" parent="World_2D/Camera2D" node_paths=PackedStringArray("log", "inventory", "glow_stick_label", "fuel_label") groups=["UI"]]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("14_coyqj")
+log = NodePath("Log")
+inventory = NodePath("Inventory")
+glow_stick_label = NodePath("Inventory/HBoxContainer/Glow Sticks")
+fuel_label = NodePath("Inventory/HBoxContainer2/Fuel")
+
+[node name="Log" type="RichTextLabel" parent="World_2D/Camera2D/UI" groups=["Item Log"]]
 z_index = 999
 material = SubResource("CanvasItemMaterial_h7mlw")
 custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -212,22 +229,52 @@ size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 12
 text = "
 "
-script = ExtResource("3_op1do")
 metadata/_edit_use_anchors_ = true
 
-[node name="GlowStick" parent="World_2D" instance=ExtResource("6_fdrvb")]
-position = Vector2(248, 440)
-collision_mask = 12
-time_alive = 1000.0
+[node name="Inventory" type="HBoxContainer" parent="World_2D/Camera2D/UI"]
+z_index = 99
+layout_mode = 0
+offset_left = 301.0
+offset_top = -213.0
+offset_right = 375.0
+offset_bottom = -173.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="World_2D/Camera2D/UI/Inventory"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="World_2D/Camera2D/UI/Inventory/HBoxContainer"]
+material = SubResource("CanvasItemMaterial_coyqj")
+layout_mode = 2
+texture = ExtResource("15_coyqj")
+stretch_mode = 5
+
+[node name="Glow Sticks" type="Label" parent="World_2D/Camera2D/UI/Inventory/HBoxContainer"]
+material = SubResource("CanvasItemMaterial_coyqj")
+layout_mode = 2
+text = "0"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="World_2D/Camera2D/UI/Inventory"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="World_2D/Camera2D/UI/Inventory/HBoxContainer2"]
+material = SubResource("CanvasItemMaterial_coyqj")
+layout_mode = 2
+texture = ExtResource("16_e22uk")
+stretch_mode = 4
+
+[node name="Fuel" type="Label" parent="World_2D/Camera2D/UI/Inventory/HBoxContainer2"]
+material = SubResource("CanvasItemMaterial_coyqj")
+layout_mode = 2
+text = "0"
 
 [node name="FmodBankLoader" type="FmodBankLoader" parent="World_2D"]
 bank_paths = ["res://FmodBanks/Desktop/Master.strings.bank", "res://FmodBanks/Desktop/Master.bank", "res://FmodBanks/Desktop/SFX.bank", "res://FmodBanks/Desktop/Music.bank"]
 
 [node name="GlowStickPickup" parent="World_2D" instance=ExtResource("10_op1do")]
-position = Vector2(421, 477)
+position = Vector2(516, 372)
 
 [node name="GlowStickPickup2" parent="World_2D" instance=ExtResource("10_op1do")]
-position = Vector2(465, 479)
+position = Vector2(584, 372)
 
 [node name="FuelCanPickup" parent="World_2D" instance=ExtResource("14_sxnil")]
 position = Vector2(576, 272)

@@ -15,7 +15,7 @@ func activate() -> void:
 		var condition = Inventory.call(condition_callback)
 		if !condition:
 			return
-		Game.log.push_next("Unlocked!")
+		Game.ui.log_message("Unlocked!")
 	if _is_open: 
 		deactivate()
 		return
