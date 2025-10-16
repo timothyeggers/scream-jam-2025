@@ -1,7 +1,5 @@
-class_name ItemPickup extends Node2D
+class_name ItemPickup extends Area2D
 
-signal light_area_entered(light_area_2d)
-signal light_area_exited(light_area_2d)
 
 const OUTLINE_MATERIAL = preload("res://Assets/OutlineMaterial.tres")
 
@@ -12,7 +10,6 @@ const time_to_disappear_in_dark: float = 2
 @export var require_interact_to_pickup: bool = true
 
 @export_category("Internal")
-@export var area: Area2D
 @export var tooltip: Label
 @export var sprite: Sprite2D
 
@@ -24,19 +21,22 @@ var _is_nearby: bool = false
 
 func _ready():
 	tooltip.hide()
-	area.body_entered.connect(_on_body_entered)
-	area.body_exited.connect(_on_body_exited)
-	light_area_entered.connect(_on_light_area_entered)
-	light_area_exited.connect(_on_light_area_exited)
+	LightArea2DManager.light_area_entered.connect(_on_light_area_entered)
+	LightArea2DManager.light_area_exited.connect(_on_light_area_exited)
+	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
 
-
-func _on_light_area_entered(light_area_2d):
-	modulate.a = 1
+func _on_light_area_entered(node):
+	if node != self: return
+	
 	_in_light = true
+	modulate.a = 1
 
-func _on_light_area_exited(light_area_2d):
-	_time_left_to_disappear = time_to_disappear_in_dark
+func _on_light_area_exited(node):
+	if node != self: return
+	
 	_in_light = false
+	_time_left_to_disappear = time_to_disappear_in_dark
 
 func _on_body_entered(body):
 	sprite.material = OUTLINE_MATERIAL

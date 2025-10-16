@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 Game="*res://Assets/Global/Game.gd"
 Inventory="*res://Assets/Global/Inventory.gd"
 FmodManager="*res://addons/fmod/FmodManager.gd"
+LightArea2DManager="*res://Assets/Global/LightArea2DManager.gd"
 
 [display]
 
@@ -41,6 +42,7 @@ Door=""
 "Red Generator"=""
 "Item Log"=""
 Player=""
+Vanishing=""
 
 [input]
 

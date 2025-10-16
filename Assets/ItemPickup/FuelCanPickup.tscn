@@ -9,19 +9,15 @@ radius = 25.079872
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ng7v0"]
 light_mode = 1
 
-[node name="FuelCanPickup" type="Node2D" node_paths=PackedStringArray("area", "tooltip", "sprite")]
+[node name="FuelCanPickup" type="Area2D" node_paths=PackedStringArray("tooltip", "sprite") groups=["Vanishing"]]
 script = ExtResource("1_x8vxj")
 item = 1
 pickup_description = "Obtained 1 fuel."
-area = NodePath("Area2D")
 tooltip = NodePath("Label")
 sprite = NodePath("Sprite2D")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_jqwih")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
