@@ -31,7 +31,7 @@ var _damage_cd: float = 0
 
 # Variables for footsteps sounds
 var _footstepTimer = 0
-var _resetfootstepTimer = 0.6
+var _resetfootstepTimer = 0.3
 
 @onready var musicEmitter = get_node("../../SpatialAudio3D/Music_Emitter")
 @onready var listener3d = get_node("../../SpatialAudio3D/FmodListener3D")
@@ -78,10 +78,10 @@ func _process(delta: float) -> void:
 	#region Reflect direction in player sprite
 	if target_pos.x < 0:
 		_player_hand.scale.y = 1
-		_animator.flip_h = false
+		#_animator.flip_h = false
 	else:
 		_player_hand.scale.y = -1
-		_animator.flip_h = true
+		#_animator.flip_h = true
 	#endregion
 
 func _update_ui():
@@ -101,19 +101,33 @@ func _physics_process(delta: float) -> void:
 	if _is_running:
 		_stamina_left -= delta * Game.get_stamina_consumption_rate()
 		speed = _run_speed
+		_animator.speed_scale = 1.25
 		
 		if _stamina_left <= 0:
 			_is_running = false
 	else:
 		_stamina_left += delta
+		_animator.speed_scale = 1
 	#endregion
 	_stamina_left = clamp(_stamina_left, 0, _total_stamina)
 	velocity = dir * speed
+	#region Animate Sprite
+	if dir.x > 0:
+		_animator.play("walk_right")
+	elif dir.x < 0:
+		_animator.play("walk_left")
+	elif dir.y > 0:
+		_animator.play("walk_down")
+	elif dir.y < 0:
+		_animator.play("walk_up")
+	else:
+		_animator.pause()
+	#endregion
 	if dir:
 		if _footstepTimer <= 0:
 			footstepsEmitter3d.play()
 			if _is_running:
-				_footstepTimer = _resetfootstepTimer/2
+				_footstepTimer = _resetfootstepTimer / 1.1
 			else:
 				_footstepTimer = _resetfootstepTimer
 		_footstepTimer -= delta

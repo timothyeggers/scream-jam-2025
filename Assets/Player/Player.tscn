@@ -95,7 +95,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_down",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -112,7 +112,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_left",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -129,7 +129,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_right",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -146,7 +146,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_up",
-"speed": 5.0
+"speed": 6.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hmte7"]
@@ -207,6 +207,7 @@ position = Vector2(2, -15)
 script = ExtResource("2_a3eu5")
 
 [node name="HandSprite" type="Sprite2D" parent="HandPivot"]
+visible = false
 z_index = 1
 texture = ExtResource("2_qofj0")
 
@@ -225,7 +226,7 @@ position = Vector2(0, -5)
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_aq1ug")
 animation = &"walk_up"
-frame_progress = 0.597222
+frame_progress = 0.14896934
 offset = Vector2(0, -22)
 
 [node name="HandToolMachine" type="Node2D" parent="." node_paths=PackedStringArray("default_state")]
