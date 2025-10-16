@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://i46gj4cvt3vb"]
+
+[ext_resource type="Script" uid="uid://c1rc68p4de7di" path="res://Assets/Trader/Trader.gd" id="1_kp6pu"]
+[ext_resource type="Texture2D" uid="uid://c8my1m7bwsper" path="res://Assets/Trader/Trader.png" id="2_kp6pu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7gb8a"]
+size = Vector2(32, 54)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kp6pu"]
+light_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ssbc4"]
+size = Vector2(16, 8)
+
+[node name="Trader" type="CharacterBody2D" node_paths=PackedStringArray("dialog_label", "sprite", "interaction_area")]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_kp6pu")
+condition_met = false
+dialog_label = NodePath("Label")
+sprite = NodePath("Sprite2D")
+interaction_area = NodePath("Interaction")
+
+[node name="Interaction" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+position = Vector2(0, -17)
+shape = SubResource("RectangleShape2D_7gb8a")
+
+[node name="Label" type="Label" parent="."]
+z_index = 99
+material = SubResource("CanvasItemMaterial_kp6pu")
+custom_minimum_size = Vector2(128, 0)
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = -41.0
+theme_override_font_sizes/font_size = 10
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ssbc4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -20)
+texture = ExtResource("2_kp6pu")

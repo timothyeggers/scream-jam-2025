@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bg8diwbthudyd"]
+[gd_scene load_steps=5 format=3 uid="uid://bme5vebhgbrqv"]
 
-[ext_resource type="Script" uid="uid://c6syvfv6r6o74" path="res://Assets/ItemPickup/ItemPickup.gd" id="1_x8vxj"]
-[ext_resource type="Texture2D" uid="uid://bmpjbtke1dt13" path="res://Assets/FuelCan/gas_tank.png" id="4_x8vxj"]
+[ext_resource type="Script" uid="uid://c6syvfv6r6o74" path="res://Assets/ItemPickup/ItemPickup.gd" id="1_mkupg"]
+[ext_resource type="Texture2D" uid="uid://c6uyiwbygvbow" path="res://Assets/apple.png" id="2_mkupg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jqwih"]
 radius = 25.079872
@@ -9,10 +9,10 @@ radius = 25.079872
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ng7v0"]
 light_mode = 1
 
-[node name="FuelCanPickup" type="Area2D" node_paths=PackedStringArray("tooltip", "sprite") groups=["Vanishing"]]
-script = ExtResource("1_x8vxj")
-item = 1
-pickup_description = "Obtained one fuel."
+[node name="ApplePickup" type="Area2D" node_paths=PackedStringArray("tooltip", "sprite") groups=["Vanishing"]]
+script = ExtResource("1_mkupg")
+item = 7
+pickup_description = "Obtained one apple."
 tooltip = NodePath("Label")
 sprite = NodePath("Sprite2D")
 
@@ -22,7 +22,8 @@ shape = SubResource("CircleShape2D_jqwih")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
-texture = ExtResource("4_x8vxj")
+position = Vector2(0, 4)
+texture = ExtResource("2_mkupg")
 offset = Vector2(0, -16)
 
 [node name="Label" type="Label" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://lqpa18l6a1vp"]
+[gd_scene load_steps=35 format=3 uid="uid://lqpa18l6a1vp"]
 
 [ext_resource type="Script" uid="uid://oiqtgnh2hmoy" path="res://Assets/Player/Player.gd" id="1_cjc2e"]
 [ext_resource type="Script" uid="uid://ygkr81jmtsfw" path="res://Assets/Player/HandToolManager.gd" id="2_a3eu5"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://ccb2a0n4atyrm" path="res://Assets/States/Tools/ToolState.gd" id="4_1vo2c"]
 [ext_resource type="Texture2D" uid="uid://boeeii5v84xfv" path="res://Assets/Player/ambient_light.png" id="4_u5to8"]
 [ext_resource type="PackedScene" uid="uid://no5uah74bibm" path="res://Assets/GlowStick/GlowStickTool.tscn" id="4_x4ggo"]
-[ext_resource type="PackedScene" uid="uid://3e1poy8fdjbg" path="res://Assets/Melee/MeleeTool.tscn" id="5_vewtk"]
 [ext_resource type="Texture2D" uid="uid://drqjjnl0uxay" path="res://Assets/UI/progress-bar-circle.png" id="6_o1dpk"]
 [ext_resource type="Texture2D" uid="uid://c7idm1xu1sdrs" path="res://Assets/UI/progress-bar-frame.png" id="7_vewtk"]
 [ext_resource type="Script" uid="uid://dn1o3dao3fen7" path="res://Assets/States/Tools/GlowStickToolState.gd" id="7_x4ggo"]
@@ -218,10 +217,6 @@ position = Vector2(2, 0)
 [node name="GlowStickTool" parent="HandPivot" instance=ExtResource("4_x4ggo")]
 visible = false
 
-[node name="MeleeTool" parent="HandPivot" instance=ExtResource("5_vewtk")]
-visible = false
-position = Vector2(0, -5)
-
 [node name="Character" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_aq1ug")
@@ -232,7 +227,7 @@ offset = Vector2(0, -22)
 [node name="HandToolMachine" type="Node2D" parent="." node_paths=PackedStringArray("default_state")]
 position = Vector2(2, -15)
 script = ExtResource("2_xl0l8")
-default_state = NodePath("Empty")
+default_state = NodePath("Lantern")
 
 [node name="Empty" type="Node" parent="HandToolMachine"]
 script = ExtResource("4_1vo2c")
@@ -247,7 +242,7 @@ tool = NodePath("../../HandPivot/GlowStickTool")
 
 [node name="MeleeToolState" type="Node" parent="HandToolMachine" node_paths=PackedStringArray("tool")]
 script = ExtResource("8_o1dpk")
-tool = NodePath("../../HandPivot/MeleeTool")
+tool = NodePath("")
 
 [node name="AmbientLight" type="PointLight2D" parent="."]
 position = Vector2(-2, -18)

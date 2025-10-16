@@ -26,5 +26,6 @@ func activate() -> void:
 	pass
 
 func _process(delta):
-	if _in_area && Input.is_action_just_pressed("interact"):
-		activate()
+	if _in_area:
+		if Input.is_action_just_pressed("interact"):
+			activate()
