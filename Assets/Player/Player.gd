@@ -47,7 +47,7 @@ func _ready() -> void:
 	add_to_group("Player")
 	_interactor.body_shape_entered.connect(_on_body_shape_entered)
 
-
+var _facing_dir: Vector2 = Vector2.DOWN
 func _process(delta: float) -> void:
 	_update_ui()
 	
@@ -78,10 +78,32 @@ func _process(delta: float) -> void:
 	#region Reflect direction in player sprite
 	if target_pos.x < 0:
 		_player_hand.scale.y = 1
-		#_animator.flip_h = false
-	else:
+	elif target_pos.x > 0:
 		_player_hand.scale.y = -1
-		#_animator.flip_h = true
+
+	var hor_priority = true if abs(target_pos.x) > abs(target_pos.y) else false
+	if velocity.x != 0 && velocity.y == 0:
+		hor_priority = true
+	if velocity.x == 0 && velocity.y != 0:
+		hor_priority = false
+	if hor_priority:
+		if target_pos.x < 0:
+			_animator.play("walk_right")
+			_facing_dir = Vector2.RIGHT
+		elif target_pos.x > 0:
+			_animator.play("walk_left")
+			_facing_dir = Vector2.LEFT
+	else:
+		if target_pos.y > 0:
+			_animator.play("walk_up")
+			_facing_dir = Vector2.UP
+		elif target_pos.y < 0:
+			_animator.play("walk_down")
+			_facing_dir = Vector2.DOWN
+	
+	if velocity.length() == 0:
+		_animator.frame = 0
+		_animator.pause()
 	#endregion
 
 func _update_ui():
@@ -111,18 +133,7 @@ func _physics_process(delta: float) -> void:
 	#endregion
 	_stamina_left = clamp(_stamina_left, 0, _total_stamina)
 	velocity = dir * speed
-	#region Animate Sprite
-	if dir.x > 0:
-		_animator.play("walk_right")
-	elif dir.x < 0:
-		_animator.play("walk_left")
-	elif dir.y > 0:
-		_animator.play("walk_down")
-	elif dir.y < 0:
-		_animator.play("walk_up")
-	else:
-		_animator.pause()
-	#endregion
+	
 	if dir:
 		if _footstepTimer <= 0:
 			footstepsEmitter3d.play()
