@@ -37,6 +37,7 @@ var _resetfootstepTimer = 0.3
 @onready var musicEmitter = get_node("../../SpatialAudio3D/Music_Emitter")
 @onready var listener3d = get_node("../../SpatialAudio3D/FmodListener3D")
 @onready var footstepsEmitter3d = get_node("../../SpatialAudio3D/Footsteps_FmodEmitter3D")
+@onready var playerHitEmitter3d = get_node("../../SpatialAudio3D/Player_Hit")
 var scaleListener = 0.015
 
 func _ready() -> void:
@@ -145,8 +146,10 @@ func _physics_process(delta: float) -> void:
 		if _footstepTimer <= 0:
 			footstepsEmitter3d.play()
 			if _is_running:
+				footstepsEmitter3d.set_parameter("Pitch_Footsteps", 1)
 				_footstepTimer = _resetfootstepTimer / 1.1
 			else:
+				footstepsEmitter3d.set_parameter("Pitch_Footsteps", 0)
 				_footstepTimer = _resetfootstepTimer
 		_footstepTimer -= delta
 	move_and_slide()
@@ -173,6 +176,7 @@ func take_damage(amount: int):
 	_health -= amount
 	_attack_sprite.show()
 	_blood_emitter.emitting = true
+	playerHitEmitter3d.play_one_shot()
 	var tween = create_tween()
 	_attack_sprite.modulate.a = 1
 	tween.tween_property(_attack_sprite, "modulate:a", 0, 1).set_ease(Tween.EASE_OUT)

@@ -12,7 +12,7 @@ var _in_light = false
 var _zombieSoundTimer = 0
 var _resetzombieSoundTimer = 0.5
 
-@onready var zombieEmitter3D = get_node("../../SpatialAudio3D/ZombieSounds_FmodEventEmitter3D")
+#@onready var zombieEmitter3D = get_node("../../SpatialAudio3D/ZombieSounds_FmodEventEmitter3D")
 var scaleEmitter = 0.015
 
 func _ready():
@@ -24,7 +24,7 @@ func _ready():
 	visible = false
 
 func _process(delta: float) -> void:
-	zombieEmitter3D.global_transform.origin = Vector3(global_position.x*scaleEmitter, 0.0, global_position.y*scaleEmitter)
+	$ZombieSounds3D.global_transform.origin = Vector3(global_position.x*scaleEmitter, 0.0, global_position.y*scaleEmitter)
 	
 	if _in_light: return
 	_time_left_to_disappear -= delta
@@ -48,7 +48,7 @@ func _on_light_area_exited(body):
 	light_area_exited.emit()
 	
 func _start_playing_sounds():
-	zombieEmitter3D.play()
+	$ZombieSounds3D.play()
 	_zombieSoundTimer = randf_range(1.5, 3)
 	$Timer_Groans.start(_zombieSoundTimer)
 
@@ -56,6 +56,6 @@ func _on_timer_groans_timeout() -> void:
 	_start_playing_sounds()
 	
 func _stop_playing_sounds():
-	zombieEmitter3D.stop()
+	$ZombieSounds3D.stop()
 	$Timer_Groans.stop()
 	

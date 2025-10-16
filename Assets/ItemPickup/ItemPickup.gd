@@ -19,6 +19,8 @@ var _in_light = false
 
 var _is_nearby: bool = false
 
+@onready var keyEmitter = get_node("../../SpatialAudio3D/KeyPickup_Emitter")
+
 func _ready():
 	if tooltip: tooltip.hide()
 	LightArea2DManager.light_area_entered.connect(_on_light_area_entered)
@@ -66,6 +68,10 @@ func _process(delta: float) -> void:
 		pickup()
 
 func pickup():
+	
+	if "KEY" in Inventory.ItemType.find_key(item): 
+		keyEmitter.play()
+		
 	Inventory.add_item(item, pickup_description)
 	
 	queue_free()

@@ -76,6 +76,14 @@ event_guid = "{c903e3c9-064e-4cb3-a023-d331bd8a9566}"
 event_name = "event:/Music"
 event_guid = "{698ee3a7-bda1-4b2c-bbc4-9bd9ce4e3fea}"
 
+[node name="KeyPickup_Emitter" type="FmodEventEmitter3D" parent="SpatialAudio3D"]
+event_name = "event:/Key_Found"
+event_guid = "{e4e356c2-0f2c-4ca9-8e48-b999528431e5}"
+
+[node name="Player_Hit" type="FmodEventEmitter3D" parent="SpatialAudio3D"]
+event_name = "event:/Player_Hit"
+event_guid = "{96a6b68f-0484-4318-b790-6f4022ef15cd}"
+
 [node name="World_2D" type="Node2D" parent="."]
 y_sort_enabled = true
 
