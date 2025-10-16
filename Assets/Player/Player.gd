@@ -145,8 +145,10 @@ func _physics_process(delta: float) -> void:
 		if _footstepTimer <= 0:
 			footstepsEmitter3d.play()
 			if _is_running:
+				footstepsEmitter3d.set_parameter("Pitch_Footsteps", 1)
 				_footstepTimer = _resetfootstepTimer / 1.1
 			else:
+				footstepsEmitter3d.set_parameter("Pitch_Footsteps", 0)
 				_footstepTimer = _resetfootstepTimer
 		_footstepTimer -= delta
 	move_and_slide()
