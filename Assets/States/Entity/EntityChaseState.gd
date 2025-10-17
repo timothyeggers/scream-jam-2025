@@ -1,6 +1,6 @@
 class_name EntityChaseState extends EntityState
 
-@export var move_speed: float = 55
+@export var move_speed: float = 85
 @export var attack_distance: float = 25
 @export var timer: Timer
 @export var chase_wait_time: float = 0.25

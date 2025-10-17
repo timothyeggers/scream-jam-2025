@@ -1,9 +1,9 @@
 class_name EntityFleeState extends EntityState
 
-const FLEE_DISTANCE = 300
+const FLEE_DISTANCE = 500
 
-@export var move_speed: float = 75
-@export var flee_time: float = 4
+@export var move_speed: float = 105
+@export var flee_time: float = 6
 @export var timer: Timer
 
 var _start_pos: Vector2
@@ -12,12 +12,12 @@ func end_flee():
 	emit_signal("transitioned", self, "EntityWanderState")
 
 func enter():
-	_start_pos = entity.position
+	_start_pos = entity.global_position
 	navigation.velocity_computed.connect(Callable(_on_velocity_computed))
 	timer.wait_time = flee_time
 	timer.timeout.connect(end_flee)
 	timer.start()
-	navigation.target_position = entity.position + (Game.get_player().position.direction_to(entity.position) * FLEE_DISTANCE)
+	navigation.target_position = entity.global_position + (Game.get_player().global_position.direction_to(entity.global_position) * FLEE_DISTANCE)
 
 func exit():
 	navigation.velocity_computed.disconnect(Callable(_on_velocity_computed))

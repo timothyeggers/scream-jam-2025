@@ -5,8 +5,8 @@ const MAX_HAND_DISTANCE: float = 12
 ## When the player hits a RB, that isn't a door, how much should the velocity transfer to an impulse to that RB?
 const VEL_TO_RB_FORCE_RATIO: float = 0.3
 
-@export var _walk_speed : float = 50
-@export var _run_speed : float = 90
+@export var _walk_speed : float = 80
+@export var _run_speed : float = 95
 @export var _total_stamina : float = 5
 ## when you reach _health 0 you die immediately, so u really only have 3 hits until dead
 @export var _health: float = 6
@@ -120,7 +120,7 @@ func _update_ui():
 func _physics_process(delta: float) -> void:
 	var dir_x = Input.get_axis("move_left", "move_right")
 	var dir_y = Input.get_axis("move_up", "move_down")
-	var dir = Vector2(dir_x, dir_y)
+	var dir = Vector2(dir_x, dir_y).normalized()
 	var speed = _walk_speed
 	#region Stamina consumption.
 	if Input.is_action_just_pressed("run") && dir != Vector2.ZERO &&  _stamina_left > 0:
@@ -176,4 +176,4 @@ func take_damage(amount: int):
 	tween.tween_property(_attack_sprite, "modulate:a", 0, 1).set_ease(Tween.EASE_OUT)
 	if _health <= 0:
 		Game.player_died.emit()
-		_player_camera.enabled = false
+		#_player_camera.enabled = false

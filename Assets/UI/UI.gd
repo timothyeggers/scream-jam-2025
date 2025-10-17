@@ -5,6 +5,7 @@ class_name UI extends Control
 @export var glow_stick_label: Label
 @export var fuel_label: Label
 @export var apple_label: Label
+@export var key_label: Label
 
 var _show_inventory_time: float = 3
 var _hide_inventory_dt: float = 0
@@ -38,6 +39,7 @@ func _update_ui():
 	glow_stick_label.text = str(Inventory.glow_sticks)
 	fuel_label.text = str(Inventory.fuel_cans)
 	apple_label.text = str(Inventory.apples)
+	key_label.text = str(Inventory.get_key_count())
 
 func log_message(text: String):
 	_messages.push_front(text)

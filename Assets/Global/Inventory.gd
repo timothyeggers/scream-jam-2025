@@ -47,6 +47,18 @@ var _has_black_key: bool = false
 
 var items: Array[Node2D]
 
+func get_key_count() -> int:
+	var count = 0
+	if _has_black_key:
+		count += 1
+	if _has_blue_key:
+		count += 1
+	if _has_red_key:
+		count += 1
+	if _has_yellow_key:
+		count += 1
+	return count
+
 func reset():
 	apples = 0
 	fuel_cans = 1
@@ -72,7 +84,10 @@ func add_item(item: ItemType, description: String):
 			_has_black_key = true
 		ItemType.APPLE:
 			apples += 1
-	Game.ui.log_message(description)
+	
+	if Game.ui:
+		Game.ui._update_ui()
+		Game.ui.log_message(description)
 
 func has_yellow_key():
 	return _has_yellow_key

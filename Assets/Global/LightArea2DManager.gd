@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
 	var was_in_areas = _in_areas.duplicate()
 	var newly_in_area: Array[Node2D] = []
 	for light_area in light_areas:
+		if light_area.is_queued_for_deletion(): continue
 		if !light_area.monitoring: continue
 		for area in light_area.get_overlapping_areas():
 			if !area.is_in_group(LIGHT_AREA2D_AFFECTED_GROUP): continue

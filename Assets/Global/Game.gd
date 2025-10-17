@@ -32,6 +32,21 @@ func reset_game():
 	var _mental_state = PlayerMentalState.DEFAULT
 	get_tree().reload_current_scene()
 
+func end_game_good():
+	var current = get_tree().get_first_node_in_group("World2D")
+	var win = get_tree().get_first_node_in_group("WinWorld")
+	
+	for child in current.get_children():
+		child.set_process(false)
+		child.set_physics_process(false)
+	current.hide()
+	
+	var win_camera = get_tree().get_first_node_in_group("WinCamera")
+	var player_camera = get_tree().get_first_node_in_group("PlayerCamera")
+	player_camera.enabled = false
+	win_camera.enabled = true
+	win.set_process(true)
+
 func _end_game_bad():
 	var current = get_tree().get_first_node_in_group("World2D")
 	var death = get_tree().get_first_node_in_group("DeathWorld")
@@ -42,7 +57,8 @@ func _end_game_bad():
 	current.hide()
 	
 	var death_camera = get_tree().get_first_node_in_group("DeathCamera")
-	death.show()
+	var player_camera = get_tree().get_first_node_in_group("PlayerCamera")
+	player_camera.enabled = false
 	death_camera.enabled = true
 	death.set_process(true)
 

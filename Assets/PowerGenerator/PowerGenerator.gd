@@ -7,7 +7,7 @@ const GENERATOR_OFF_SPRITE = preload("res://Assets/generator_off.png")
 @export var target_group: String = "Red Generator"
 @export var call_method: String = "activate"
 @export var call_deactivate_method: String = "deactivate"
-@export var time_active_on_fuel: float = 5
+@export var time_active_on_fuel: float = 15
 
 @export_category("Internal")
 @export var area: Area2D

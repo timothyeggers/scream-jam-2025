@@ -47,9 +47,11 @@ Player=""
 Vanishing=""
 UI=""
 NavigationLevel=""
-DeathWorld=""
 World2D=""
 DeathCamera=""
+WinCamera=""
+"Blue Generator"=""
+PlayerCamera=""
 
 [input]
 

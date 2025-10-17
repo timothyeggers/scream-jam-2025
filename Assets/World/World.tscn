@@ -1,6 +1,7 @@
-[gd_scene load_steps=48 format=4 uid="uid://cqwr1f22r0806"]
+[gd_scene load_steps=51 format=4 uid="uid://cqwr1f22r0806"]
 
 [ext_resource type="Texture2D" uid="uid://beeioy02jj8fr" path="res://ground.BMP" id="1_2o6ge"]
+[ext_resource type="Texture2D" uid="uid://dby88vgv7nxwn" path="res://Assets/GAMEOVERSPLASH.png" id="1_dy58e"]
 [ext_resource type="TileSet" uid="uid://b31nkkc6kpopy" path="res://Assets/TileSet.tres" id="1_hmte7"]
 [ext_resource type="Texture2D" uid="uid://d3fsl526urkky" path="res://Assets/WINSPLASH.png" id="1_v1p26"]
 [ext_resource type="Script" uid="uid://ck5q4y1530gim" path="res://Assets/Player/PlayerCamera.gd" id="2_2o6ge"]
@@ -32,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://ks6s2qngkkme" path="res://Assets/side_table.png" id="26_671ma"]
 [ext_resource type="Texture2D" uid="uid://bfbd6ojjkc4to" path="res://Assets/Lamp/lamp_light.tres" id="28_it4rn"]
 [ext_resource type="Texture2D" uid="uid://cee8ialtd8n0o" path="res://Assets/sign_red_light.png" id="29_671ma"]
+[ext_resource type="Script" uid="uid://ds0bji1rijlsv" path="res://Assets/World/win_area.gd" id="33_06x0n"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v1p26"]
 light_mode = 1
@@ -91,6 +93,9 @@ radius = 28.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m4rks"]
 size = Vector2(36, 32.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ftwpm"]
+size = Vector2(204, 224)
+
 [node name="Game" type="Node" groups=["World"]]
 
 [node name="Death_World_2D" type="Node2D" parent="." groups=["DeathWorld"]]
@@ -100,12 +105,46 @@ position = Vector2(6488, 112)
 material = SubResource("CanvasItemMaterial_v1p26")
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("1_v1p26")
+texture = ExtResource("1_dy58e")
 
-[node name="Camera2D" type="Camera2D" parent="Death_World_2D" groups=["DeathCamera"]]
+[node name="DeathCamera" type="Camera2D" parent="Death_World_2D" groups=["DeathCamera"]]
 anchor_mode = 0
 enabled = false
 script = ExtResource("2_ftwpm")
+
+[node name="Label" type="Label" parent="Death_World_2D"]
+offset_left = 336.0
+offset_top = 580.0
+offset_right = 781.0
+offset_bottom = 625.0
+theme_override_font_sizes/font_size = 32
+text = "Press Spacebar to try again..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Win_World_2D" type="Node2D" parent="." groups=["WinWorld"]]
+position = Vector2(7976, 108)
+
+[node name="TextureRect" type="TextureRect" parent="Win_World_2D"]
+material = SubResource("CanvasItemMaterial_v1p26")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_v1p26")
+
+[node name="Camera2D" type="Camera2D" parent="Win_World_2D" groups=["WinCamera"]]
+anchor_mode = 0
+enabled = false
+script = ExtResource("2_ftwpm")
+
+[node name="Label" type="Label" parent="Win_World_2D"]
+offset_left = 336.0
+offset_top = 580.0
+offset_right = 781.0
+offset_bottom = 625.0
+theme_override_font_sizes/font_size = 32
+text = "Press Spacebar to try again..."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SpatialAudio3D" type="Node3D" parent="."]
 
@@ -139,50 +178,38 @@ position = Vector2(-300, 872)
 position = Vector2(480, -632)
 
 [node name="Player" parent="World_2D" node_paths=PackedStringArray("_player_camera") instance=ExtResource("5_rw40b")]
-position = Vector2(16, 1076)
-_player_camera = NodePath("../Camera2D")
+position = Vector2(868, 756)
+_player_camera = NodePath("../PlayerCamera")
 
 [node name="Entity" parent="World_2D" instance=ExtResource("11_mh0j8")]
-position = Vector2(-72, 964)
+position = Vector2(-40, 852)
 
 [node name="Entity16" parent="World_2D" instance=ExtResource("11_mh0j8")]
-position = Vector2(1432, 1656)
+position = Vector2(1488, 1696)
 
 [node name="Entity6" parent="World_2D" instance=ExtResource("11_mh0j8")]
-position = Vector2(0, 724)
-
-[node name="Entity7" parent="World_2D" instance=ExtResource("11_mh0j8")]
-position = Vector2(-232, 620)
+position = Vector2(-132, 752)
 
 [node name="Entity8" parent="World_2D" instance=ExtResource("11_mh0j8")]
-position = Vector2(-496, 668)
-
-[node name="Entity9" parent="World_2D" instance=ExtResource("11_mh0j8")]
-position = Vector2(-636, 824)
+position = Vector2(-488, 792)
 
 [node name="Entity10" parent="World_2D" instance=ExtResource("11_mh0j8")]
-position = Vector2(-524, 1024)
+position = Vector2(-304, 1144)
 
 [node name="Entity11" parent="World_2D" instance=ExtResource("11_mh0j8")]
-position = Vector2(-300, 1108)
+position = Vector2(-168, 1068)
 
 [node name="Entity12" parent="World_2D" instance=ExtResource("11_mh0j8")]
-position = Vector2(-384, 964)
-
-[node name="Entity13" parent="World_2D" instance=ExtResource("11_mh0j8")]
-position = Vector2(-456, 792)
+position = Vector2(-412, 1040)
 
 [node name="Entity14" parent="World_2D" instance=ExtResource("11_mh0j8")]
-position = Vector2(-316, 720)
-
-[node name="Entity15" parent="World_2D" instance=ExtResource("11_mh0j8")]
-position = Vector2(-136, 812)
+position = Vector2(-344, 668)
 
 [node name="Entity2" parent="World_2D" instance=ExtResource("11_mh0j8")]
 position = Vector2(964, 300)
 
 [node name="Entity3" parent="World_2D" instance=ExtResource("11_mh0j8")]
-position = Vector2(1708, -16)
+position = Vector2(1740, 204)
 
 [node name="Entity4" parent="World_2D" instance=ExtResource("11_mh0j8")]
 position = Vector2(1896, -540)
@@ -369,6 +396,22 @@ time_alive = 99999.0
 position = Vector2(-204, 876)
 time_alive = 99999.0
 
+[node name="GlowStick3" parent="World_2D/Level/Objects" instance=ExtResource("6_fdrvb")]
+position = Vector2(1180, 820)
+time_alive = 99999.0
+
+[node name="GlowStick4" parent="World_2D/Level/Objects" instance=ExtResource("6_fdrvb")]
+position = Vector2(1472, 1028)
+time_alive = 99999.0
+
+[node name="GlowStick6" parent="World_2D/Level/Objects" instance=ExtResource("6_fdrvb")]
+position = Vector2(1912, 1420)
+time_alive = 99999.0
+
+[node name="GlowStick5" parent="World_2D/Level/Objects" instance=ExtResource("6_fdrvb")]
+position = Vector2(1312, 1420)
+time_alive = 99999.0
+
 [node name="EscapeSign" parent="World_2D/Level/Objects" instance=ExtResource("3_ssbc4")]
 position = Vector2(812, 708)
 
@@ -383,6 +426,10 @@ position = Vector2(472, 264)
 [node name="LampLight" parent="World_2D/Level/Objects/PowerGenerator" groups=["Red Generator"] instance=ExtResource("7_rw40b")]
 position = Vector2(184, 40)
 
+[node name="LampLight2" parent="World_2D/Level/Objects/PowerGenerator" instance=ExtResource("7_rw40b")]
+position = Vector2(1188, 1792)
+start_off = false
+
 [node name="Light" type="Sprite2D" parent="World_2D/Level/Objects/PowerGenerator"]
 modulate = Color(1, 1, 1, 0.09411765)
 material = SubResource("CanvasItemMaterial_671ma")
@@ -394,8 +441,9 @@ metadata/_edit_lock_ = true
 
 [node name="PowerGenerator2" parent="World_2D/Level/Objects" instance=ExtResource("8_2o6ge")]
 position = Vector2(216, -500)
+target_group = "Blue Generator"
 
-[node name="LampLight2" parent="World_2D/Level/Objects/PowerGenerator2" groups=["Red Generator"] instance=ExtResource("7_rw40b")]
+[node name="LampLight2" parent="World_2D/Level/Objects/PowerGenerator2" groups=["Blue Generator"] instance=ExtResource("7_rw40b")]
 position = Vector2(160, 84)
 
 [node name="LevelMesh" type="NavigationRegion2D" parent="World_2D"]
@@ -412,14 +460,14 @@ range_item_cull_mask = 3
 script = ExtResource("2_mh0j8")
 metadata/_edit_lock_ = true
 
-[node name="Camera2D" type="Camera2D" parent="World_2D"]
+[node name="PlayerCamera" type="Camera2D" parent="World_2D" groups=["PlayerCamera"]]
 position = Vector2(379, 217)
 zoom = Vector2(1.5, 1.5)
 editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("2_2o6ge")
 
-[node name="UI" type="Control" parent="World_2D/Camera2D" node_paths=PackedStringArray("log", "inventory", "glow_stick_label", "fuel_label", "apple_label") groups=["UI"]]
+[node name="UI" type="Control" parent="World_2D/PlayerCamera" node_paths=PackedStringArray("log", "inventory", "glow_stick_label", "fuel_label", "apple_label", "key_label") groups=["UI"]]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -430,8 +478,9 @@ inventory = NodePath("Inventory")
 glow_stick_label = NodePath("Inventory/Glowsticks/Amount")
 fuel_label = NodePath("Inventory/Fuel/Amount")
 apple_label = NodePath("Inventory/Apple/Amount")
+key_label = NodePath("Inventory/Keys/Amount")
 
-[node name="Log" type="RichTextLabel" parent="World_2D/Camera2D/UI" groups=["Item Log"]]
+[node name="Log" type="RichTextLabel" parent="World_2D/PlayerCamera/UI" groups=["Item Log"]]
 z_index = 999
 material = SubResource("CanvasItemMaterial_h7mlw")
 custom_minimum_size = Vector2(200, 100)
@@ -452,7 +501,7 @@ text = "
 "
 metadata/_edit_use_anchors_ = true
 
-[node name="Inventory" type="VBoxContainer" parent="World_2D/Camera2D/UI"]
+[node name="Inventory" type="VBoxContainer" parent="World_2D/PlayerCamera/UI"]
 z_index = 99
 layout_mode = 0
 offset_left = 261.0
@@ -461,11 +510,11 @@ offset_right = 377.0
 offset_bottom = -126.0
 alignment = 2
 
-[node name="Glowsticks" type="HBoxContainer" parent="World_2D/Camera2D/UI/Inventory"]
+[node name="Glowsticks" type="HBoxContainer" parent="World_2D/PlayerCamera/UI/Inventory"]
 layout_mode = 2
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="World_2D/Camera2D/UI/Inventory/Glowsticks"]
+[node name="TextureRect" type="TextureRect" parent="World_2D/PlayerCamera/UI/Inventory/Glowsticks"]
 material = SubResource("CanvasItemMaterial_coyqj")
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
@@ -473,16 +522,16 @@ texture = ExtResource("15_coyqj")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Amount" type="Label" parent="World_2D/Camera2D/UI/Inventory/Glowsticks"]
+[node name="Amount" type="Label" parent="World_2D/PlayerCamera/UI/Inventory/Glowsticks"]
 material = SubResource("CanvasItemMaterial_coyqj")
 layout_mode = 2
 text = "0"
 
-[node name="Fuel" type="HBoxContainer" parent="World_2D/Camera2D/UI/Inventory"]
+[node name="Fuel" type="HBoxContainer" parent="World_2D/PlayerCamera/UI/Inventory"]
 layout_mode = 2
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="World_2D/Camera2D/UI/Inventory/Fuel"]
+[node name="TextureRect" type="TextureRect" parent="World_2D/PlayerCamera/UI/Inventory/Fuel"]
 material = SubResource("CanvasItemMaterial_coyqj")
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
@@ -490,16 +539,16 @@ texture = ExtResource("16_e22uk")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Amount" type="Label" parent="World_2D/Camera2D/UI/Inventory/Fuel"]
+[node name="Amount" type="Label" parent="World_2D/PlayerCamera/UI/Inventory/Fuel"]
 material = SubResource("CanvasItemMaterial_coyqj")
 layout_mode = 2
 text = "0"
 
-[node name="Apple" type="HBoxContainer" parent="World_2D/Camera2D/UI/Inventory"]
+[node name="Apple" type="HBoxContainer" parent="World_2D/PlayerCamera/UI/Inventory"]
 layout_mode = 2
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="World_2D/Camera2D/UI/Inventory/Apple"]
+[node name="TextureRect" type="TextureRect" parent="World_2D/PlayerCamera/UI/Inventory/Apple"]
 material = SubResource("CanvasItemMaterial_coyqj")
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
@@ -507,7 +556,24 @@ texture = ExtResource("19_4astu")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Amount" type="Label" parent="World_2D/Camera2D/UI/Inventory/Apple"]
+[node name="Amount" type="Label" parent="World_2D/PlayerCamera/UI/Inventory/Apple"]
+material = SubResource("CanvasItemMaterial_coyqj")
+layout_mode = 2
+text = "0"
+
+[node name="Keys" type="HBoxContainer" parent="World_2D/PlayerCamera/UI/Inventory"]
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="World_2D/PlayerCamera/UI/Inventory/Keys"]
+material = SubResource("CanvasItemMaterial_coyqj")
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+texture = ExtResource("25_it4rn")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Amount" type="Label" parent="World_2D/PlayerCamera/UI/Inventory/Keys"]
 material = SubResource("CanvasItemMaterial_coyqj")
 layout_mode = 2
 text = "0"
@@ -550,6 +616,24 @@ position = Vector2(1540, 1744)
 
 [node name="FuelCanPickup2" parent="World_2D" instance=ExtResource("14_sxnil")]
 position = Vector2(144, -496)
+
+[node name="FuelCanPickup4" parent="World_2D" instance=ExtResource("14_sxnil")]
+position = Vector2(296, -208)
+
+[node name="FuelCanPickup5" parent="World_2D" instance=ExtResource("14_sxnil")]
+position = Vector2(1316, 684)
+
+[node name="FuelCanPickup6" parent="World_2D" instance=ExtResource("14_sxnil")]
+position = Vector2(1512, 96)
+
+[node name="FuelCanPickup7" parent="World_2D" instance=ExtResource("14_sxnil")]
+position = Vector2(48, 1056)
+
+[node name="FuelCanPickup8" parent="World_2D" instance=ExtResource("14_sxnil")]
+position = Vector2(68, 604)
+
+[node name="FuelCanPickup9" parent="World_2D" instance=ExtResource("14_sxnil")]
+position = Vector2(1000, 1972)
 
 [node name="DangerSign" parent="World_2D" instance=ExtResource("18_qk2bo")]
 position = Vector2(-240, 1228)
@@ -625,7 +709,7 @@ position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_sxnil")
 
 [node name="ApplePickup" parent="World_2D" instance=ExtResource("14_54nk4")]
-position = Vector2(144, -412)
+position = Vector2(240, -416)
 item = 6
 
 [node name="ApplePickup2" parent="World_2D" instance=ExtResource("14_54nk4")]
@@ -743,3 +827,11 @@ position = Vector2(0, -16)
 rotation = 1.5707964
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("28_it4rn")
+
+[node name="WinArea" type="Area2D" parent="World_2D"]
+position = Vector2(-764, 1940)
+script = ExtResource("33_06x0n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World_2D/WinArea"]
+position = Vector2(-26, 4)
+shape = SubResource("RectangleShape2D_ftwpm")
