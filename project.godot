@@ -14,7 +14,7 @@ General/banks_path="res://FmodBanks/Desktop"
 
 [application]
 
-config/name="ScreamJam2025"
+config/name="Creeping Shadows (ScreamJam2025)"
 config/description="Find the 4 keys and escape!"
 config/version="1.0"
 run/main_scene="res://Assets/World/World.tscn"
