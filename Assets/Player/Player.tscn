@@ -240,9 +240,8 @@ tool = NodePath("../../HandPivot/Lantern")
 script = ExtResource("7_x4ggo")
 tool = NodePath("../../HandPivot/GlowStickTool")
 
-[node name="MeleeToolState" type="Node" parent="HandToolMachine" node_paths=PackedStringArray("tool")]
+[node name="MeleeToolState" type="Node" parent="HandToolMachine"]
 script = ExtResource("8_o1dpk")
-tool = NodePath("")
 
 [node name="AmbientLight" type="PointLight2D" parent="."]
 position = Vector2(-2, -18)

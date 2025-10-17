@@ -10,8 +10,7 @@ enum ItemType {
 	BLUE_KEY,
 	RED_KEY,
 	BLACK_KEY,
-	WHITE_KEY,
-	APPLE
+	APPLE,
 }
 
 var glow_sticks: int = 4:
@@ -42,6 +41,9 @@ var apples: int = 0:
 			item_obtained.emit()
 
 var _has_yellow_key: bool = false
+var _has_blue_key: bool = false
+var _has_red_key: bool = false
+var _has_black_key: bool = false
 
 var items: Array[Node2D]
 
@@ -53,12 +55,27 @@ func add_item(item: ItemType, description: String):
 			fuel_cans += 1
 		ItemType.YELLOW_KEY:
 			_has_yellow_key = true
+		ItemType.BLUE_KEY:
+			_has_blue_key = true
+		ItemType.RED_KEY:
+			_has_red_key = true
+		ItemType.BLACK_KEY:
+			_has_black_key = true
 		ItemType.APPLE:
 			apples += 1
 	Game.ui.log_message(description)
 
 func has_yellow_key():
 	return _has_yellow_key
+
+func has_blue_key():
+	return _has_blue_key
+
+func has_red_key():
+	return _has_red_key
+
+func has_black_key():
+	return _has_black_key
 
 func has_three_apples():
 	return apples >= 3

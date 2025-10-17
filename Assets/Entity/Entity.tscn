@@ -1,13 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://8fu162i6jn6l"]
+[gd_scene load_steps=14 format=3 uid="uid://8fu162i6jn6l"]
 
-[ext_resource type="Script" uid="uid://dj6y1lcechcwk" path="res://Assets/Entity/Entity.gd" id="1_h5qsp"]
+[ext_resource type="Script" uid="uid://dkcayi1t6onj7" path="res://Assets/Entity/Entity.gd" id="1_h5qsp"]
 [ext_resource type="Texture2D" uid="uid://cmc8vvaha6rtb" path="res://Assets/star.png" id="2_67amp"]
-[ext_resource type="Script" uid="uid://b5g0khcyp6an7" path="res://Assets/StateMachine/StateMachine.gd" id="3_pki85"]
-[ext_resource type="Script" uid="uid://ceglep2ifamy7" path="res://Assets/States/Entity/EntityWanderState.gd" id="4_6gvbd"]
-[ext_resource type="Script" uid="uid://cw02fllxtq054" path="res://Assets/States/Entity/EntityChaseState.gd" id="5_tha7b"]
-[ext_resource type="Script" uid="uid://bnn8wgqvrq712" path="res://Assets/States/Entity/EntityStunnedState.gd" id="6_2of05"]
-[ext_resource type="Script" uid="uid://c3045oc1sv7rx" path="res://Assets/States/Entity/EntityFleeState.gd" id="7_1ta34"]
-[ext_resource type="Texture2D" uid="uid://phqoirrc86iu" path="res://Assets/Player/sheet.png" id="8_4t5va"]
+[ext_resource type="Script" uid="uid://bcqdtjau3wt7r" path="res://Assets/StateMachine/StateMachine.gd" id="3_pki85"]
+[ext_resource type="Script" uid="uid://b3f7doumy1fkv" path="res://Assets/States/Entity/EntityWanderState.gd" id="4_6gvbd"]
+[ext_resource type="Script" uid="uid://b2g7yhw1tviqd" path="res://Assets/States/Entity/EntityChaseState.gd" id="5_tha7b"]
+[ext_resource type="Script" uid="uid://clhwnne81atjj" path="res://Assets/States/Entity/EntityStunnedState.gd" id="6_2of05"]
+[ext_resource type="Script" uid="uid://bf5wooc37wmki" path="res://Assets/States/Entity/EntityFleeState.gd" id="7_1ta34"]
+[ext_resource type="Texture2D" uid="uid://d2wlcr8unos4i" path="res://Assets/zombie.png" id="8_h5qsp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h5qsp"]
 size = Vector2(12, 10)
@@ -21,50 +21,11 @@ radius = 109.041
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7gb8a"]
 light_mode = 1
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e22uk"]
-atlas = ExtResource("8_4t5va")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ugr57"]
-atlas = ExtResource("8_4t5va")
-region = Rect2(48, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4astu"]
-atlas = ExtResource("8_4t5va")
-region = Rect2(96, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_54nk4"]
-atlas = ExtResource("8_4t5va")
-region = Rect2(0, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nn57s"]
-atlas = ExtResource("8_4t5va")
-region = Rect2(48, 48, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2sfmm"]
-atlas = ExtResource("8_4t5va")
-region = Rect2(96, 48, 48, 48)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_05pht"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e22uk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ugr57")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4astu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_54nk4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nn57s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2sfmm")
+"texture": ExtResource("8_h5qsp")
 }],
 "loop": true,
 "name": &"default",
@@ -147,7 +108,6 @@ sprite = NodePath("../../Character")
 y_sort_enabled = true
 position = Vector2(1, -22)
 sprite_frames = SubResource("SpriteFrames_05pht")
-frame = 4
 frame_progress = 0.0609381
 
 [node name="Timer" type="Timer" parent="."]

@@ -68,8 +68,8 @@ func _process(delta: float) -> void:
 		pickup()
 
 func pickup():
-	
-	if "KEY" in Inventory.ItemType.find_key(item): 
+	var item_name = Inventory.ItemType.find_key(item)
+	if "KEY" in item_name: 
 		keyEmitter.play()
 		
 	Inventory.add_item(item, pickup_description)

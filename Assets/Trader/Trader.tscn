@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://c8my1m7bwsper" path="res://Assets/Trader/Trader.png" id="2_kp6pu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7gb8a"]
-size = Vector2(32, 54)
+size = Vector2(40, 31.5)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kp6pu"]
 light_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssbc4"]
-size = Vector2(16, 8)
+size = Vector2(40, 12)
 
 [node name="Trader" type="CharacterBody2D" node_paths=PackedStringArray("dialog_label", "sprite", "interaction_area")]
 collision_layer = 128
@@ -24,7 +24,7 @@ interaction_area = NodePath("Interaction")
 [node name="Interaction" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
-position = Vector2(0, -17)
+position = Vector2(0, 8.25)
 shape = SubResource("RectangleShape2D_7gb8a")
 
 [node name="Label" type="Label" parent="."]

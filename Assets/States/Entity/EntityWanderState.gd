@@ -9,7 +9,7 @@ class_name EntityWanderState extends EntityState
 var _start_pos: Vector2
 
 func _ready():
-	_start_pos = entity.position
+	_start_pos = entity.global_position
 
 func _on_player_entered(body):
 	if body is not Player: return
@@ -26,7 +26,7 @@ func get_random_wander_position():
 	return Vector2(random_x, random_y)
 
 func enter():
-	_start_pos = entity.position
+	_start_pos = entity.global_position
 	set_target_position()
 	detector.body_entered.connect(_on_player_entered)
 	navigation.velocity_computed.connect(Callable(_on_velocity_computed))
