@@ -6,10 +6,10 @@ const MAX_HAND_DISTANCE: float = 12
 const VEL_TO_RB_FORCE_RATIO: float = 0.3
 
 @export var _walk_speed : float = 50
-@export var _run_speed : float = 70
+@export var _run_speed : float = 90
 @export var _total_stamina : float = 5
 ## when you reach _health 0 you die immediately, so u really only have 3 hits until dead
-@export var _health: float = 4
+@export var _health: float = 6
 @export var _damage_cooldown: float = 1
 
 @export_category("Internal")
@@ -54,9 +54,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_update_ui()
 	
-	if Input.is_action_just_pressed("debug_start_chase"):
+	if Input.is_action_just_pressed("debug_run"):
 		_walk_speed = walk_speed * 3
-	if Input.is_action_just_pressed("debug_stun"):
+	if Input.is_action_just_pressed("debug_walk"):
 		_walk_speed = walk_speed
 	
 	listener3d.global_transform.origin = Vector3(global_position.x*scaleListener, 0.0, global_position.y*scaleListener)
@@ -65,7 +65,7 @@ func _process(delta: float) -> void:
 		_damage_cd -= delta
 	
 	#region Update camera position
-	var target_pos = position - get_global_mouse_position()
+	var target_pos = global_position - get_global_mouse_position()
 	_player_camera.position = position
 	if _is_running:
 		_player_camera.zoom = _camera_zoom * 0.9

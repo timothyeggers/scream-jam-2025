@@ -220,8 +220,7 @@ visible = false
 [node name="Character" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_aq1ug")
-animation = &"walk_up"
-frame_progress = 0.14896934
+animation = &"walk_down"
 offset = Vector2(0, -22)
 
 [node name="HandToolMachine" type="Node2D" parent="." node_paths=PackedStringArray("default_state")]
