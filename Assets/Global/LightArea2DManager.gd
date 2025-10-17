@@ -8,6 +8,10 @@ const LIGHT_AREA2D_AFFECTED_GROUP = "Vanishing"
 var light_areas: Array[LightArea2D] = []
 var _in_areas: Array[Node2D] = []
 
+func reset():
+	light_areas = []
+	_in_areas = []
+
 func _process(delta: float) -> void:
 	var was_in_areas = _in_areas.duplicate()
 	var newly_in_area: Array[Node2D] = []

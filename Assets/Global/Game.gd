@@ -1,5 +1,8 @@
 extends Node
 
+const PLAYER_DEATH_SCREEN = "res://Assets/DeathScreen.tscn"
+const PLAYER_WIN_SCREEN = "res://Assets/DeathScreen.tscn"
+
 signal player_died
 
 var ui: UI : get = get_ui
@@ -15,6 +18,33 @@ enum PlayerMentalState {
 }
 
 var _mental_state = PlayerMentalState.DEFAULT
+
+func _ready():
+	player_died.connect(_end_game_bad)
+	
+	var death = get_tree().get_first_node_in_group("DeathWorld")
+	death.set_process(false)
+
+
+func reset_game():
+	Inventory.reset()
+	LightArea2DManager.reset()
+	var _mental_state = PlayerMentalState.DEFAULT
+	get_tree().reload_current_scene()
+
+func _end_game_bad():
+	var current = get_tree().get_first_node_in_group("World2D")
+	var death = get_tree().get_first_node_in_group("DeathWorld")
+	
+	for child in current.get_children():
+		child.set_process(false)
+		child.set_physics_process(false)
+	current.hide()
+	
+	var death_camera = get_tree().get_first_node_in_group("DeathCamera")
+	death.show()
+	death_camera.enabled = true
+	death.set_process(true)
 
 func get_ui() -> UI:
 	var ui = get_tree().get_first_node_in_group("UI")

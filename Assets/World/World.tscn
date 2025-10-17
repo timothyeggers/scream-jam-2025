@@ -1,9 +1,11 @@
-[gd_scene load_steps=45 format=4 uid="uid://cqwr1f22r0806"]
+[gd_scene load_steps=48 format=4 uid="uid://cqwr1f22r0806"]
 
 [ext_resource type="Texture2D" uid="uid://beeioy02jj8fr" path="res://ground.BMP" id="1_2o6ge"]
 [ext_resource type="TileSet" uid="uid://b31nkkc6kpopy" path="res://Assets/TileSet.tres" id="1_hmte7"]
+[ext_resource type="Texture2D" uid="uid://d3fsl526urkky" path="res://Assets/WINSPLASH.png" id="1_v1p26"]
 [ext_resource type="Script" uid="uid://ck5q4y1530gim" path="res://Assets/Player/PlayerCamera.gd" id="2_2o6ge"]
 [ext_resource type="PackedScene" uid="uid://d114gmh52qqbk" path="res://Assets/ItemPickup/KeyPickup.tscn" id="2_7gb8a"]
+[ext_resource type="Script" uid="uid://c6sccwad4o1x0" path="res://Assets/World/DeathScreen.gd" id="2_ftwpm"]
 [ext_resource type="Script" uid="uid://bsn7l24lrenpa" path="res://Assets/World/OverworldLight.gd" id="2_mh0j8"]
 [ext_resource type="PackedScene" uid="uid://csluw12yetokq" path="res://Assets/EscapeSign.tscn" id="3_ssbc4"]
 [ext_resource type="PackedScene" uid="uid://lqpa18l6a1vp" path="res://Assets/Player/Player.tscn" id="5_rw40b"]
@@ -30,6 +32,9 @@
 [ext_resource type="Texture2D" uid="uid://ks6s2qngkkme" path="res://Assets/side_table.png" id="26_671ma"]
 [ext_resource type="Texture2D" uid="uid://bfbd6ojjkc4to" path="res://Assets/Lamp/lamp_light.tres" id="28_it4rn"]
 [ext_resource type="Texture2D" uid="uid://cee8ialtd8n0o" path="res://Assets/sign_red_light.png" id="29_671ma"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v1p26"]
+light_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssbc4"]
 size = Vector2(16, 72)
@@ -88,6 +93,20 @@ size = Vector2(36, 32.5)
 
 [node name="Game" type="Node" groups=["World"]]
 
+[node name="Death_World_2D" type="Node2D" parent="." groups=["DeathWorld"]]
+position = Vector2(6488, 112)
+
+[node name="TextureRect" type="TextureRect" parent="Death_World_2D"]
+material = SubResource("CanvasItemMaterial_v1p26")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_v1p26")
+
+[node name="Camera2D" type="Camera2D" parent="Death_World_2D" groups=["DeathCamera"]]
+anchor_mode = 0
+enabled = false
+script = ExtResource("2_ftwpm")
+
 [node name="SpatialAudio3D" type="Node3D" parent="."]
 
 [node name="FmodListener3D" type="FmodListener3D" parent="SpatialAudio3D"]
@@ -112,16 +131,15 @@ event_guid = "{e4e356c2-0f2c-4ca9-8e48-b999528431e5}"
 event_name = "event:/Player_Hit"
 event_guid = "{96a6b68f-0484-4318-b790-6f4022ef15cd}"
 
-[node name="World_2D" type="Node2D" parent="."]
+[node name="World_2D" type="Node2D" parent="." groups=["World2D"]]
 y_sort_enabled = true
 position = Vector2(-300, 872)
-
-[node name="Characters" type="Node" parent="World_2D"]
 
 [node name="Trader" parent="World_2D" instance=ExtResource("22_ugr57")]
 position = Vector2(480, -632)
 
 [node name="Player" parent="World_2D" node_paths=PackedStringArray("_player_camera") instance=ExtResource("5_rw40b")]
+position = Vector2(16, 1076)
 _player_camera = NodePath("../Camera2D")
 
 [node name="Entity" parent="World_2D" instance=ExtResource("11_mh0j8")]

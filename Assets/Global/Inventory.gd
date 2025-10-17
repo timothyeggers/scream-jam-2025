@@ -47,6 +47,15 @@ var _has_black_key: bool = false
 
 var items: Array[Node2D]
 
+func reset():
+	apples = 0
+	fuel_cans = 1
+	glow_sticks = 4
+	_has_yellow_key = false
+	_has_blue_key = false
+	_has_red_key = false
+	_has_black_key = false
+
 func add_item(item: ItemType, description: String):
 	match item:
 		ItemType.GLOWSTICK:
